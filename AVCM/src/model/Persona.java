@@ -10,5 +10,8 @@ package model;
  * @author diegg
  */
 public class Persona {
-    
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private String rfc;
 }
