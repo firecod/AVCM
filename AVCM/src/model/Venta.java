@@ -6,11 +6,13 @@
 package model;
 
 /**
- * Version: 1 
- * @author Adrian Israel Calcanas Ramírez
- * Fecha: 17 - 02 - 2019
+ * Version: 2 
+ * @author Adrian Israel Calcanas Ramírez and Diego Humberto Castro Castro
+ * Fecha: 21 - 02 - 2019
  * Descripción: Modelado de clase Venta
  */
+
+/** Revisar base de datos: tabla detalle de venta y tabla venta */
 public class Venta {
     private String fechaVenta;
     private int idProducto;

@@ -6,12 +6,13 @@
 package model;
 
 /**
- * Version: 1 
- * @author Mónica del Rosario Díaz Arredondo
- * Fecha: 16 - 02 - 2019
- * Descripción: Modelado de clase Compra
+ * Version: 2 
+ * @author Mónica del Rosario Díaz Arredondo and Diego Humberto Castro Castro
+ * Fecha: 21 - 02 - 2019
+ * Descripción: Modelado de clase Detalle de la Compra
  */
-public class Compra {
+public class DetalleCompra {
+   
     private String fechaCompra;
     private int idProducto;
     private int idVendedor;
