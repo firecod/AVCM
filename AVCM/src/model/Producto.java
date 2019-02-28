@@ -15,9 +15,9 @@ public class Producto {
     private int id;
     private String nombre;
     private String marca;
-    private Float precioUso;
+    private Float precio;
     private String categoria;
-    private String estatus;
+    private int estatus;
     private Almacen almacen;
 
     public int getId() {
@@ -44,12 +44,12 @@ public class Producto {
         this.marca = marca;
     }
 
-    public Float getPrecioUso() {
-        return precioUso;
+    public Float getPrecio() {
+        return precio;
     }
 
-    public void setPrecioUso(Float precioUso) {
-        this.precioUso = precioUso;
+    public void setPrecio(Float precio) {
+        this.precio = precio;
     }
 
     public String getCategoria() {
@@ -60,13 +60,15 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public String getEstatus() {
+    public int getEstatus() {
         return estatus;
     }
 
-    public void setEstatus(String estatus) {
+    public void setEstatus(int estatus) {
         this.estatus = estatus;
     }
+
+    
 
     public Almacen getAlmacen() {
         return almacen;
