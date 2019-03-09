@@ -16,6 +16,7 @@ public class Cliente {
     private String correoElectronico;
     private int estatus;
     private int idPersona;
+    private Usuario usuario;
 
     public int getId() {
         return id;

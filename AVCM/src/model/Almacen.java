@@ -13,11 +13,19 @@ public class Almacen {
     private int id;
     private String nombre;
     private String domicilio;
-    private String nombreDueño;
+    private Vendedor vendedor;
     private int estatus;
 
     public int getId() {
         return id;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
     }
 
     public void setId(int id) {
@@ -40,13 +48,7 @@ public class Almacen {
         this.domicilio = domicilio;
     }
 
-    public String getNombreDueño() {
-        return nombreDueño;
-    }
-
-    public void setNombreDueño(String nombreDueño) {
-        this.nombreDueño = nombreDueño;
-    }
+    
 
     public int getEstatus() {
         return estatus;
