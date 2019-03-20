@@ -33,12 +33,13 @@ public class ControllerProducto {
         pDialog.setMessage("Guardando...");
         pDialog.show();
         // Request a string response from the provided URL.
-        StringRequest sr = new StringRequest(
+        JsonObjectRequest sr = new JsonObjectRequest(
                 Request.Method.POST, //GET or POST
                 url, //URL
-                new Response.Listener<String>() {
+                null,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
                         try {
                             gson = new Gson();
                             Producto p = gson.fromJson(response.toString(), Producto.class);
@@ -57,15 +58,6 @@ public class ControllerProducto {
             }
         }
         ) {
-
-            @Override
-            public Map getHeaders() throws AuthFailureError{
-                Map <String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-
-
             @Override
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -76,15 +68,51 @@ public class ControllerProducto {
                 params.put("idAlmacen", String.valueOf(producto.getAlmacen().getId()));
                 return params;
             }
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+             /*
+            JSONObject params = new JSONObject();
+            try {
+                params.put("name", "Ajay K K");
+                params.put("mailid", "ajaykk50@gmail.com");
+                params.put("phone", "8086327023");
+                params.put("place", "Calicut");
+                params.put("longitude","44444.3333");
+                params.put("latitude","666666.3333");
+                params.put("wheel", "1");
+                params.put("type", "owner");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-    };
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Method.POST,
+                    url, params, //Not null.
+                    new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d(TAG, response.toString());
+                            // pDialog.hide();
+                        }
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    //pDialog.hide();
+                }
+            });
+*/
+        };
 
         queue.add(sr);
         return id;
     }
 
     public void construirParametros(Producto p, RequestQueue queue, ProgressDialog pDialog){
-        String url ="http://192.168.43.16:8084/AVCM_WEB/restProducto/insertProducto";
+        String url ="http://192.168.0.105:8084/AVCM_WEB/restProducto/insertProducto";
         guardarProducto(p,url, queue, pDialog);
     }
 }
