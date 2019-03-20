@@ -1,5 +1,6 @@
 package com.firecod.avcm_android.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.core.ControllerProducto;
 import com.firecod.avcm_android.model.Almacen;
@@ -33,6 +36,7 @@ public class ActivityProducto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        inicializar();
     }
 
     public void inicializar(){
@@ -40,6 +44,7 @@ public class ActivityProducto extends AppCompatActivity {
         cbEstatus = findViewById(R.id.cbEstatus);
         spCategoriaProducto = findViewById(R.id.spCategoriaProducto);
         txtIdProducto = findViewById(R.id.txtIdProducto);
+        txtIdProducto.setEnabled(false);
         txtNombreProducto = findViewById(R.id.txtNombreProducto);
         txtMarcaProducto = findViewById(R.id.txtMarcaProducto);
         txtPrecioProducto = findViewById(R.id.txtPrecioProducto);
@@ -59,7 +64,7 @@ public class ActivityProducto extends AppCompatActivity {
         a = new Almacen();
       //  Gson gson = new Gson();
         cp = new ControllerProducto();
-        p.setId(Integer.parseInt(txtIdProducto.getText().toString()));
+        //p.setId(Integer.parseInt(txtIdProducto.getText().toString()));
         p.setCategoria("xd");
         p.setEstatus(1);
         p.setMarca(txtMarcaProducto.getText().toString());
@@ -67,6 +72,8 @@ public class ActivityProducto extends AppCompatActivity {
         a.setId(1);
         p.setAlmacen(a);
        // String productoJson = gson.toJson(p);
-        cp.construirParametros(p);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        final ProgressDialog pDialog = new ProgressDialog(this);
+        cp.construirParametros(p, queue, pDialog);
     }
 }

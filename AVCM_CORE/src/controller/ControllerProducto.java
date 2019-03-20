@@ -26,7 +26,7 @@ public class ControllerProducto {
     
     public int insert(Producto p) throws Exception{
         
-        String sql = "INSERT INTO producto (nombre, marca, precio, categoria, estatus, almacen) "
+        String sql = "INSERT INTO producto (nombre, marca, precio, categoria, estatus, idAlmacen) "
                     + "VALUES (?, ?, ?, ?, ?, ?)";
         
         //Aquí guardaremos el ID que se generará
@@ -78,7 +78,7 @@ public class ControllerProducto {
     
     public void update(Producto p) throws Exception{
         //Definimos la consulta SQL que realiza la inserción del registro:
-        String sql =    "UPDATE producto SET nombre = ?, marca = ?, precio = ?, categoria = ?, estatus = ?, almacen = ? " + 
+        String sql =    "UPDATE producto SET nombre = ?, marca = ?, precio = ?, categoria = ?, estatus = ?, idAlmacen = ? " + 
                         "WHERE idProducto = ?";        
         //Con este objeto nos vamos a conectar a la Base de Datos:
         ConexionMySQL connMySQL = new ConexionMySQL();
