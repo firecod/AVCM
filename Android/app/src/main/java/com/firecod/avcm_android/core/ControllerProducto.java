@@ -18,6 +18,7 @@ import com.firecod.avcm_android.model.Producto;
 import com.firecod.avcm_android.view.ActivityProducto;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -32,6 +33,17 @@ public class ControllerProducto {
 
         pDialog.setMessage("Guardando...");
         pDialog.show();
+
+        JSONObject params = new JSONObject();
+        try {
+            params.put("nombre", "Crema");//producto.getNombre());
+            params.put("marca", String.valueOf(producto.getMarca()));
+            params.put("precio", String.valueOf(producto.getPrecio()));
+            params.put("categoria", String.valueOf(producto.getCategoria()));
+            params.put("idAlmacen", String.valueOf(producto.getAlmacen().getId()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         // Request a string response from the provided URL.
         JsonObjectRequest sr = new JsonObjectRequest(
                 Request.Method.POST, //GET or POST
