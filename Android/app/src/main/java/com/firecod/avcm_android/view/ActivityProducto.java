@@ -69,6 +69,7 @@ public class ActivityProducto extends AppCompatActivity {
         p.setEstatus(1);
         p.setMarca(txtMarcaProducto.getText().toString());
         p.setNombre(txtNombreProducto.getText().toString());
+        p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
         a.setId(1);
         p.setAlmacen(a);
        // String productoJson = gson.toJson(p);

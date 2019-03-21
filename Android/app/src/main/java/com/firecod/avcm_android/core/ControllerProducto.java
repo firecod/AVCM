@@ -34,24 +34,14 @@ public class ControllerProducto {
         pDialog.setMessage("Guardando...");
         pDialog.show();
 
-        JSONObject params = new JSONObject();
-        try {
-            params.put("nombre", "Crema");//producto.getNombre());
-            params.put("marca", String.valueOf(producto.getMarca()));
-            params.put("precio", String.valueOf(producto.getPrecio()));
-            params.put("categoria", String.valueOf(producto.getCategoria()));
-            params.put("idAlmacen", String.valueOf(producto.getAlmacen().getId()));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         // Request a string response from the provided URL.
-        JsonObjectRequest sr = new JsonObjectRequest(
+        StringRequest sr = new StringRequest(
                 Request.Method.POST, //GET or POST
                 url, //URL
-                null,
-                new Response.Listener<JSONObject>() {
+
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(String response) {
                         try {
                             gson = new Gson();
                             Producto p = gson.fromJson(response.toString(), Producto.class);
@@ -70,20 +60,23 @@ public class ControllerProducto {
             }
         }
         ) {
+
             @Override
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("nombre", "Crema");//producto.getNombre());
-                params.put("marca", String.valueOf(producto.getMarca()));
-                params.put("precio", String.valueOf(producto.getPrecio()));
-                params.put("categoria", String.valueOf(producto.getCategoria()));
-                params.put("idAlmacen", String.valueOf(producto.getAlmacen().getId()));
+                params.put("marca", "josdc");
+                params.put("precio", "78");
+                params.put("categoria", "1");
+                params.put("idAlmacen", "1");
                 return params;
             }
+
             @Override
             public String getBodyContentType() {
                 return "application/json";
             }
+
              /*
             JSONObject params = new JSONObject();
             try {
@@ -124,7 +117,8 @@ public class ControllerProducto {
     }
 
     public void construirParametros(Producto p, RequestQueue queue, ProgressDialog pDialog){
-        String url ="http://192.168.0.105:8084/AVCM_WEB/restProducto/insertProducto";
+        String url ="http://192.168.43.16:8084/AVCM_WEB/restProducto/insertProducto?nombre=" + p.getNombre() + "&marca=" + p.getMarca() + "&precio=" + String.valueOf(p.getPrecio()) + "&categoria=" + p.getCategoria() + "&idAlmacen=" + String.valueOf(p.getAlmacen().getId());
+
         guardarProducto(p,url, queue, pDialog);
     }
 }

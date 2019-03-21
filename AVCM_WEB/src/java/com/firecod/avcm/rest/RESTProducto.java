@@ -27,11 +27,11 @@ public class RESTProducto extends Application{
     @POST
     @Path("insertProducto")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insert(@FormParam("nombre")@DefaultValue("") String nombre,
-                           @FormParam("marca")@DefaultValue("") String marca,
-                           @FormParam("precio")@DefaultValue("0") float precio,
-                           @FormParam("categoria")@DefaultValue("") String categoria,
-                           @FormParam("idAlmacen")@DefaultValue("1") int almacen)
+    public Response insert(@QueryParam("nombre")@DefaultValue("") String nombre,
+                           @QueryParam("marca")@DefaultValue("") String marca,
+                           @QueryParam("precio")@DefaultValue("0") float precio,
+                           @QueryParam("categoria")@DefaultValue("") String categoria,
+                           @QueryParam("idAlmacen")@DefaultValue("1") int almacen)
     {        
         ControllerProducto cp= new ControllerProducto();        
         String out = null;
