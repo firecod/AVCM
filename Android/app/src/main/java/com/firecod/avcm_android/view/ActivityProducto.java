@@ -33,6 +33,7 @@ public class ActivityProducto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        inicializar();
     }
 
     public void inicializar(){
@@ -59,7 +60,7 @@ public class ActivityProducto extends AppCompatActivity {
         a = new Almacen();
       //  Gson gson = new Gson();
         cp = new ControllerProducto();
-        p.setId(Integer.parseInt(txtIdProducto.getText().toString()));
+        //p.setId(Integer.parseInt(txtIdProducto.getText().toString()));
         p.setCategoria("xd");
         p.setEstatus(1);
         p.setMarca(txtMarcaProducto.getText().toString());

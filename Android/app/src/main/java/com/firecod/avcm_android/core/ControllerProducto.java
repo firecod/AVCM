@@ -31,6 +31,7 @@ public class ControllerProducto {
         RequestQueue queue = Volley.newRequestQueue( new ActivityProducto());
         final ProgressDialog pDialog = new ProgressDialog(new ActivityProducto());
         pDialog.setMessage("Guardando...");
+        pDialog.setCanceledOnTouchOutside(false);
         pDialog.show();
         // Request a string response from the provided URL.
         JsonObjectRequest request = new JsonObjectRequest(
@@ -83,7 +84,7 @@ public class ControllerProducto {
 
 
     public void construirParametros(Producto p){
-        String url ="http://192.168.43.152:8084/AVCM/servicioProducto/guardarProducto";
+        String url ="http://192.168.137.223:8084/AVCM/servicioProducto/guardarProducto";
         guardarProducto(p,url);
     }
 }
