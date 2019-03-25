@@ -1,9 +1,6 @@
 package com.firecod.avcm_android.core;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.util.Log;
-import android.widget.EditText;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,7 +8,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.firecod.avcm_android.model.Producto;
-import com.firecod.avcm_android.view.ActivityProducto;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,13 +15,13 @@ import java.util.Map;
 public class ControllerProducto {
 
     private Gson gson;
-    private static int id;
-    private Intent i = new Intent();
+    private int id;
 
-    public void guardarProducto(final Producto producto, String url, RequestQueue queue, final ProgressDialog pDialog, final EditText etId) {
+    public void guardarProducto(final Producto producto, String url, RequestQueue queue, final ProgressDialog pDialog) {
 
         pDialog.setMessage("Guardando...");
         pDialog.show();
+
         // Request a string response from the provided URL.
         StringRequest sr = new StringRequest(
                 Request.Method.POST, //GET or POST
@@ -37,10 +33,11 @@ public class ControllerProducto {
                         try {
                             gson = new Gson();
                             Producto p = gson.fromJson(response.toString(), Producto.class);
-                            id = p.getId();
-                            etId.setText("" + id);
+                            setId(p.getId());
+                            final int  id = p.getId();
                             Log.d("Bienvenido", "" + id);
                             pDialog.hide();
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -72,11 +69,21 @@ public class ControllerProducto {
         };
 
         queue.add(sr);
+
+    }
+    private  void setId (int id){
+        this.id = id;
     }
 
-    public void construirParametros(Producto p, RequestQueue queue, ProgressDialog pDialog, EditText etId){
+    public int getId (){
+        System.out.println("el id" + this.id);
+        return this.id;
+    }
+    public int construirParametros(Producto p, RequestQueue queue, ProgressDialog pDialog){
         String url ="http://192.168.0.9:8084/AVCM_WEB/restProducto/insertProducto";
 
-        guardarProducto(p,url, queue, pDialog, etId);
+        guardarProducto(p,url, queue, pDialog);
+        System.out.println("el id we"+ id);
+        return id;
     }
 }
