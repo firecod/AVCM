@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -55,7 +56,16 @@ public class ActivityProducto extends AppCompatActivity {
                 guardarProducto();
             }
         });
+      asignarCategorias();
 
+    }
+
+    public void asignarCategorias(){
+        String[] categorias = new String[] {"Produtos de Temporada","Alimentos", "Línea Blanca", "Muebles", "Papeleria y Merceria",
+                                        "Moda", "Bebes", "Entretenimiento", "Herramientas", "Limpieza"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, categorias);
+        spCategoriaProducto.setAdapter(adapter);
     }
 
     public void guardarProducto(){
@@ -65,7 +75,7 @@ public class ActivityProducto extends AppCompatActivity {
       //  Gson gson = new Gson();
         cp = new ControllerProducto();
         //p.setId(Integer.parseInt(txtIdProducto.getText().toString()));
-        p.setCategoria("xd");
+        p.setCategoria(spCategoriaProducto.getSelectedItem().toString());
         p.setEstatus(1);
         p.setMarca(txtMarcaProducto.getText().toString());
         p.setNombre(txtNombreProducto.getText().toString());
@@ -75,6 +85,9 @@ public class ActivityProducto extends AppCompatActivity {
        // String productoJson = gson.toJson(p);
         RequestQueue queue = Volley.newRequestQueue(this);
         final ProgressDialog pDialog = new ProgressDialog(this);
-        cp.construirParametros(p, queue, pDialog);
+         cp.construirParametros(p, queue, pDialog);
+
+        txtIdProducto.setText("" + cp.getId());
+//        txtIdProducto.setText(cp.id);
     }
 }

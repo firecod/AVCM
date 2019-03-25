@@ -15,9 +15,9 @@ import java.util.Map;
 public class ControllerProducto {
 
     private Gson gson;
-    public int id;
+    private int id;
 
-    public int guardarProducto(final Producto producto, String url, RequestQueue queue, final ProgressDialog pDialog) {
+    public void guardarProducto(final Producto producto, String url, RequestQueue queue, final ProgressDialog pDialog) {
 
         pDialog.setMessage("Guardando...");
         pDialog.show();
@@ -33,10 +33,11 @@ public class ControllerProducto {
                         try {
                             gson = new Gson();
                             Producto p = gson.fromJson(response.toString(), Producto.class);
-                            Log.d("Bienvenido", "" + p.getId());
-                            Log.d("Bienvenido", "" + response.toString());
+                            setId(p.getId());
+                            final int  id = p.getId();
+                            Log.d("Bienvenido", "" + id);
                             pDialog.hide();
-                            id = p.getId();
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -68,12 +69,21 @@ public class ControllerProducto {
         };
 
         queue.add(sr);
-        return id;
+
+    }
+    private  void setId (int id){
+        this.id = id;
     }
 
-    public void construirParametros(Producto p, RequestQueue queue, ProgressDialog pDialog){
-        String url ="http://192.168.0.105:8084/AVCM_WEB/restProducto/insertProducto";
+    public int getId (){
+        System.out.println("el id" + this.id);
+        return this.id;
+    }
+    public int construirParametros(Producto p, RequestQueue queue, ProgressDialog pDialog){
+        String url ="http://192.168.0.9:8084/AVCM_WEB/restProducto/insertProducto";
 
         guardarProducto(p,url, queue, pDialog);
+        System.out.println("el id we"+ id);
+        return id;
     }
 }

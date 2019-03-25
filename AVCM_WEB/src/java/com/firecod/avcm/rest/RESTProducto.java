@@ -2,6 +2,9 @@
 package com.firecod.avcm.rest;
 
 import controller.ControllerProducto;
+import flexjson.JSON;
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -32,6 +35,7 @@ public class RESTProducto extends Application{
         ControllerProducto cp= new ControllerProducto();        
         String out = null;
         Producto p = new Producto();
+        JSONSerializer jss = new JSONSerializer();
         Almacen a = new Almacen();    
         try {
             
@@ -44,7 +48,7 @@ public class RESTProducto extends Application{
             p.setPrecio(precio);
             cp.insert(p);
             if(p.getId() > 0)
-                out = "{\"result\":" + p.getId() + "}";
+               out = jss.serialize(p);                            
             else
                 out = "{\"error\":\"Movimiento no realizado.\"}";
         } catch (Exception e) {
