@@ -85,10 +85,15 @@ public class ActivityProducto extends AppCompatActivity {
        // String productoJson = gson.toJson(p);
         RequestQueue queue = Volley.newRequestQueue(this);
         final ProgressDialog pDialog = new ProgressDialog(this);
+<<<<<<< HEAD
          cp.construirParametros(p, queue, pDialog);
     }
 
     public void recuperarID(View v){
         txtIdProducto.setText(""  );
+=======
+        cp.construirParametros(p, queue, pDialog, txtIdProducto);
+//        txtIdProducto.setText(cp.id);
+>>>>>>> 421255bc7774cb01fffffc34bc5fcbd46db3a8ae
     }
 }
