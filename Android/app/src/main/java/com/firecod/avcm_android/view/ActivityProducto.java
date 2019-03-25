@@ -86,8 +86,9 @@ public class ActivityProducto extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         final ProgressDialog pDialog = new ProgressDialog(this);
          cp.construirParametros(p, queue, pDialog);
+    }
 
-        txtIdProducto.setText("" + cp.getId());
-//        txtIdProducto.setText(cp.id);
+    public void recuperarID(View v){
+        txtIdProducto.setText(""  );
     }
 }
