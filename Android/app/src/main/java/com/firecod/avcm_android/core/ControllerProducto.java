@@ -32,7 +32,7 @@ public class ControllerProducto {
                     public void onResponse(String response) {
                         try {
                             gson = new Gson();
-                            Producto p = gson.fromJson(response.toString(), Producto.class);
+                            Producto p = gson.fromJson(response, Producto.class);
                             Log.d("Bienvenido", "" + p.getId());
                             Log.d("Bienvenido", "" + response.toString());
                             pDialog.hide();
