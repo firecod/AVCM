@@ -8,7 +8,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.firecod.avcm_android.model.Producto;
-import com.firecod.avcm_android.view.ActivityProducto;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +32,9 @@ public class ControllerProducto {
                     public void onResponse(String response) {
                         try {
                             gson = new Gson();
-                            ActivityProducto ap = new ActivityProducto();
-                            Producto p = gson.fromJson(response, Producto.class);
-                            ap.recuperarID(p.getId());
+                            Producto p = gson.fromJson(response.toString(), Producto.class);
+                            setId(p.getId());
+                            final int  id = p.getId();
                             Log.d("Bienvenido", "" + id);
                             pDialog.hide();
 
@@ -71,10 +70,17 @@ public class ControllerProducto {
 
         queue.add(sr);
 
+    }
+    private  void setId (int id){
+        this.id = id;
+    }
 
+    public int getId (){
+        System.out.println("el id" + this.id);
+        return this.id;
     }
     public int construirParametros(Producto p, RequestQueue queue, ProgressDialog pDialog){
-        String url ="http://192.168.0.105:8084/AVCM_WEB/restProducto/insertProducto";
+        String url ="http://192.168.0.9:8084/AVCM_WEB/restProducto/insertProducto";
 
         guardarProducto(p,url, queue, pDialog);
         System.out.println("el id we"+ id);
