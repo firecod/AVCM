@@ -14,10 +14,14 @@ import android.widget.Spinner;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.core.ControllerAlmacen;
 import com.firecod.avcm_android.core.ControllerProducto;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityProducto extends AppCompatActivity {
     EditText txtIdProducto;
@@ -32,6 +36,33 @@ public class ActivityProducto extends AppCompatActivity {
     Almacen a;
     ControllerProducto cp;
 
+    public EditText getTxtIdProducto() {
+        return txtIdProducto;
+    }
+
+    public EditText getTxtNombreProducto() {
+        return txtNombreProducto;
+    }
+
+    public EditText getTxtMarcaProducto() {
+        return txtMarcaProducto;
+    }
+
+    public EditText getTxtPrecioProducto() {
+        return txtPrecioProducto;
+    }
+
+    public Spinner getSpCategoriaProducto() {
+        return spCategoriaProducto;
+    }
+
+    public Spinner getSpAlmacenProducto() {
+        return spAlmacenProducto;
+    }
+
+    public CheckBox getCbEstatus() {
+        return cbEstatus;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +87,13 @@ public class ActivityProducto extends AppCompatActivity {
                 guardarProducto();
             }
         });
-      asignarCategorias();
+        asignarCategorias();
+        asignarAlmacen();
+    }
 
+    public void asignarAlmacen(){
+        ControllerAlmacen ca = new ControllerAlmacen();
+        ca.getAll(this);
     }
 
     public void asignarCategorias(){
@@ -69,12 +105,9 @@ public class ActivityProducto extends AppCompatActivity {
     }
 
     public void guardarProducto(){
-      //  Intent i = new Intent(this, ControllerProducto.class);
         p = new Producto();
         a = new Almacen();
-      //  Gson gson = new Gson();
         cp = new ControllerProducto();
-        //p.setId(Integer.parseInt(txtIdProducto.getText().toString()));
         p.setCategoria(spCategoriaProducto.getSelectedItem().toString());
         p.setEstatus(1);
         p.setMarca(txtMarcaProducto.getText().toString());
@@ -82,10 +115,7 @@ public class ActivityProducto extends AppCompatActivity {
         p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
         a.setId(1);
         p.setAlmacen(a);
-       // String productoJson = gson.toJson(p);
-        RequestQueue queue = Volley.newRequestQueue(this);
-        final ProgressDialog pDialog = new ProgressDialog(this);
-         cp.construirParametros(p, queue, pDialog, txtIdProducto);
-//        txtIdProducto.setText(cp.id);
+
+         cp.guardarProducto(this,p );
     }
 }
