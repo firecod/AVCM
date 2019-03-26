@@ -18,12 +18,12 @@ import java.util.ArrayList;
 
 public class ControllerAlmacen {
     Gson gson;
-    String urlGlobal = "http://192.168.43.16:8084/AVCM_WEB/restAlmacen/";
-    public void getAll(final ActivityProducto act) {
+    String urlGlobal = "http://192.168.0.105:8084/AVCM_WEB/restAlmacen/";
+    public void getAllSpinnerProducto(final ActivityProducto act) {
 
         JsonArrayRequest sr = new JsonArrayRequest(
                 Request.Method.GET, //GET or POST
-                urlGlobal + "getAllAlmacen", //URL
+                urlGlobal + "getAllAlmacen?estatus=1", //URL
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -43,10 +43,6 @@ public class ControllerAlmacen {
                             act.getSpAlmacenProducto().setAdapter(adapter);
                             Almacen acd = new Almacen();
                             acd = ((Almacen) act.getSpAlmacenProducto().getSelectedItem());
-                            System.out.println("si we" + acd.getId());
-                            for(int i = 0; i<almacenes.size(); i++){
-                                System.out.println("valores" + almacenes.get(i).getNombre());
-                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

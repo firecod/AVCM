@@ -32,6 +32,7 @@ public class ActivityProducto extends AppCompatActivity {
     Spinner spAlmacenProducto;
     CheckBox cbEstatus;
     Button btnGuardar;
+    Button btnConsultar;
     Producto p;
     Almacen a;
     ControllerProducto cp;
@@ -87,18 +88,25 @@ public class ActivityProducto extends AppCompatActivity {
                 guardarProducto();
             }
         });
+        btnConsultar = findViewById(R.id.btnConsultar);
+        btnConsultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                consultarProductos();
+            }
+        });
         asignarCategorias();
         asignarAlmacen();
     }
 
     public void asignarAlmacen(){
         ControllerAlmacen ca = new ControllerAlmacen();
-        ca.getAll(this);
+        ca.getAllSpinnerProducto(this);
     }
 
     public void asignarCategorias(){
         String[] categorias = new String[] {"Produtos de Temporada","Alimentos", "Línea Blanca", "Muebles", "Papeleria y Merceria",
-                                        "Moda", "Bebes", "Entretenimiento", "Herramientas", "Limpieza"};
+                                            "Moda", "Bebes", "Entretenimiento", "Herramientas", "Limpieza"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, categorias);
         spCategoriaProducto.setAdapter(adapter);
@@ -117,5 +125,10 @@ public class ActivityProducto extends AppCompatActivity {
         p.setAlmacen(a);
 
          cp.guardarProducto(this,p );
+    }
+
+    public void consultarProductos(){
+       Intent i = new Intent(this, ActivityProductoConsulta.class);
+       startActivity(i);
     }
 }

@@ -1,12 +1,15 @@
 
 package com.firecod.avcm.rest;
 
+import controller.ControllerAlmacen;
 import controller.ControllerProducto;
 import flexjson.JSON;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import java.util.List;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -57,5 +60,23 @@ public class RESTProducto extends Application{
         }
          return Response.status(Response.Status.OK).entity(out).build();
     }    
-
+@GET
+    @Path("getAllProducto")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll(@QueryParam("estatus")@DefaultValue("1")int estatus){
+        ControllerProducto ca= new ControllerProducto();
+        
+        List<Producto> productos =null;
+        JSONSerializer jss= new JSONSerializer();
+        String out= null;
+        
+        try {
+            productos = ca.getAll("", estatus);
+            out = jss.serialize(productos);
+        } catch (Exception e) {
+            e.printStackTrace();
+            out="{\"error:\":\""+e.toString()+"\"}";
+        }
+         return Response.status(Response.Status.OK).entity(out).build();
+    }
 }

@@ -1,6 +1,7 @@
 package com.firecod.avcm_android.core;
 import android.app.ProgressDialog;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -9,18 +10,31 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.evrencoskun.tableview.TableView;
+import com.firecod.avcm_android.components.TableAdapterProducto;
+import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
 import com.firecod.avcm_android.view.ActivityProducto;
+import com.firecod.avcm_android.view.ActivityProductoConsulta;
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 public class ControllerProducto {
 
     private Gson gson;
-    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restProducto/";
+    private String urlGlobal ="http://192.168.0.105:8084/AVCM_WEB/restProducto/";
 
     public void guardarProducto(final ActivityProducto act, final Producto producto) {
         Toast t = new Toast(act.getBaseContext());
@@ -65,6 +79,52 @@ public class ControllerProducto {
                 return "application/x-www-form-urlencoded; charset=UTF-8";
             }
         };
+        RequestQueue queue = Volley.newRequestQueue(act);
+        queue.add(sr);
+    }
+
+    public void getAll(final ActivityProductoConsulta act) {
+
+        JsonArrayRequest sr = new JsonArrayRequest(
+                Request.Method.GET, //GET or POST
+                urlGlobal + "getAllProducto?estatus=1", //URL
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            gson = new Gson();
+                            ArrayList<Producto> productos = new ArrayList<>();
+                            List<List<Producto>> mCellList = new ArrayList<>();
+                            Producto p;
+                            List<Producto> mRowHeaderList = productos;
+                            for(int i = 0; i<response.length(); i++){
+                                p = new Producto();
+                                p = gson.fromJson(response.get(i).toString(), Producto.class);
+                                productos.add(p);
+
+                            }
+
+                             List<Producto> mColumnHeaderList = productos;
+                             mCellList.add(mRowHeaderList);
+                            TableView tableView = new TableView(act);
+                            // Create our custom TableView Adapter
+                            TableAdapterProducto adapter = new TableAdapterProducto(act);
+                            // Set this adapter to the our TableView
+                            tableView.setAdapter(adapter);
+                            // Let's set datas of the TableView on the Adapter
+                            adapter.setAllItems(mColumnHeaderList, mRowHeaderList, mCellList);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+            }
+        }
+        ) ;
         RequestQueue queue = Volley.newRequestQueue(act);
         queue.add(sr);
     }

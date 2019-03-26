@@ -30,7 +30,7 @@
         <ScrollView
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,6 +145,13 @@
                     tools:layout_editor_absoluteY="536dp">
 
                     <Button
+                        android:id="@+id/btnConsultar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Consultar" />
+
+                    <Button
                         android:id="@+id/btnGuardar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -164,8 +171,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Nuevo" />
+
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
