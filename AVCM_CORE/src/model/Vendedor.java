@@ -18,7 +18,8 @@ public class Vendedor {
     private int reputacion;
     private int estatus;
     private Persona persona;
-
+    private Usuario usuario;
+    
     public int getId() {
         return id;
     }
@@ -67,7 +68,12 @@ public class Vendedor {
         this.persona = persona;
     }
 
-   
-    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     
 }

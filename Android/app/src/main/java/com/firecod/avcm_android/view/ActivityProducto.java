@@ -32,6 +32,33 @@ public class ActivityProducto extends AppCompatActivity {
     Almacen a;
     ControllerProducto cp;
 
+    public EditText getTxtIdProducto() {
+        return txtIdProducto;
+    }
+
+    public EditText getTxtNombreProducto() {
+        return txtNombreProducto;
+    }
+
+    public EditText getTxtMarcaProducto() {
+        return txtMarcaProducto;
+    }
+
+    public EditText getTxtPrecioProducto() {
+        return txtPrecioProducto;
+    }
+
+    public Spinner getSpCategoriaProducto() {
+        return spCategoriaProducto;
+    }
+
+    public Spinner getSpAlmacenProducto() {
+        return spAlmacenProducto;
+    }
+
+    public CheckBox getCbEstatus() {
+        return cbEstatus;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +110,10 @@ public class ActivityProducto extends AppCompatActivity {
         a.setId(1);
         p.setAlmacen(a);
        // String productoJson = gson.toJson(p);
-        RequestQueue queue = Volley.newRequestQueue(this);
-        final ProgressDialog pDialog = new ProgressDialog(this);
-         cp.construirParametros(p, queue, pDialog, txtIdProducto);
+        //RequestQueue queue = Volley.newRequestQueue(this);
+        //final ProgressDialog pDialog = new ProgressDialog(this);
+         //cp.construirParametros(p, queue, pDialog, txtIdProducto);
 //        txtIdProducto.setText(cp.id);
+        cp.guardarProducto(this, p);
     }
 }

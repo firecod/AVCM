@@ -1,0 +1,73 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller;
+
+import DB.ConexionMySQL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import model.Cliente;
+import model.Persona;
+import model.Usuario;
+import model.Vendedor;
+
+/**
+ *
+ * @author Vanessa
+ */
+public class ControllerLogin {
+    
+    public Object login(String usuario, String password) throws Exception{
+        
+        String sql1 = "SELECT * FROM v_vendedor " +
+                      "WHERE nombreUsuario = ? AND contrasenia = ? AND estatus = 1";
+        String sql2 = "SELECT * FROM v_clientes " +
+                      "WHERE nombreUsuario = ? AND contrasenia = ? AND estatus = 1";
+        
+        ConexionMySQL connMySQL = new ConexionMySQL();
+        
+        Connection conn = connMySQL.abrir();
+        
+        PreparedStatement pstmt = conn.prepareStatement(sql1);
+        
+        ResultSet rs = null;
+        
+        Cliente c = null;
+        Vendedor v = null;
+        Persona p = null;
+        Usuario u = null;
+        
+        pstmt.setString(1, usuario);
+        pstmt.setString(2, password);
+        
+        rs = pstmt.executeQuery();
+        if(rs.next())
+        {
+            v = new Vendedor();
+            p = new Persona();
+            u = new Usuario();
+            
+            p.setId(rs.getInt("idPersona"));
+            p.setApellidoMaterno(rs.getString("apellidoMaterno"));
+            p.setApellidoPaterno(rs.getString("apellidoPaterno"));
+            p.setNombre(rs.getString("nombre"));
+            p.setDomicilio(rs.getString("domicilio"));
+            p.setRfc(rs.getString("rfc"));
+            
+            u.setId(rs.getInt("idUsuario"));
+            u.setPuesto(rs.getString("puesto"));
+            u.setNombreUsuario(rs.getString("nombreUsuario"));
+            u.setContrasenia(rs.getString("contrasenia"));
+            
+            v.setId(rs.getInt("idVendedor"));
+            v.setNumeroVendedor(rs.getString("numeroVendedor"));
+            v.setReputacion(rs.getInt("reputacion"));
+            v.setFotografíaVendedor(password);
+        }
+    }
+    
+}
