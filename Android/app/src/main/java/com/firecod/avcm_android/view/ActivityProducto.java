@@ -14,10 +14,14 @@ import android.widget.Spinner;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.core.ControllerAlmacen;
 import com.firecod.avcm_android.core.ControllerProducto;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityProducto extends AppCompatActivity {
     EditText txtIdProducto;
@@ -28,6 +32,7 @@ public class ActivityProducto extends AppCompatActivity {
     Spinner spAlmacenProducto;
     CheckBox cbEstatus;
     Button btnGuardar;
+    Button btnConsultar;
     Producto p;
     Almacen a;
     ControllerProducto cp;
@@ -83,25 +88,34 @@ public class ActivityProducto extends AppCompatActivity {
                 guardarProducto();
             }
         });
-      asignarCategorias();
+        btnConsultar = findViewById(R.id.btnConsultar);
+        btnConsultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+        asignarCategorias();
+        asignarAlmacen();
+    }
+
+    public void asignarAlmacen(){
+        ControllerAlmacen ca = new ControllerAlmacen();
+        ca.getAllSpinnerProducto(this);
     }
 
     public void asignarCategorias(){
         String[] categorias = new String[] {"Produtos de Temporada","Alimentos", "Línea Blanca", "Muebles", "Papeleria y Merceria",
-                                        "Moda", "Bebes", "Entretenimiento", "Herramientas", "Limpieza"};
+                "Moda", "Bebes", "Entretenimiento", "Herramientas", "Limpieza"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, categorias);
         spCategoriaProducto.setAdapter(adapter);
     }
 
     public void guardarProducto(){
-      //  Intent i = new Intent(this, ControllerProducto.class);
         p = new Producto();
         a = new Almacen();
-      //  Gson gson = new Gson();
         cp = new ControllerProducto();
-        //p.setId(Integer.parseInt(txtIdProducto.getText().toString()));
         p.setCategoria(spCategoriaProducto.getSelectedItem().toString());
         p.setEstatus(1);
         p.setMarca(txtMarcaProducto.getText().toString());
@@ -109,11 +123,8 @@ public class ActivityProducto extends AppCompatActivity {
         p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
         a.setId(1);
         p.setAlmacen(a);
-       // String productoJson = gson.toJson(p);
-        //RequestQueue queue = Volley.newRequestQueue(this);
-        //final ProgressDialog pDialog = new ProgressDialog(this);
-         //cp.construirParametros(p, queue, pDialog, txtIdProducto);
-//        txtIdProducto.setText(cp.id);
-        cp.guardarProducto(this, p);
+
+        cp.guardarProducto(this,p );
     }
+
 }
