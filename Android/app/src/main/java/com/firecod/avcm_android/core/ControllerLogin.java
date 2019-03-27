@@ -10,10 +10,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.firecod.avcm_android.model.Producto;
+import com.firecod.avcm_android.model.Cliente;
+import com.firecod.avcm_android.model.Vendedor;
 import com.firecod.avcm_android.view.ActivityLogin;
-import com.firecod.avcm_android.view.ActivityMainVendedor;
-import com.firecod.avcm_android.view.ActivityProducto;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -22,7 +21,7 @@ import java.util.Map;
 public class ControllerLogin {
 
     private Gson gson;
-    private String url ="http://192.168.0.9:8084/AVCM_WEB/restProducto/";
+    private String url ="http://192.168.137.45:8084/AVCM_WEB/restProducto/";
 
     public void login(final ActivityLogin act, final Object obj)
     {
@@ -41,12 +40,17 @@ public class ControllerLogin {
                             if(response.toLowerCase().contains("error")){
                                 Toast t = new Toast(act);
                                 t.makeText(act, "Usuario y/o contraseña inválidos", Toast.LENGTH_LONG).show();
-                            } else if(response.toLowerCase().contains("vendedor")){
-
+                            } else if(response.toLowerCase().contains("vendedor")) {
+                                Vendedor v = gson.fromJson(response, Vendedor.class);
+                                Toast t = new Toast(act);
+                                t.makeText(act, "Ingresando...", Toast.LENGTH_LONG).show();
+                                act.ingresar(v);
+                            }else{
+                                Cliente c = gson.fromJson(response, Cliente.class);
+                                Toast t = new Toast(act);
+                                t.makeText(act, "Ingresando...", Toast.LENGTH_LONG).show();
+                                act.ingresar(c);
                             }
-
-                            if(response)
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
