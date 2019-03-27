@@ -1,8 +1,4 @@
 package com.firecod.avcm_android.core;
-import android.app.ProgressDialog;
-import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -14,8 +10,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.evrencoskun.tableview.TableView;
-import com.firecod.avcm_android.components.TableAdapterProducto;
-import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
 import com.firecod.avcm_android.view.ActivityProducto;
 import com.firecod.avcm_android.view.ActivityProductoConsulta;
@@ -24,11 +18,8 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 public class ControllerProducto {
@@ -105,15 +96,6 @@ public class ControllerProducto {
 
                             }
 
-                             List<Producto> mColumnHeaderList = productos;
-                             mCellList.add(mRowHeaderList);
-                            TableView tableView = new TableView(act);
-                            // Create our custom TableView Adapter
-                            TableAdapterProducto adapter = new TableAdapterProducto(act);
-                            // Set this adapter to the our TableView
-                            tableView.setAdapter(adapter);
-                            // Let's set datas of the TableView on the Adapter
-                            adapter.setAllItems(mColumnHeaderList, mRowHeaderList, mCellList);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
