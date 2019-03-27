@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.model.Cliente;
 import com.firecod.avcm_android.model.Vendedor;
 
 public class ActivityLogin extends AppCompatActivity {
@@ -62,7 +63,7 @@ public class ActivityLogin extends AppCompatActivity {
     }
     public void ingresar(Cliente c){
         Intent i = new Intent(this, ActivityMainVendedor.class);
-        i.putExtra("cliente", o);
+       // i.putExtra("cliente", c);
         startActivity(i);
     }
 }
