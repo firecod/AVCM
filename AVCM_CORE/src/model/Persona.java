@@ -13,7 +13,12 @@ package model;
  */
 public class Persona {
     private int id;
-
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private String rfc;
+    private String domicilio;
+    
     public int getId() {
         return id;
     }
@@ -21,11 +26,6 @@ public class Persona {
     public void setId(int id) {
         this.id = id;
     }
-    private String nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
-    private String rfc;
-    private String domicilio;
 
     public String getNombre() {
         return nombre;

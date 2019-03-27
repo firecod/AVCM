@@ -20,7 +20,7 @@ import java.util.Map;
 public class ControllerProducto {
 
     private Gson gson;
-    private String url ="http://192.168.0.9:8084/AVCM_WEB/restProducto/";
+    private String url ="http://192.168.137.45:8084/AVCM_WEB/restProducto/";
 
     public void guardarProducto(final ActivityProducto act, final Producto producto)
     {

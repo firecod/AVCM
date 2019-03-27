@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.model.Cliente;
 import com.firecod.avcm_android.model.Vendedor;
 
 public class ActivityLogin extends AppCompatActivity {
@@ -52,17 +53,17 @@ public class ActivityLogin extends AppCompatActivity {
         this.btnEntrar = btnEntrar;
     }
 
-    public void login(){
-
-    }
-
     public void ingresar(Vendedor v)
     {
-
+        Intent i = new Intent(this, ActivityMainCliente.class);
+        i.putExtra("nomVendedor", v.getPersona().getNombre());
+        startActivity(i);
     }
-    public void ingresar(Cliente c){
-        Intent i = new Intent(this, ActivityMainVendedor.class);
-        i.putExtra("cliente", o);
+
+    public void ingresar(Cliente c)
+    {
+        Intent i = new Intent(this, ActivityMainCliente.class);
+        i.putExtra("nomCliente", c.getPersona().getNombre());
         startActivity(i);
     }
 }
