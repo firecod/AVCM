@@ -66,8 +66,59 @@ public class ControllerLogin {
             v.setId(rs.getInt("idVendedor"));
             v.setNumeroVendedor(rs.getString("numeroVendedor"));
             v.setReputacion(rs.getInt("reputacion"));
-            v.setFotografíaVendedor(password);
+            v.setFotografíaVendedor(rs.getString("fotografiaVendedor"));
+            v.setEstatus(rs.getInt("estatus"));
+            
+            v.setPersona(p);
+            v.setUsuario(u);
+            
         }
+        rs.close();
+        pstmt.close();
+        
+        if(v != null){
+            connMySQL.cerrar();
+            return v;
+        }
+        
+        pstmt = conn.prepareStatement(sql2);
+        pstmt.setString(1, usuario);
+        pstmt.setString(2, password);
+        rs = pstmt.executeQuery();
+        
+        if(rs.next()){
+            c = new Cliente();
+            p = new Persona();
+            u = new Usuario();
+            
+            p.setId(rs.getInt("idPersona"));
+            p.setApellidoMaterno(rs.getString("apellidoMaterno"));
+            p.setApellidoPaterno(rs.getString("apellidoPaterno"));
+            p.setNombre(rs.getString("nombre"));
+            p.setDomicilio(rs.getString("domicilio"));
+            p.setRfc(rs.getString("rfc"));
+            
+            u.setId(rs.getInt("idUsuario"));
+            u.setPuesto(rs.getString("puesto"));
+            u.setNombreUsuario(rs.getString("nombreUsuario"));
+            u.setContrasenia(rs.getString("contrasenia"));
+        
+            c.setId(rs.getInt("idCliente"));
+            c.setNumeroCliente(rs.getString("numeroCliente"));
+            c.setCorreoElectronico(rs.getString("correoElectronico"));
+            c.setEstatus(rs.getInt("estatus"));
+            
+            c.setPersona(p);
+            c.setUsuario(u);
+            
+            rs.close();
+            pstmt.close();
+            connMySQL.cerrar();
+            
+            return c;
+        }
+        
+        return null;
     }
     
 }

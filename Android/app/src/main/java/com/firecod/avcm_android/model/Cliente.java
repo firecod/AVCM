@@ -1,30 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package model;
+package com.firecod.avcm_android.model;
 
-/**
- *
- * @author diegg
- */
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Cliente {
-    
+
+    @SerializedName("id")
+    @Expose
     private int id;
+
+    @SerializedName("numeroCliente")
+    @Expose
     private String numeroCliente;
+
+    @SerializedName("correoElectronico")
+    @Expose
     private String correoElectronico;
+
+    @SerializedName("estatus")
+    @Expose
     private int estatus;
+
+    @SerializedName("persona")
+    @Expose
     private Persona persona;
+
+    @SerializedName("usuario")
+    @Expose
     private Usuario usuario;
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
     public int getId() {
         return id;
@@ -58,12 +61,19 @@ public class Cliente {
         this.estatus = estatus;
     }
 
-    public Persona getersona() {
+    public Persona getPersona() {
         return persona;
     }
 
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-   
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
