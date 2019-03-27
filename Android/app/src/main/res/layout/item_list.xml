@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+    >
+
+        <TextView
+            android:id="@+id/idProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Id"
+            android:layout_margin="20dp"
+            />
+
+        <TextView
+            android:id="@+id/nombreProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre Producto"
+            android:layout_margin="20dp"
+            />
+
+        <TextView
+            android:id="@+id/marcaProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Marca del Producto"
+            android:layout_margin="20dp"
+            />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

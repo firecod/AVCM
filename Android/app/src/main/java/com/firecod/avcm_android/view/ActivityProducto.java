@@ -1,7 +1,5 @@
 package com.firecod.avcm_android.view;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,17 +9,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.core.ControllerAlmacen;
 import com.firecod.avcm_android.core.ControllerProducto;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityProducto extends AppCompatActivity {
     EditText txtIdProducto;
@@ -68,7 +60,7 @@ public class ActivityProducto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_producto);
         inicializar();
     }
 
