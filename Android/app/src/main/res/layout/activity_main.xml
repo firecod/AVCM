@@ -160,6 +160,13 @@
                         android:text="Eliminar" />
 
                     <Button
+                        android:id="@+id/btnConsultar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Button" />
+
+                    <Button
                         android:id="@+id/btnNuevo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
