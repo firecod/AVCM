@@ -42,8 +42,8 @@ estatus INT NOT NULL
 CREATE TABLE Vendedor(
 idVendedor INT AUTO_INCREMENT PRIMARY KEY,
 numeroVendedor VARCHAR(20) NOT NULL, 
-fotografiaVendedor LONGTEXT NOT NULL,
-reputacion INT NOT NULL,
+fotografiaVendedor LONGTEXT,
+reputacion INT DEFAULT 0,
 estatus INT NOT NULL,
 idUsuario INT NOT NULL,
 idPersona INT NOT NULL,
@@ -249,4 +249,8 @@ INSERT INTO Producto (nombre, categoria, precio, marca, estatus, idAlmacen) VALU
 ('Refresco Pepsi botella de 1.5 l', 'Refresco', 19.00, 'Pepsi', 1, 3),
 ('Refresco Coca Cola botella de 2.5 l', 'Refresco', 33, 'Coca Cola', 1, 1);
 
-SELECT * FROM VENDEDOR;
+CALL registroCliente('Vanessa', 'Ortega', 'Torres', 'OETJ981207', 'Via asinaria #323-A, Col. Villamagna', '4775595234',
+					'van1207', '1111', 'vanessato_98@hotmail.com', @idPersona, @idUsuario, @idCliente, @numeroCliente);
+                    
+CALL registroVendedor('Diego', 'Castro', 'Castro', 'CACD990225', 'Imperio Asiático #615', '4113603464',
+					  'Vendedor', 'dieg0225', '2222', null, null, 1, @idPersona, @idUsuario, @idVendedor, @numeroVendedor);

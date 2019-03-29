@@ -1,6 +1,5 @@
 package com.firecod.avcm_android.core;
 
-import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -21,9 +20,9 @@ import java.util.Map;
 public class ControllerLogin {
 
     private Gson gson;
-    private String url ="http://192.168.137.45:8084/AVCM_WEB/restProducto/";
+    private String url ="http://192.168.43.152:8084/AVCM_WEB/restLogin/login";
 
-    public void login(final ActivityLogin act, final Object obj)
+    public void login(final ActivityLogin act)
     {
         Toast t = new Toast(act.getBaseContext());
         t.makeText(act.getBaseContext(), "Ingresando...", Toast.LENGTH_LONG).show();
