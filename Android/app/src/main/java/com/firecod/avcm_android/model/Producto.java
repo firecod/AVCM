@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Producto {
     @SerializedName("id")
     @Expose
-    private int id;
+    public int id;
     @SerializedName("nombre")
     @Expose
     private String nombre;
