@@ -170,8 +170,7 @@ public class ControllerProducto {
             p.setMarca(rs.getString("marca"));
             p.setNombre(rs.getString("nombre"));
             p.setPrecio(rs.getFloat("precio"));
-            p.setCategoria(rs.getString("categoria"));
-            
+            p.setCategoria(rs.getString("categoria"));            
             a.setId(rs.getInt("idAlmacen"));
             p.setAlmacen(a);
             

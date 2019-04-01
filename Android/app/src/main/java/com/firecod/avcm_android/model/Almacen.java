@@ -13,9 +13,7 @@ public class Almacen {
     @SerializedName("domicilio")
     @Expose
     private String domicilio;
-    @SerializedName("vendedor")
-    @Expose
-    private Vendedor vendedor;
+
     @SerializedName("estatus")
     @Expose
     private int estatus;
@@ -44,14 +42,6 @@ public class Almacen {
         this.domicilio = domicilio;
     }
 
-    public Vendedor getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
-    }
-
     public int getEstatus() {
         return estatus;
     }
@@ -59,4 +49,5 @@ public class Almacen {
     public void setEstatus(int estatus) {
         this.estatus = estatus;
     }
+
 }

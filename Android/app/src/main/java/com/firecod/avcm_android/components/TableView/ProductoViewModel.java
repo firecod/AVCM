@@ -115,13 +115,11 @@ public class ProductoViewModel {
             // The order should be same with column header list;
             list.add(new CellProducto("1-" + i, producto.getId()));          // "Id"
             list.add(new CellProducto("2-" + i, producto.getNombre()));        // "Name"
-            list.add(new CellProducto("3-" + i, producto.getAlmacen()));    // "Nickname"
+            list.add(new CellProducto("3-" + i, producto.getAlmacen().getNombre()));    // "Nickname"
             list.add(new CellProducto("4-" + i, producto.getCategoria()));       // "Email"
             list.add(new CellProducto("5-" + i, producto.getEstatus()));   // "BirthDay"
             list.add(new CellProducto("6-" + i, producto.getMarca()));      // "Gender"
             list.add(new CellProducto("7-" + i, producto.getPrecio()));         // "Age"
-             // "Fax"
-            // Add
             lists.add(list);
         }
 
