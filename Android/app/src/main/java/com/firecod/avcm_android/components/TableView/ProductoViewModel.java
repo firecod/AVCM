@@ -1,4 +1,4 @@
-package com.firecod.avcm_android.components.TableView.popup;
+package com.firecod.avcm_android.components.TableView;
 
 import android.view.Gravity;
 
@@ -31,25 +31,6 @@ public class ProductoViewModel {
                 return 0;
         }
     }
-
-     /*
-       - Each of Column Header -
-            "Id"
-            "Name"
-            "Nickname"
-            "Email"
-            "Birthday"
-            "Gender"
-            "Age"
-            "Job"
-            "Salary"
-            "CreatedAt"
-            "UpdatedAt"
-            "Address"
-            "Zip Code"
-            "Phone"
-            "Fax"
-     */
 
     public int getColumnTextAlign(int column) {
         switch (column) {
@@ -109,20 +90,13 @@ public class ProductoViewModel {
 
         // Create Column Headers
         list.add(new ColumnHeaderProducto("Id"));
-        list.add(new ColumnHeaderProducto("Name"));
-        list.add(new ColumnHeaderProducto("Nickname"));
-        list.add(new ColumnHeaderProducto("Email"));
-        list.add(new ColumnHeaderProducto("Birthday"));
-        list.add(new ColumnHeaderProducto("Sex"));
-        list.add(new ColumnHeaderProducto("Age"));
-        list.add(new ColumnHeaderProducto("Job"));
-        list.add(new ColumnHeaderProducto("Salary"));
-        list.add(new ColumnHeaderProducto("CreatedAt"));
-        list.add(new ColumnHeaderProducto("UpdatedAt"));
-        list.add(new ColumnHeaderProducto("Address"));
-        list.add(new ColumnHeaderProducto("Zip Code"));
-        list.add(new ColumnHeaderProducto("Phone"));
-        list.add(new ColumnHeaderProducto("Fax"));
+        list.add(new ColumnHeaderProducto("Nombre"));
+        list.add(new ColumnHeaderProducto("Almacen"));
+        list.add(new ColumnHeaderProducto("Categoria"));
+        list.add(new ColumnHeaderProducto("Estatus"));
+        list.add(new ColumnHeaderProducto("Marca"));
+        list.add(new ColumnHeaderProducto("Precio"));
+
 
         return list;
     }

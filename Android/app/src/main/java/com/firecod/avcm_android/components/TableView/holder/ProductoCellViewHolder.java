@@ -10,11 +10,11 @@ import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractSorterViewH
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.components.TableView.model.CellProducto;
 
-public class ProductoViewCellHolder extends AbstractSorterViewHolder {
+public class ProductoCellViewHolder extends AbstractSorterViewHolder {
     public final TextView cell_textview;
     public final LinearLayout cell_container;
 
-    public ProductoViewCellHolder(View itemView) {
+    public ProductoCellViewHolder(View itemView) {
         super(itemView);
         cell_textview = itemView.findViewById(R.id.cell_data);
         cell_container = itemView.findViewById(R.id.cell_container);

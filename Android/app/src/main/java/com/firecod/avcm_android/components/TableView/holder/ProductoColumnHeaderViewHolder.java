@@ -1,5 +1,6 @@
 package com.firecod.avcm_android.components.TableView.holder;
 
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -7,15 +8,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.evrencoskun.tableview.ITableView;
+import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractSorterViewHolder;
+import com.evrencoskun.tableview.sort.SortState;
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.components.TableView.model.ColumnHeaderProducto;
 
-public class ProductoColumnHeaderViewHolder {
+public class ProductoColumnHeaderViewHolder extends AbstractSorterViewHolder {
     final LinearLayout column_header_container;
     final TextView column_header_textview;
     final ImageButton column_header_sort_button;
     final ITableView tableView;
 
-    public ColumnHeaderViewHolder(View itemView, ITableView pTableView) {
+    public ProductoColumnHeaderViewHolder(View itemView, ITableView pTableView) {
         super(itemView);
         tableView = pTableView;
         column_header_textview = itemView.findViewById(R.id.column_header_textView);
@@ -26,7 +30,7 @@ public class ProductoColumnHeaderViewHolder {
         column_header_sort_button.setOnClickListener(mSortButtonClickListener);
     }
 
-    public void setColumnHeaderModel(ColumnHeaderModel pColumnHeaderModel, int pColumnPosition) {
+    public void setColumnHeaderModel(ColumnHeaderProducto pColumnHeaderModel, int pColumnPosition) {
 
         // Change alignment of textView
         column_header_textview.setGravity(COLUMN_TEXT_ALIGNS[pColumnPosition] | Gravity
@@ -143,4 +147,4 @@ public class ProductoColumnHeaderViewHolder {
 
 
 }
-}
+
