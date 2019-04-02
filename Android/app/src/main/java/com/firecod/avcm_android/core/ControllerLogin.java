@@ -30,7 +30,6 @@ public class ControllerLogin {
         StringRequest sr = new StringRequest(
                 Request.Method.POST, //GET or POST
                 url, //URL
-
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

@@ -92,7 +92,7 @@ public class ContenedorProducto extends Fragment {
     private void llenarViewPager(ViewPager viewPager) {
         SectionsAdapter adapter = new SectionsAdapter(getFragmentManager());
         adapter.addFragment(new FormularioProducto(), "Formulario Producto");
-        adapter.addFragment(new catalogo_producto(), "Catálogo Producto");
+        adapter.addFragment(new CatalogoProducto(), "Catálogo Producto");
         adapter.addFragment(new descripcion_producto(), "Descripción Producto");
 
         viewPager.setAdapter(adapter);

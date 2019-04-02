@@ -23,7 +23,7 @@ import com.firecod.avcm_android.fragmentsCliente.DescripcionCliente;
 import com.firecod.avcm_android.fragmentsCliente.FormularioCliente;
 import com.firecod.avcm_android.fragmentsProducto.ContenedorProducto;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
-import com.firecod.avcm_android.fragmentsProducto.catalogo_producto;
+import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
 import com.firecod.avcm_android.fragmentsProducto.descripcion_producto;
 
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
                     CatalogoCliente.OnFragmentInteractionListener,
                     DescripcionCliente.OnFragmentInteractionListener,
                     ContenedorProducto.OnFragmentInteractionListener,
-                    catalogo_producto.OnFragmentInteractionListener,
+                    CatalogoProducto.OnFragmentInteractionListener,
                     FormularioProducto.OnFragmentInteractionListener,
                     descripcion_producto.OnFragmentInteractionListener
                     {

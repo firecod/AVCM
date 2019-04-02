@@ -43,18 +43,21 @@ public class TableAdapterListenerProducto implements ITableViewListener {
             ColumnHeaderLongPressPopupProducto popup = new ColumnHeaderLongPressPopupProducto(
                     (ProductoColumnHeaderViewHolder) columnHeaderView, mTableView);
 
-            // Show
             popup.show();
         }
     }
 
     @Override
     public void onRowHeaderClicked(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
+
+
         Log.d(LOG_TAG, "onRowHeaderClicked has been clicked for " + row);
     }
 
     @Override
     public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder owHeaderView, int row) {
         Log.d(LOG_TAG, "onRowHeaderLongPressed has been clicked for " + row);
+        //Probar seleccion y obtención
+        //mTableView.getAdapter().getCellItem(1,2);
     }
 }

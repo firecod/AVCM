@@ -50,4 +50,8 @@ public class Almacen {
         this.estatus = estatus;
     }
 
+    @Override
+    public String toString() {
+        return  nombre ;
+    }
 }

@@ -1,6 +1,5 @@
 package com.firecod.avcm_android.core;
 
-import android.app.Activity;
 import android.widget.ArrayAdapter;
 
 import com.android.volley.Request;
@@ -10,20 +9,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 import com.firecod.avcm_android.model.Almacen;
-import com.firecod.avcm_android.view.ActivityProducto;
 import com.google.gson.Gson;
 import org.json.JSONArray;
 import java.util.ArrayList;
 
 public class ControllerAlmacen {
     Gson gson;
-    String urlGlobal = "http://192.168.0.105:8084/AVCM_WEB/restAlmacen/";
-    public void getAllSpinnerProducto(final ActivityProducto act) {
+    String urlGlobal = "http://192.168.43.16:8084/AVCM_WEB/restAlmacen/";
+    public void getAllSpinnerProducto(final FormularioProducto act) {
 
         JsonArrayRequest sr = new JsonArrayRequest(
                 Request.Method.GET, //GET or POST
-                urlGlobal + "getAllAlmacen?estatus=1", //URL
+                    urlGlobal + "getAllAlmacen?estatus=1", //URL
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -38,10 +37,11 @@ public class ControllerAlmacen {
                                 a = gson.fromJson(response.get(i).toString(), Almacen.class);
                                 almacenes.add(a);
                             }
-                            ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act,
+
+                            ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
                                     android.R.layout.simple_spinner_item, almacenes);
                             act.getSpAlmacenProducto().setAdapter(adapter);
-                            Almacen acd = new Almacen();
+                            Almacen acd;
                             acd = ((Almacen) act.getSpAlmacenProducto().getSelectedItem());
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -54,7 +54,7 @@ public class ControllerAlmacen {
             }
         }
         ) ;
-        RequestQueue queue = Volley.newRequestQueue(act);
+        RequestQueue queue = Volley.newRequestQueue(act.getContext());
         queue.add(sr);
     }
 }

@@ -135,7 +135,7 @@ public class ControllerProducto {
        
        public List<Producto> getAll(String filtro, int estatus) throws Exception{
         //Definimos la consulta SQL:
-        String sql = "SELECT * FROM producto WHERE estatus = ?";
+        String sql = "SELECT * FROM vistaProducto WHERE estatus = ?";
         
         //Aquí guardaremos objetos de tipo Producto. Una lista es un "contenedor"
         //dinamico de objetos. En este caso, queremos un contenedor de 
@@ -168,12 +168,13 @@ public class ControllerProducto {
             p.setEstatus(rs.getInt("estatus"));
             p.setId(rs.getInt("idProducto"));
             p.setMarca(rs.getString("marca"));
-            p.setNombre(rs.getString("nombre"));
+            p.setNombre(rs.getString("nombreProducto"));
             p.setPrecio(rs.getFloat("precio"));
             p.setCategoria(rs.getString("categoria"));            
             a.setId(rs.getInt("idAlmacen"));
+            a.setNombre(rs.getString("nombreAlmacen"));
             p.setAlmacen(a);
-            
+                        
             //Agregamos el producto a la lista:
             productos.add(p);
         }

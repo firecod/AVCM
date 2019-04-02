@@ -1,6 +1,5 @@
 package com.firecod.avcm_android.fragmentsProducto;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,28 +22,26 @@ import com.firecod.avcm_android.components.TableView.TableAdapterListenerProduct
 import com.firecod.avcm_android.components.TableView.TableAdapterProducto;
 import com.firecod.avcm_android.core.ControllerProducto;
 import com.firecod.avcm_android.model.Producto;
-import com.firecod.avcm_android.view.ActivityProducto;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
-public class catalogo_producto extends Fragment {
+public class CatalogoProducto extends Fragment {
 
     private TableView pTableView;
     private TableAdapterProducto pTableAdapter;
     private ProgressBar mProgressBar;
     private ControllerProducto cp;
     private Gson gson;
-    private String url ="http://192.168.0.106:8084/AVCM_WEB/restProducto/";
+    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restProducto/";
 
-    private static final String LOG_TAG = catalogo_producto.class.getSimpleName();
+    private static final String LOG_TAG = CatalogoProducto.class.getSimpleName();
 
 
-    public catalogo_producto(){
+    public CatalogoProducto(){
 
     }
 
@@ -69,7 +66,7 @@ public class catalogo_producto extends Fragment {
         // initialize ViewModel
         JsonArrayRequest sr = new JsonArrayRequest(
                 Request.Method.GET, //GET or POST
-                url + "getAllProducto?estatus=1", //URL
+                urlGlobal + "getAllProducto?estatus=1", //URL
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -82,7 +79,7 @@ public class catalogo_producto extends Fragment {
                             for(int i = 0; i<response.length(); i++){
                                 p = gson.fromJson(response.get(i).toString(), Producto.class);
                                 productos.add(p);
-                                System.out.println("valotes" + productos.get(i).getNombre());
+
                             }
                             if(productos != null && productos.size()>0){
                                 // set the list on TableViewModel
@@ -102,26 +99,14 @@ public class catalogo_producto extends Fragment {
         ) ;
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         queue.add(sr);
-
-
-
-
-
         return view;
     }
 
-    public void getAll(  ) {
-
-
-    }
-
     private void initializeTableView(TableView tableView){
-       ProductoViewModel pvm = new ProductoViewModel();
-        // Create TableView Adapter
 
+        // Create TableView Adapter
         pTableAdapter = new TableAdapterProducto(getContext());
         tableView.setAdapter(pTableAdapter);
-
         // Create listener
         tableView.setTableViewListener(new TableAdapterListenerProducto(tableView));
     }
