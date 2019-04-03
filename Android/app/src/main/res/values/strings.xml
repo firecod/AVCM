@@ -13,4 +13,8 @@
     <string name="clear_sorting">Clear</string>
     <string name="row_show">Show 5. Row</string>
     <string name="row_hide">Hide 5. Row</string>
+    <string name="cancel">Cancelar</string>
+    <string name="edit">Editar</string>
+    <string name="save">Guardar We</string>
+
 </resources>

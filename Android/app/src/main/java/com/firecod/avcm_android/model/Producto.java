@@ -81,4 +81,17 @@ public class Producto {
     public void setAlmacen(Almacen almacen) {
         this.almacen = almacen;
     }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", marca='" + marca + '\'' +
+                ", precio=" + precio +
+                ", categoria='" + categoria + '\'' +
+                ", estatus=" + estatus +
+                ", almacen=" + almacen +
+                '}';
+    }
 }

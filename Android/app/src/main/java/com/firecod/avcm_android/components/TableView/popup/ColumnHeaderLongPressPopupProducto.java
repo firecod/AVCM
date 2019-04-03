@@ -9,7 +9,6 @@ import com.evrencoskun.tableview.ITableView;
 import com.evrencoskun.tableview.sort.SortState;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.components.TableView.holder.ProductoColumnHeaderViewHolder;
-import com.firecod.avcm_android.model.Producto;
 
 public class ColumnHeaderLongPressPopupProducto  extends PopupMenu implements PopupMenu
         .OnMenuItemClickListener

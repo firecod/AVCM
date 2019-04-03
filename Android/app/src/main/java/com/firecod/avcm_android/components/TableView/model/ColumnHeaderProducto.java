@@ -8,6 +8,7 @@ public class ColumnHeaderProducto {
     }
 
     public String getData(){
+
         return  pData;
     }
 }

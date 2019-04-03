@@ -1,8 +1,15 @@
 package com.firecod.avcm_android.fragmentsProducto;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+
+
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +22,25 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.evrencoskun.tableview.ITableView;
 import com.evrencoskun.tableview.TableView;
+import com.evrencoskun.tableview.listener.ITableViewListener;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.components.TableView.ProductoViewModel;
 import com.firecod.avcm_android.components.TableView.TableAdapterListenerProducto;
 import com.firecod.avcm_android.components.TableView.TableAdapterProducto;
 import com.firecod.avcm_android.core.ControllerProducto;
+import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.model.Producto;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class CatalogoProducto extends Fragment {
+public class CatalogoProducto extends Fragment  implements DialogProducto.NoticeDialogListener {
 
     private TableView pTableView;
     private TableAdapterProducto pTableAdapter;
@@ -37,19 +48,24 @@ public class CatalogoProducto extends Fragment {
     private ControllerProducto cp;
     private Gson gson;
     private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restProducto/";
-
+    private FragmentActivity myContext;
     private static final String LOG_TAG = CatalogoProducto.class.getSimpleName();
+    private ITableView mTableView;
+    private List productos = new ArrayList();
 
+    public CatalogoProducto()  {
 
-    public CatalogoProducto(){
-
+    }
+    @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -99,17 +115,28 @@ public class CatalogoProducto extends Fragment {
         ) ;
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         queue.add(sr);
+
         return view;
     }
 
     private void initializeTableView(TableView tableView){
-
         // Create TableView Adapter
         pTableAdapter = new TableAdapterProducto(getContext());
         tableView.setAdapter(pTableAdapter);
         // Create listener
-        tableView.setTableViewListener(new TableAdapterListenerProducto(tableView));
+        tableView.setTableViewListener(new TableAdapterListenerProducto(tableView, this));
     }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -125,4 +152,12 @@ public class CatalogoProducto extends Fragment {
         pTableView.setVisibility(View.VISIBLE);
     }
 
+    
+    public  void datos(List productos){
+      llamarDialog();
+    }
+    public void llamarDialog(){
+        DialogProducto dp = new DialogProducto();
+        dp.show(getFragmentManager(), "missiles");
+    }
 }

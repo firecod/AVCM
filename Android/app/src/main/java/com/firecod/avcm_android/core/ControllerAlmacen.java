@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ControllerAlmacen {
     Gson gson;
-    String urlGlobal = "http://192.168.43.16:8084/AVCM_WEB/restAlmacen/";
+    String urlGlobal = "http://192.168.137.159:8084/AVCM_WEB/restAlmacen/";
     public void getAllSpinnerProducto(final FormularioProducto act) {
 
         JsonArrayRequest sr = new JsonArrayRequest(

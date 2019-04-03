@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,12 @@ import android.widget.Spinner;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.core.ControllerAlmacen;
 import com.firecod.avcm_android.core.ControllerProducto;
+import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
+import com.firecod.avcm_android.view.MainActivity;
+
+import java.util.List;
 
 
 /**
@@ -42,7 +47,7 @@ public class FormularioProducto extends Fragment {
     Spinner spAlmacenProducto;
     CheckBox cbEstatus;
     Button btnGuardar;
-    Button btnConsultar;
+    Button btnEliminar;
     Producto p;
     Almacen a;
     ControllerProducto cp;
@@ -80,14 +85,17 @@ public class FormularioProducto extends Fragment {
     }
 
     public Button getBtnConsultar() {
-        return btnConsultar;
+        return btnEliminar;
     }
 
     private OnFragmentInteractionListener mListener;
 
+    private FormularioProducto myContext;
     public FormularioProducto() {
         // Required empty public constructor
+
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -108,6 +116,7 @@ public class FormularioProducto extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -116,6 +125,7 @@ public class FormularioProducto extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_formulario_producto, container, false);
         inicializar(view);
+
         return view;
     }
 
@@ -143,10 +153,16 @@ public class FormularioProducto extends Fragment {
                 guardarProducto();
             }
         });
-
-
+        btnEliminar = view.findViewById(R.id.btnEliminar);
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                llamarDialog();
+            }
+        });
         asignarCategorias();
         asignarAlmacen();
+
 
     }
 
@@ -163,6 +179,8 @@ public class FormularioProducto extends Fragment {
         spCategoriaProducto.setAdapter(adapter);
     }
 
+
+
     public void guardarProducto(){
         p = new Producto();
         a = new Almacen();
@@ -174,9 +192,9 @@ public class FormularioProducto extends Fragment {
         p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
         a.setId(1);
         p.setAlmacen(a);
-
         cp.guardarProducto(this,p);
     }
+
 
 
     @Override
@@ -189,7 +207,6 @@ public class FormularioProducto extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
-
     @Override
     public void onDetach() {
         super.onDetach();
@@ -199,5 +216,9 @@ public class FormularioProducto extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    public void llamarDialog(){
+        DialogProducto dp = new DialogProducto();
+        dp.show( getFragmentManager(), "missiles");
     }
 }

@@ -121,6 +121,7 @@ public class ProductoViewModel {
             list.add(new CellProducto("6-" + i, producto.getMarca()));      // "Gender"
             list.add(new CellProducto("7-" + i, producto.getPrecio()));         // "Age"
             lists.add(list);
+
         }
 
         return lists;
@@ -130,7 +131,7 @@ public class ProductoViewModel {
         List<RowHeaderProducto> list = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             // In this example, Row headers just shows the index of the TableView List.
-            list.add(new RowHeaderProducto(String.valueOf(i + 1)));
+                list.add(new RowHeaderProducto(String.valueOf(i + 1)));
         }
         return list;
     }

@@ -28,6 +28,7 @@
         <activity android:name=".view.ActivityVendedor" />
         <activity android:name=".view.ActivityAlmacen" />
         <activity android:name=".view.ActivityCliente" />
+
     </application>
 
 </manifest>

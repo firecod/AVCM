@@ -30,4 +30,10 @@ public class CellProducto implements ISortableModel {
         return mData;
     }
 
+
+    @Override
+    public String toString() {
+        return mData.toString();
+
+    }
 }

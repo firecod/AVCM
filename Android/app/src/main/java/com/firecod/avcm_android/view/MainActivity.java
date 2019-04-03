@@ -24,6 +24,7 @@ import com.firecod.avcm_android.fragmentsCliente.FormularioCliente;
 import com.firecod.avcm_android.fragmentsProducto.ContenedorProducto;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
+import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.fragmentsProducto.descripcion_producto;
 
 
@@ -44,8 +45,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
+        Bundle bundle = getIntent().getExtras();
+        String valorRecibido= getIntent().getStringExtra("dato_bundle");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_Producto) {
             fragmento = new ContenedorProducto();
             fragSeleccionado = true;
+
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -153,4 +155,6 @@ public class MainActivity extends AppCompatActivity
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+
 }
