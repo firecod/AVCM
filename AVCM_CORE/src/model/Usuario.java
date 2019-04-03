@@ -12,9 +12,9 @@ package model;
 public class Usuario {
     
     private int id;
-    private String puesto;
     private String nombreUsuario;
     private String contrasenia;
+    private String rol;
 
     public int getId() {
         return id;
@@ -23,15 +23,7 @@ public class Usuario {
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getPuesto() {
-        return puesto;
-    }
-
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
-    }
-
+    
     public String getNombreUsuario() {
         return nombreUsuario;
     }
@@ -46,6 +38,14 @@ public class Usuario {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
     
     

@@ -15,10 +15,10 @@ telefono VARCHAR(15)
 );
 
 CREATE TABLE Usuario(
-idUsuario INT AUTO_INCREMENT PRIMARY KEY, 
-puesto VARCHAR(20),
+idUsuario INT AUTO_INCREMENT PRIMARY KEY,
 nombreUsuario VARCHAR(20),
-contrasenia VARCHAR(12)
+contrasenia VARCHAR(12),
+rol VARCHAR(20)
 );
 
 CREATE TABLE Cliente(
@@ -28,8 +28,8 @@ correoElectronico VARCHAR(30),
 estatus INT NOT NULL,
 idUsuario INT NOT NULL,
 idPersona INT NOT NULL,
-CONSTRAINT fk_idPersonaC FOREIGN KEY (idPersona) REFERENCES persona (idPersona),
-CONSTRAINT fk_idUsuarioC FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario)	
+CONSTRAINT fk_idPersonaC FOREIGN KEY (idPersona) REFERENCES persona (idPersona) ON DELETE CASCADE,
+CONSTRAINT fk_idUsuarioC FOREIGN KEY (idUsuario) REFERENCES usuario (idUsuario)	ON DELETE CASCADE
 );
 
 CREATE TABLE Almacen(
@@ -127,29 +127,29 @@ DELIMITER //
 
 CREATE PROCEDURE registroCliente (
 									/*---- Datos Entrada Persona ----*/
-									IN var_nombre VARCHAR(20), 
-                                    IN var_apellidoPaterno VARCHAR(20),
-                                    IN var_apellidoMaterno VARCHAR(20),
-                                    IN var_rfc VARCHAR(14),
-                                    IN var_domicilio VARCHAR(100),
-                                    IN var_telefono VARCHAR(15),
+									IN var_nombre VARCHAR(20), 				-- 1
+                                    IN var_apellidoPaterno VARCHAR(20),		-- 2
+                                    IN var_apellidoMaterno VARCHAR(20),		-- 3
+                                    IN var_rfc VARCHAR(14),					-- 4
+                                    IN var_domicilio VARCHAR(100),			-- 5
+                                    IN var_telefono VARCHAR(15),			-- 6
                                     
                                     /*---- Datos Entrada Usuario ----*/
-                                    IN var_nombreUsuario VARCHAR(20),
-                                    IN var_contrasenia VARCHAR(12),	
+                                    IN var_nombreUsuario VARCHAR(20),		-- 7
+                                    IN var_contrasenia VARCHAR(12),			-- 8
                                     
                                     /*---- Datos Entrada Cliente ----*/
-                                    IN var_correoElectronico VARCHAR(30),
+                                    IN var_correoElectronico VARCHAR(30),	-- 9
                                     
                                     /*---- Datos Salida Persona ----*/
-                                    OUT var_idPersona INT,
+                                    OUT var_idPersona INT,					-- 10
                                     
                                     /*---- Datos Salida Usuario ----*/
-                                    OUT var_idUsuario INT,
+                                    OUT var_idUsuario INT,					-- 11
                                     
                                     /*---- Datos Salida Cliente ----*/
-                                    OUT var_idCliente INT,
-                                    OUT var_numeroCliente VARCHAR(20)
+                                    OUT var_idCliente INT,					-- 12
+                                    OUT var_numeroCliente VARCHAR(20)		-- 13
 									)
 
 BEGIN
@@ -159,7 +159,7 @@ BEGIN
     
     SET var_idPersona = LAST_INSERT_ID();
     
-    INSERT INTO usuario (puesto, nombreUsuario, contrasenia) VALUES
+    INSERT INTO usuario (rol, nombreUsuario, contrasenia) VALUES
     ('Cliente', var_nombreUsuario, var_contrasenia);
     
     SET var_idUsuario = LAST_INSERT_ID();
@@ -169,11 +169,7 @@ BEGIN
     INSERT INTO cliente (numeroCliente, correoElectronico, estatus, idUsuario, idPersona) VALUES
     (var_numeroCliente, var_correoElectronico, 1, var_idUsuario, var_idPersona);
     
-END//
-
-DELIMITER ;
-
-DELIMITER //
+END //
 
 CREATE PROCEDURE registroVendedor (
 									/*---- Datos Entrada Persona ----*/
@@ -185,9 +181,9 @@ CREATE PROCEDURE registroVendedor (
                                     IN var_telefono VARCHAR(15),
                                     
                                     /*---- Datos Entrada Usuario ----*/
-                                    IN var_puesto VARCHAR(20),
                                     IN var_nombreUsuario VARCHAR(20),
-                                    IN var_contrasenia VARCHAR(12),	
+                                    IN var_contrasenia VARCHAR(12),
+                                    IN var_rol VARCHAR(20),
                                     
                                     /*---- Datos Entrada Vendedor ----*/
                                     IN var_fotografiaVendedor LONGTEXT,
@@ -212,8 +208,8 @@ BEGIN
     
     SET var_idPersona = LAST_INSERT_ID();
     
-    INSERT INTO usuario (puesto, nombreUsuario, contrasenia) VALUES
-    (var_puesto, var_nombreUsuario, var_contrasenia);
+    INSERT INTO usuario (rol, nombreUsuario, contrasenia) VALUES
+    (var_rol, var_nombreUsuario, var_contrasenia);
     
     SET var_idUsuario = LAST_INSERT_ID();
     
@@ -222,7 +218,81 @@ BEGIN
     INSERT INTO vendedor (numeroVendedor, fotografiaVendedor, estatus, reputacion, idUsuario, idPersona, idAlmacen) VALUES
     (var_numeroVendedor, var_fotografiaVendedor, 1, var_reputacion, var_idUsuario, var_idPersona, var_idAlmacen);
     
+END //
+
+
+CREATE PROCEDURE actualizarCliente (
+									/*---- Datos Entrada Persona ----*/
+                                    IN var_idPersona INT,					-- 1
+									IN var_nombre VARCHAR(20), 				-- 2
+                                    IN var_apellidoPaterno VARCHAR(20),		-- 3
+                                    IN var_apellidoMaterno VARCHAR(20),		-- 4
+                                    IN var_rfc VARCHAR(14),					-- 5
+                                    IN var_domicilio VARCHAR(100),			-- 6
+                                    IN var_telefono VARCHAR(15),			-- 7
+                                    
+                                    /*---- Datos Entrada Usuario ----*/
+                                    IN var_idUsuario INT,					-- 8
+                                    IN var_nombreUsuario VARCHAR(20),		-- 9
+                                    IN var_contrasenia VARCHAR(12),			-- 10
+                                    
+                                    /*---- Datos Entrada Cliente ----*/
+                                    IN var_idCliente INT,					-- 11
+                                    IN var_correoElectronico VARCHAR(30),	-- 12
+                                    IN var_estatus INT
+									)
+
+BEGIN
+	
+    UPDATE persona SET nombre = var_nombre, apellidoPaterno = var_apellidoPaterno, 
+	apellidoMaterno = var_apellidoMaterno, rfc = var_rfc, domicilio = var_domicilio,
+    telefono = var_telefono WHERE idPersona = var_idPersona;
+    
+    UPDATE usuario SET rol = var_rol, nombreUsuario = var_nombreUsuario, contrasenia = var_contrasenia
+    WHERE idUsuario = var_idUsuario;
+    
+    UPDATE cliente SET numeroCliente = var_numeroCliente, correoElectronico = var_correo, estatus = var_estatus,
+    idUsuario = var_idUsuario, idPersona = var_idPersona WHERE idCliente = var_idCliente;
+    
 END//
+
+CREATE PROCEDURE actualizarVendedor (
+									/*---- Datos Entrada Persona ----*/
+                                    IN var_idPersona INT,
+									IN var_nombre VARCHAR(20), 
+                                    IN var_apellidoPaterno VARCHAR(20),
+                                    IN var_apellidoMaterno VARCHAR(20),
+                                    IN var_rfc VARCHAR(14),
+                                    IN var_domicilio VARCHAR(100),
+                                    IN var_telefono VARCHAR(15),
+                                    
+                                    /*---- Datos Entrada Usuario ----*/
+                                    IN var_idUsuario INT,
+                                    IN var_puesto VARCHAR(20),
+                                    IN var_nombreUsuario VARCHAR(20),
+                                    IN var_contrasenia VARCHAR(12),	
+                                    IN var_rol VARCHAR(20),
+                                    
+                                    /*---- Datos Entrada Vendedor ----*/
+                                    IN var_idVendedor INT,
+                                    IN var_fotografiaVendedor LONGTEXT,
+                                    IN var_reputacion INT,
+                                    IN var_idAlmacen INT
+									)
+
+BEGIN
+	
+    UPDATE persona SET nombre = var_nombre, apellidoPaterno = var_apellidoPaterno, 
+	apellidoMaterno = var_apellidoMaterno, rfc = var_rfc, domicilio = var_domicilio,
+    telefono = var_telefono WHERE idPersona = var_idPersona;
+    
+    UPDATE usuario SET rol = var_rol, nombreUsuario = var_nombreUsuario, contrasenia = var_contrasenia
+    WHERE idUsuario = var_idUsuario;
+    
+    UPDATE vendedor SET numeroVendedor = var_numeroVendedor, fotografiaVendedor = var_fotografiaVendedor,
+    reputacion= var_reputacion, estatus = var_estatus WHERE idVendedor = var_idVendedor;
+    
+END //
 
 DELIMITER ;
 
@@ -253,4 +323,4 @@ CALL registroCliente('Vanessa', 'Ortega', 'Torres', 'OETJ981207', 'Via asinaria 
 					'van1207', '1111', 'vanessato_98@hotmail.com', @idPersona, @idUsuario, @idCliente, @numeroCliente);
                     
 CALL registroVendedor('Diego', 'Castro', 'Castro', 'CACD990225', 'Imperio Asiático #615', '4113603464',
-					  'Vendedor', 'dieg0225', '2222', null, null, 1, @idPersona, @idUsuario, @idVendedor, @numeroVendedor);
+					  'Vendedor', 'dieg0225','2222', 'Vendedor', null, null, 1, @idPersona, @idUsuario, @idVendedor, @numeroVendedor);

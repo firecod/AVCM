@@ -58,7 +58,7 @@ public class Cliente {
         this.estatus = estatus;
     }
 
-    public Persona getersona() {
+    public Persona getPersona() {
         return persona;
     }
 

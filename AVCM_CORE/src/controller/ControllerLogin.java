@@ -59,7 +59,7 @@ public class ControllerLogin {
             p.setRfc(rs.getString("rfc"));
             
             u.setId(rs.getInt("idUsuario"));
-            u.setPuesto(rs.getString("puesto"));
+            u.setRol(rs.getString("rol"));
             u.setNombreUsuario(rs.getString("nombreUsuario"));
             u.setContrasenia(rs.getString("contrasenia"));
             
@@ -99,7 +99,7 @@ public class ControllerLogin {
             p.setRfc(rs.getString("rfc"));
             
             u.setId(rs.getInt("idUsuario"));
-            u.setPuesto(rs.getString("puesto"));
+            u.setRol(rs.getString("rol"));
             u.setNombreUsuario(rs.getString("nombreUsuario"));
             u.setContrasenia(rs.getString("contrasenia"));
         

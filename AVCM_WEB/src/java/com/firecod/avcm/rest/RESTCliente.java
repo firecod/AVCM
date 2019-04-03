@@ -26,13 +26,13 @@ public class RESTCliente extends Application {
     @GET
     @Path("")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll(@QueryParam("estatus")@DefaultValue("1")String estatus) {
+    public Response getAll(@QueryParam("estatus") @DefaultValue("1") int estatus) {
         ControllerCliente cc = new ControllerCliente();
         List<Cliente> clientes = null;
         String out = null;
         JSONSerializer jss = new JSONSerializer();        
         try{
-            clientes = cc.getAll(estatus);
+            clientes = cc.getAll("", estatus);
             out = jss.serialize(clientes);            
         }catch (Exception e){
             e.printStackTrace();

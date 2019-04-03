@@ -18,6 +18,7 @@ public class Persona {
     private String apellidoMaterno;
     private String rfc;
     private String domicilio;
+    private String telefono;
     
     public int getId() {
         return id;
@@ -65,6 +66,14 @@ public class Persona {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
     
     
