@@ -126,7 +126,7 @@ CONSTRAINT fk_idCompraF FOREIGN KEY (idCompra) REFERENCES compraventa (idCompraV
 CREATE VIEW v_vendedor AS
 	SELECT P.*,
 		   U.*,
-           A.idAlmacen, A.nombre AS 'nombreAlmacen', A.domicilio AS 'domicilioAlmacen', estatus AS 'estatusAlmacen',
+           A.idAlmacen, A.nombre AS 'nombreAlmacen', A.domicilio AS 'domicilioAlmacen', A.estatus AS 'estatusAlmacen',
            V.idVendedor, V.numeroVendedor, V.fotografiaVendedor, V.reputacion, V.estatus
 	FROM Vendedor V
     INNER JOIN Persona P ON V.idPersona = P.idPersona
