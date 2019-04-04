@@ -53,6 +53,7 @@ public class DialogAlmacen extends DialogFragment {
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        eliminarAlmacen(content);
                         dialog.dismiss();
 
                     }
@@ -141,5 +142,41 @@ public class DialogAlmacen extends DialogFragment {
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         queue.add(sr);
 
+    }
+
+
+    public void eliminarAlmacen(View v){
+        eliminarAlmacen(Integer.parseInt(txtIdAlmacen.getText().toString()));
+
+    }
+    public void eliminarAlmacen(int id){
+        final Context c = this.getContext();
+        final Toast t = new Toast(this.requireContext());
+        t.makeText(this.requireContext(), "Eliminando...", Toast.LENGTH_LONG).show();
+        StringRequest sr = new StringRequest(
+                Request.Method.GET, //GET or POST
+                urlGlobal + "deleteAlmacen?idAlmacen=" + id, //URL
+
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            if (response.contains("Eliminado")){
+                                t.makeText(c, "Eliminado", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(c, "Ocurrió un error de conexión", Toast.LENGTH_LONG).show();
+            }
+        }
+        ) ;
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        queue.add(sr);
     }
 }

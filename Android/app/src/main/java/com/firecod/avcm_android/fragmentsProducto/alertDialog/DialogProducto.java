@@ -71,12 +71,13 @@ public class DialogProducto extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
                         actualizarProducto(content);
-                        System.out.println("entre");
+
                     }
                 })
                 .setNegativeButton("Eliminar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        eliminarProducto(content);
+                        dialog.dismiss();
 
                     }
                 });
@@ -197,8 +198,8 @@ public class DialogProducto extends DialogFragment {
 
     }
 
-    public void eliminarProducto(){
-        
+    public void eliminarProducto(View content){
+        eliminarProducto(Integer.parseInt(txtIdProducto.getText().toString()));
     }
 
     public void eliminarProducto(int id){
@@ -230,7 +231,5 @@ public class DialogProducto extends DialogFragment {
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         queue.add(sr);
     }
-
-
-
+    
 }
