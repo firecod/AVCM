@@ -23,7 +23,6 @@ public class TableAdapterListenerProducto implements ITableViewListener {
     private static final String LOG_TAG = TableAdapterListenerProducto.class.getSimpleName();
     private Boolean editar = false;
     private ITableView mTableView;
-    private List productos = new ArrayList();
     private CatalogoProducto catalogoProducto;
 
 
@@ -71,9 +70,9 @@ public class TableAdapterListenerProducto implements ITableViewListener {
     @Override
     public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder owHeaderView, int row) {
         Log.d(LOG_TAG, "onRowHeaderLongPressed has been clicked for " + row);
+        List productos = new ArrayList();
         for(int i = 0; i<7; i++){
             productos.add(mTableView.getAdapter().getCellItem(i, row).toString());
-            System.out.println("xdxd " + productos.get(i));
         }
         catalogoProducto.datos(productos);
     }

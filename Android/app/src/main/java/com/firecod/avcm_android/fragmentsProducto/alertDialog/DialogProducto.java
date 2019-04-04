@@ -4,6 +4,7 @@ package com.firecod.avcm_android.fragmentsProducto.alertDialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -14,12 +15,25 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.core.ControllerAlmacen;
 import com.firecod.avcm_android.core.ControllerProducto;
+import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DialogProducto extends DialogFragment {
     EditText txtIdProducto;
@@ -34,62 +48,47 @@ public class DialogProducto extends DialogFragment {
     Producto p;
     Almacen a;
     ControllerProducto cp;
+    private Gson gson;
+    private String urlGlobal ="http://192.168.0.108:8084/AVCM_WEB/restProducto/";
 
     public Spinner getSpAlmacenProducto() {
         return spAlmacenProducto;
     }
 
-    public interface NoticeDialogListener {
-        public void onDialogPositiveClick(DialogFragment dialog);
-        public void onDialogNegativeClick(DialogFragment dialog);
-    }
 
-    // Use this instance of the interface to deliver action events
-    NoticeDialogListener mListener;
 
     // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        // Verify that the host activity implements the callback interface
-        try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (NoticeDialogListener) activity;
-        } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(activity.toString()
-                    + " must implement NoticeDialogListener");
-        }
-    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         String[] datos = getArguments().getStringArray("valores");
-
-        View content = LayoutInflater.from(getContext()).inflate(R.layout.alertdialog_formulario_producto, null);
+        final View content = LayoutInflater.from(getContext()).inflate(R.layout.alertdialog_formulario_producto, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(content);
         builder.setMessage("Modificar Producto")
-                .setPositiveButton("xD", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
-                        mListener.onDialogPositiveClick(DialogProducto.this);
+                        actualizarProducto(content);
+                        System.out.println("entre");
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mListener.onDialogNegativeClick(DialogProducto.this);
+                        dialog.dismiss();
+
                     }
                 });
         // Create the AlertDialog object and return it
-        //asignarAlmacen();
         inicializar(content, datos);
+
+
         return builder.create();
     }
 
     public static DialogProducto newInstance(String[] valores) {
         DialogProducto f = new DialogProducto();
-
         Bundle args = new Bundle();
         args.putStringArray("valores", valores);
         f.setArguments(args);
@@ -99,24 +98,26 @@ public class DialogProducto extends DialogFragment {
     public void asignarAlmacen(){
         ControllerAlmacen ca = new ControllerAlmacen();
         ca.getAllSpinnerProductoEditar(this);
-
     }
 
-    public int[] agregarDatosSpinner(int p){
-        int[] posiciones = new int[2];
+    public void agregarDatosSpinner(String[] datos){
         String[] categorias = new String[] {"Produtos de Temporada","Alimentos", "Línea Blanca", "Muebles", "Papeleria y Merceria",
                 "Moda", "Bebes", "Entretenimiento", "Herramientas", "Limpieza"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_spinner_item, categorias);
         spCategoriaProducto.setAdapter(adapter);
-
-        posiciones[0] = categorias.length;
-        posiciones[1] = p;
-        return posiciones;
+        System.out.println("spinner" + spCategoriaProducto.getAdapter().getCount());
+        System.out.println("dato " + datos[4]);
+        for (int i = 0; i < spCategoriaProducto.getAdapter().getCount(); i++) {
+            if (spCategoriaProducto.getAdapter().getItem(i).toString().equals(datos[4])) {
+                spCategoriaProducto.setSelection(i);
+            }
+        }
     }
 
     public void inicializar(View content, String[] datos){
         spAlmacenProducto = content.findViewById(R.id.spAlmacenProducto);
+        asignarAlmacen();
         cbEstatus = content.findViewById(R.id.cbEstatus);
         spCategoriaProducto = content.findViewById(R.id.spCategoriaProducto);
         txtIdProducto = content.findViewById(R.id.txtIdProducto);
@@ -130,9 +131,73 @@ public class DialogProducto extends DialogFragment {
         txtNombreProducto.setText(datos[1]);
         txtMarcaProducto.setText(datos[2]);
         txtPrecioProducto.setText(datos[3]);
-
-        System.out.println("que es eto " + spCategoriaProducto.getAdapter().getCount());
-        //spAlmacenProducto
-        //cbEstatus
+        agregarDatosSpinner(datos);
     }
+
+    public void actualizarProducto(View content){
+        p = new Producto();
+
+        p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
+        a = ((Almacen)spAlmacenProducto.getSelectedItem());
+        p.setAlmacen(a);
+        p.setNombre(txtNombreProducto.getText().toString());
+        p.setMarca(txtMarcaProducto.getText().toString());
+        p.setCategoria(spCategoriaProducto.getSelectedItem().toString());
+        p.setId(Integer.parseInt(txtIdProducto.getText().toString()));
+        actualizarProducto(p);
+    }
+
+    public void actualizarProducto(final Producto producto)
+    {
+      final Context context= this.getContext();
+      final Toast t = new Toast(this.getContext());
+           t.makeText(this.getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+        StringRequest sr = new StringRequest(
+                Request.Method.POST, //GET or POST
+                urlGlobal + "updateProducto", //URL
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            gson = new Gson();
+                            Producto p = gson.fromJson(response, Producto.class);
+                            System.out.println("id cambio " + p.id);
+                            t.makeText(context, "Modificación Exitosa, el producto editado corresponde al ID " + p.getId(), Toast.LENGTH_LONG).show();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+            }
+        }
+        ) {
+
+            @Override
+            public Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("nombre", producto.getNombre());
+                params.put("marca", producto.getMarca());
+                params.put("precio", String.valueOf(producto.getPrecio()));
+                params.put("categoria", producto.getCategoria());
+                params.put("idAlmacen", String.valueOf(producto.getAlmacen().getId()));
+                params.put("idProducto", String.valueOf(producto.getId()));
+                return params;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        queue.add(sr);
+
+    }
+
+
+
 }

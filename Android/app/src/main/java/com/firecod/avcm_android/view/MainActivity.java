@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity
                     ContenedorProducto.OnFragmentInteractionListener,
                     CatalogoProducto.OnFragmentInteractionListener,
                     FormularioProducto.OnFragmentInteractionListener,
-                    descripcion_producto.OnFragmentInteractionListener,
-                    DialogProducto.NoticeDialogListener
+                    descripcion_producto.OnFragmentInteractionListener
+
                     {
 
     @Override
@@ -158,16 +158,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-                        @Override
-                        public void onDialogPositiveClick(DialogFragment dialog) {
-                            System.out.println("Se preciono positivo");
-
-                        }
-
-                        @Override
-                        public void onDialogNegativeClick(DialogFragment dialog) {
-                            System.out.println("Se preciono negativo");
-                        }
 
 
 }

@@ -157,7 +157,7 @@ public class FormularioProducto extends Fragment {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                llamarDialog();
+
             }
         });
         asignarAlmacen();
@@ -218,8 +218,5 @@ public class FormularioProducto extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public void llamarDialog(){
-        DialogProducto dp = new DialogProducto();
-        dp.show( getFragmentManager(), "missiles");
-    }
+
 }

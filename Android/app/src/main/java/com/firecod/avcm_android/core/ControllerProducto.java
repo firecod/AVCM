@@ -15,6 +15,7 @@ import com.evrencoskun.tableview.TableView;
 import com.firecod.avcm_android.components.TableView.TableAdapterProducto;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
+import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.model.Producto;
 import com.google.gson.Gson;
 
@@ -31,6 +32,7 @@ public class ControllerProducto {
 
     public void guardarProducto(final FormularioProducto act, final Producto producto)
     {
+
         Toast t = new Toast(act.requireContext());
         t.makeText(act.requireContext(), "Guardando...", Toast.LENGTH_LONG).show();
         StringRequest sr = new StringRequest(
@@ -75,6 +77,8 @@ public class ControllerProducto {
         queue.add(sr);
 
     }
+
+
 
     public void getAllProducto(final TableAdapterProducto pTableAdapter, final CatalogoProducto act, final ProgressBar mProgressBar, final TableView pTableView){
         JsonArrayRequest sr = new JsonArrayRequest(

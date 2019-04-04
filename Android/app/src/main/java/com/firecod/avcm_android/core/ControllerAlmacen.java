@@ -84,7 +84,7 @@ public class ControllerAlmacen {
                             ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
                                     android.R.layout.simple_spinner_item, almacenes);
                             act.getSpAlmacenProducto().setAdapter(adapter);
-                            act.agregarDatosSpinner(almacenes.size());
+                           // act.agregarDatosSpinner(almacenes.size());
                             // Almacen acd;
                             //acd = ((Almacen) act.getSpAlmacenProducto().getSelectedItem());
                         } catch (Exception e) {

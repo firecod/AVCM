@@ -91,11 +91,11 @@ public class ProductoViewModel {
         // Create Column Headers
         list.add(new ColumnHeaderProducto("Id"));
         list.add(new ColumnHeaderProducto("Nombre"));
-        list.add(new ColumnHeaderProducto("Almacen"));
-        list.add(new ColumnHeaderProducto("Categoria"));
-        list.add(new ColumnHeaderProducto("Estatus"));
         list.add(new ColumnHeaderProducto("Marca"));
         list.add(new ColumnHeaderProducto("Precio"));
+        list.add(new ColumnHeaderProducto("Categoría"));
+        list.add(new ColumnHeaderProducto("Almacen"));
+        list.add(new ColumnHeaderProducto("Estatus"));
 
 
         return list;
