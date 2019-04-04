@@ -42,7 +42,6 @@ public class ControllerLogin {
                                 Vendedor v = gson.fromJson(response, Vendedor.class);
                                 Toast t = new Toast(act);
                                 t.makeText(act, "Ingresando...", Toast.LENGTH_LONG).show();
-                                act.ingresar(v);
                             }else{
                                 Cliente c = gson.fromJson(response, Cliente.class);
                                 Toast t = new Toast(act);
@@ -65,7 +64,7 @@ public class ControllerLogin {
             public Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("usuario", act.getTxtUsuario().getText().toString());
-                params.put("password", act.getTxtPassword().getText().toString());
+                params.put("contrasenia", act.getTxtPassword().getText().toString());
                 return params;
             }
 

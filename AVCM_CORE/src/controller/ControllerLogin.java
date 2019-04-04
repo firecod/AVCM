@@ -52,6 +52,7 @@ public class ControllerLogin {
             v = new Vendedor();
             p = new Persona();
             u = new Usuario();
+            a = new Almacen();
             
             p.setId(rs.getInt("idPersona"));
             p.setApellidoMaterno(rs.getString("apellidoMaterno"));

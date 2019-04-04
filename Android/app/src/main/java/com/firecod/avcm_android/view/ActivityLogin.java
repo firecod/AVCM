@@ -66,7 +66,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     public void ingresar(Cliente c)
     {
-        Intent i = new Intent(this, ActivityMainVendedor.class);
+        Intent i = new Intent(this, ActivityMainCliente.class);
         i.putExtra("nomCliente", c.getPersona().getNombre());
         startActivity(i);
     }
