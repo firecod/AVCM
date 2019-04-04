@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.core.ControllerAlmacen;
 import com.firecod.avcm_android.core.ControllerProducto;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
@@ -32,6 +34,10 @@ public class DialogProducto extends DialogFragment {
     Producto p;
     Almacen a;
     ControllerProducto cp;
+
+    public Spinner getSpAlmacenProducto() {
+        return spAlmacenProducto;
+    }
 
     public interface NoticeDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog);
@@ -76,6 +82,7 @@ public class DialogProducto extends DialogFragment {
                     }
                 });
         // Create the AlertDialog object and return it
+        //asignarAlmacen();
         inicializar(content, datos);
         return builder.create();
     }
@@ -87,6 +94,25 @@ public class DialogProducto extends DialogFragment {
         args.putStringArray("valores", valores);
         f.setArguments(args);
         return f;
+    }
+
+    public void asignarAlmacen(){
+        ControllerAlmacen ca = new ControllerAlmacen();
+        ca.getAllSpinnerProductoEditar(this);
+
+    }
+
+    public int[] agregarDatosSpinner(int p){
+        int[] posiciones = new int[2];
+        String[] categorias = new String[] {"Produtos de Temporada","Alimentos", "Línea Blanca", "Muebles", "Papeleria y Merceria",
+                "Moda", "Bebes", "Entretenimiento", "Herramientas", "Limpieza"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),
+                android.R.layout.simple_spinner_item, categorias);
+        spCategoriaProducto.setAdapter(adapter);
+
+        posiciones[0] = categorias.length;
+        posiciones[1] = p;
+        return posiciones;
     }
 
     public void inicializar(View content, String[] datos){
@@ -104,7 +130,8 @@ public class DialogProducto extends DialogFragment {
         txtNombreProducto.setText(datos[1]);
         txtMarcaProducto.setText(datos[2]);
         txtPrecioProducto.setText(datos[3]);
-        //spCategoriaProducto
+
+        System.out.println("que es eto " + spCategoriaProducto.getAdapter().getCount());
         //spAlmacenProducto
         //cbEstatus
     }
