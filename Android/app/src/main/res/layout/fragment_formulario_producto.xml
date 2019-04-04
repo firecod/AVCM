@@ -131,12 +131,6 @@
                     android:layout_weight="1"
                     android:text="Guardar" />
 
-                <Button
-                    android:id="@+id/btnEliminar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Eliminar" />
 
                 <Button
                     android:id="@+id/btnNuevo"

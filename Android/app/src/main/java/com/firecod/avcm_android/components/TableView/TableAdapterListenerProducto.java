@@ -50,6 +50,7 @@ public class TableAdapterListenerProducto implements ITableViewListener {
     @Override
     public void onColumnHeaderLongPressed(@NonNull RecyclerView.ViewHolder columnHeaderView, int
             column) {
+        /*
         if (columnHeaderView != null && columnHeaderView instanceof ProductoColumnHeaderViewHolder) {
 
             // Create Long Press Popup
@@ -58,6 +59,7 @@ public class TableAdapterListenerProducto implements ITableViewListener {
 
             popup.show();
         }
+        */
     }
 
     @Override
@@ -69,7 +71,7 @@ public class TableAdapterListenerProducto implements ITableViewListener {
 
     @Override
     public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder owHeaderView, int row) {
-        Log.d(LOG_TAG, "onRowHeaderLongPressed has been clicked for " + row);
+
         List productos = new ArrayList();
         for(int i = 0; i<7; i++){
             productos.add(mTableView.getAdapter().getCellItem(i, row).toString());

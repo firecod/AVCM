@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.core.ControllerAlmacen;
@@ -48,6 +49,7 @@ public class FormularioProducto extends Fragment {
     CheckBox cbEstatus;
     Button btnGuardar;
     Button btnEliminar;
+    Button btnNuevo;
     Producto p;
     Almacen a;
     ControllerProducto cp;
@@ -90,7 +92,7 @@ public class FormularioProducto extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private FormularioProducto myContext;
+
     public FormularioProducto() {
         // Required empty public constructor
 
@@ -147,17 +149,17 @@ public class FormularioProducto extends Fragment {
         txtMarcaProducto = view.findViewById(R.id.txtMarcaProducto);
         txtPrecioProducto = view.findViewById(R.id.txtPrecioProducto);
         btnGuardar = view.findViewById(R.id.btnGuardar);
+        btnNuevo = view.findViewById(R.id.btnNuevo);
+        btnNuevo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpiarCampos();
+            }
+        });
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 guardarProducto();
-            }
-        });
-        btnEliminar = view.findViewById(R.id.btnEliminar);
-        btnEliminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
         asignarAlmacen();
@@ -195,6 +197,15 @@ public class FormularioProducto extends Fragment {
         p.setAlmacen(a);
         cp.guardarProducto(this,p);
     }
+
+    public void limpiarCampos(){
+        txtIdProducto.setText("");
+        txtMarcaProducto.setText("");
+        txtPrecioProducto.setText("");
+        txtNombreProducto.setText("");
+    }
+
+
 
 
 

@@ -2,10 +2,7 @@ package com.firecod.avcm_android.view;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,10 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.clases.Utilidades;
+import com.firecod.avcm_android.fragmentsAlmacen.CatalogoAlmacen;
+import com.firecod.avcm_android.fragmentsAlmacen.ContenedorAlmacen;
+import com.firecod.avcm_android.fragmentsAlmacen.FormularioAlmacen;
 import com.firecod.avcm_android.fragmentsCliente.CatalogoCliente;
 import com.firecod.avcm_android.fragmentsCliente.ContenedorCliente;
 import com.firecod.avcm_android.fragmentsCliente.DescripcionCliente;
@@ -25,8 +24,6 @@ import com.firecod.avcm_android.fragmentsCliente.FormularioCliente;
 import com.firecod.avcm_android.fragmentsProducto.ContenedorProducto;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
-import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
-import com.firecod.avcm_android.fragmentsProducto.descripcion_producto;
 
 
 public class MainActivity extends AppCompatActivity
@@ -38,7 +35,10 @@ public class MainActivity extends AppCompatActivity
                     ContenedorProducto.OnFragmentInteractionListener,
                     CatalogoProducto.OnFragmentInteractionListener,
                     FormularioProducto.OnFragmentInteractionListener,
-                    descripcion_producto.OnFragmentInteractionListener
+                    FormularioAlmacen.OnFragmentInteractionListener,
+                    CatalogoAlmacen.OnFragmentInteractionListener,
+                    ContenedorAlmacen.OnFragmentInteractionListener
+
 
                     {
 
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Bundle bundle = getIntent().getExtras();
         String valorRecibido= getIntent().getStringExtra("dato_bundle");
+        /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
+*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -125,7 +126,9 @@ public class MainActivity extends AppCompatActivity
             fragmento = new ContenedorProducto();
             fragSeleccionado = true;
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_Almacen) {
+            fragmento = new ContenedorAlmacen();
+            fragSeleccionado = true;
 
         } else if (id == R.id.nav_share) {
 

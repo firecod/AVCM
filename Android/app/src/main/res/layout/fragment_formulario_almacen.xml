@@ -1,26 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentsProducto.descripcion_producto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragmentsAlmacen.FormularioAlmacen">
+
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="50dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
             </LinearLayout>
@@ -30,84 +32,39 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ID producto" />
+                android:text="ID Almacén" />
 
             <EditText
-                android:id="@+id/txtIdProducto"
+                android:id="@+id/txtIdAlmacen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:enabled="false"
                 android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre Producto" />
+                android:text="Nombre" />
 
             <EditText
-                android:id="@+id/txtNombreProducto"
+                android:id="@+id/txtNombreAlmacen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:enabled="false"
                 android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Marca Producto" />
+                android:text="Dirección" />
 
             <EditText
-                android:id="@+id/txtMarcaProducto"
+                android:id="@+id/txtDomicilioAlmacen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:enabled="false"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Precio" />
-
-            <EditText
-                android:id="@+id/txtPrecioUso"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Categoría" />
-
-            <EditText
-                android:id="@+id/txtCatergoria"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Almacen" />
-
-            <EditText
-                android:id="@+id/txtAlmacen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:enabled="false"
                 android:inputType="textPersonName" />
 
             <TextView
@@ -117,36 +74,39 @@
                 android:text="Estatus" />
 
             <CheckBox
-                android:id="@+id/cbEstatus"
+                android:id="@+id/cbEstatusAlmacen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:enabled="false"
-                android:text="Activo"
-                tools:editable="false" />
+                android:text="Activo" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="89dp"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="536dp">
 
                 <Button
-                    android:id="@+id/btnModificar"
+                    android:id="@+id/btnGuardarAlmacen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Modificar" />
+                    android:text="Guardar" />
 
                 <Button
-                    android:id="@+id/btnEliminar"
+                    android:id="@+id/btnNuevoAlmacen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nuevo" />
+                <Button
+                    android:id="@+id/btnEliminarAlmacen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Eliminar" />
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

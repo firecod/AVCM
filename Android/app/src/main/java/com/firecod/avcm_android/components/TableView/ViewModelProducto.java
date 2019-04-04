@@ -10,7 +10,7 @@ import com.firecod.avcm_android.model.Producto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductoViewModel {
+public class ViewModelProducto {
     public static final int GENDER_TYPE = 1;
     public static final int MONEY_TYPE = 2;
 
