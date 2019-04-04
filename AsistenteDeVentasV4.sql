@@ -341,4 +341,8 @@ CALL registroCliente('Vanessa', 'Ortega', 'Torres', 'OETJ981207', 'Via asinaria 
 					'van1207', '1111', 'vanessato_98@hotmail.com', @idPersona, @idUsuario, @idCliente, @numeroCliente);
                     
 CALL registroVendedor('Diego', 'Castro', 'Castro', 'CACD990225', 'Imperio Asiático #615', '4113603464',
-					  'Vendedor', 'dieg0225','2222', 'Vendedor', null, null, 1, @idPersona, @idUsuario, @idVendedor, @numeroVendedor);
+					'dieg0225','2222', 'Vendedor', null, null, 1, @idPersona, @idUsuario, @idVendedor, @numeroVendedor);
+                    
+                    CREATE VIEW vistaproducto AS 
+select p.idProducto, p.nombre AS 'nombreProducto', p.marca, p.precio, p.categoria, p.estatus, p.idAlmacen, a.nombre AS 'nombreAlmacen' from producto p
+inner join almacen a where p.idAlmacen = a.idAlmacen;

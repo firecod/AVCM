@@ -20,7 +20,7 @@ import java.util.Map;
 public class ControllerLogin {
 
     private Gson gson;
-    private String url ="http://192.168.0.9:8084/AVCM_WEB/restLogin/login/";
+    private String url ="http://192.168.0.108:8084/AVCM_WEB/restLogin/login/";
 
     public void login(final ActivityLogin act)
     {
@@ -42,6 +42,7 @@ public class ControllerLogin {
                                 Vendedor v = gson.fromJson(response, Vendedor.class);
                                 Toast t = new Toast(act);
                                 t.makeText(act, "Ingresando...", Toast.LENGTH_LONG).show();
+                                act.ingresar(v);
                             }else{
                                 Cliente c = gson.fromJson(response, Cliente.class);
                                 Toast t = new Toast(act);
