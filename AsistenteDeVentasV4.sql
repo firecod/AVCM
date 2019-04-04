@@ -123,6 +123,24 @@ CONSTRAINT fk_idVendedorF FOREIGN KEY (idVendedor) REFERENCES vendedor (idVended
 CONSTRAINT fk_idCompraF FOREIGN KEY (idCompra) REFERENCES compraventa (idCompraVenta)
 );
 
+CREATE VIEW v_vendedor AS
+	SELECT P.*,
+		   U.*,
+           A.idAlmacen, A.nombre AS 'nombreAlmacen', A.domicilio AS 'domicilioAlmacen', estatus AS 'estatusAlmacen',
+           V.idVendedor, V.numeroVendedor, V.fotografiaVendedor, V.reputacion, V.estatus
+	FROM Vendedor V
+    INNER JOIN Persona P ON V.idPersona = P.idPersona
+    INNER JOIN Usuario U ON V.idUsuario = U.idUsuario
+    INNER JOIN Almacen A ON V.idAlmacen = A.idAlmacen;
+    
+CREATE VIEW v_cliente AS
+	SELECT P.*,
+		   U.*,
+           C.idCliente, C.numeroCliente, C.correoElectronico, C.estatus
+	FROM Cliente C
+    INNER JOIN Persona P ON C.idPersona = P.idPersona
+    INNER JOIN Usuario U ON C.idUsuario = U.idUsuario;
+
 DELIMITER //
 
 CREATE PROCEDURE registroCliente (

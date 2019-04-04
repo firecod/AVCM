@@ -19,6 +19,7 @@ public class Vendedor {
     private int estatus;
     private Persona persona;
     private Usuario usuario;
+    private Almacen almacen;
     
     public int getId() {
         return id;
@@ -74,6 +75,14 @@ public class Vendedor {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Almacen getAlmacen() {
+        return almacen;
+    }
+
+    public void setAlmacen(Almacen almacen) {
+        this.almacen = almacen;
     }
     
 }

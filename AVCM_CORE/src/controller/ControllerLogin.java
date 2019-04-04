@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.Almacen;
 import model.Cliente;
 import model.Persona;
 import model.Usuario;
@@ -25,7 +26,7 @@ public class ControllerLogin {
         
         String sql1 = "SELECT * FROM v_vendedor " +
                       "WHERE nombreUsuario = ? AND contrasenia = ? AND estatus = 1";
-        String sql2 = "SELECT * FROM v_clientes " +
+        String sql2 = "SELECT * FROM v_cliente " +
                       "WHERE nombreUsuario = ? AND contrasenia = ? AND estatus = 1";
         
         ConexionMySQL connMySQL = new ConexionMySQL();
@@ -40,6 +41,7 @@ public class ControllerLogin {
         Vendedor v = null;
         Persona p = null;
         Usuario u = null;
+        Almacen a = null;
         
         pstmt.setString(1, usuario);
         pstmt.setString(2, password);
@@ -63,6 +65,11 @@ public class ControllerLogin {
             u.setNombreUsuario(rs.getString("nombreUsuario"));
             u.setContrasenia(rs.getString("contrasenia"));
             
+            a.setId(rs.getInt("idAlmacen"));
+            a.setNombre(rs.getString("nombreAlmacen"));
+            a.setDomicilio(rs.getString("domicilioAlmacen"));
+            a.setEstatus(rs.getInt("estatusAlmacen"));
+            
             v.setId(rs.getInt("idVendedor"));
             v.setNumeroVendedor(rs.getString("numeroVendedor"));
             v.setReputacion(rs.getInt("reputacion"));
@@ -71,6 +78,7 @@ public class ControllerLogin {
             
             v.setPersona(p);
             v.setUsuario(u);
+            v.setAlmacen(a);
             
         }
         rs.close();
