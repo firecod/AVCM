@@ -27,4 +27,8 @@
         <item name="android:layout_marginBottom">0dp</item>
     </style>
 
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="andorid:windowBackground">@drawable/splash</item>
+    </style>
+
 </resources>
