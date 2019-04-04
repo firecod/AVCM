@@ -67,7 +67,7 @@ public class ControllerAlmacen {
     }
     
     public void update(Almacen a) throws Exception{
-        String sql = "UPDATE almacen  SET nombre = ?, domicilio = ?) "
+        String sql = "UPDATE almacen SET nombre = ?, domicilio = ? "
                     + "WHERE  idAlmacen = ?";
                
         //Con este objeto nos vamos a conectar a la Base de Datos:
@@ -88,6 +88,36 @@ public class ControllerAlmacen {
         
         pstmt.setString(1, a.getNombre());
         pstmt.setString(2, a.getDomicilio());               
+                          
+        //Ejecutamos la consutla:
+        pstmt.executeUpdate();
+        
+        //Cerramos todos los objetos de conexión con la B.D.:
+        rs.close();
+        pstmt.close();
+        connMySQL.cerrar();                
+    }
+    
+    public void delete(int idAlmacen) throws Exception{
+        String sql = "UPDATE almacen SET estatus = 0 WHERE idAlmacen = ?";
+               
+        //Con este objeto nos vamos a conectar a la Base de Datos:
+        ConexionMySQL connMySQL = new ConexionMySQL();
+        
+        //Abrimos la conexión con la Base de Datos:
+        Connection conn = connMySQL.abrir();
+        
+        //Con este objeto ejecutaremos la sentencia SQL que realiza la
+        //inserción en la tabla. Debemos especificarle que queremos que nos
+        //devuelva el ID que se genera al realizar la inserción del registro:
+        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        
+        //En este objeto guardamos el resultado de la consulta, la cual
+        //nos devolverá los ID's que se generaron. En este caso, solo se
+        //generará un ID:
+        ResultSet rs = null;
+        
+        pstmt.setInt(1, idAlmacen);         
                           
         //Ejecutamos la consutla:
         pstmt.executeUpdate();

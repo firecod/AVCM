@@ -76,7 +76,7 @@ public class RESTAlmacen extends Application{
          return Response.status(Response.Status.OK).entity(out).build();
     }    
     
-     @POST
+    @POST
     @Path("updateAlmacen")
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@FormParam("nombre")@DefaultValue("") String nombre,
@@ -105,6 +105,20 @@ public class RESTAlmacen extends Application{
          return Response.status(Response.Status.OK).entity(out).build();
     }    
     
-    
-    
+    @POST
+    @Path("deleteAlmacen")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@FormParam("idAlmacen")@DefaultValue("0") int idAlmacen)
+    {        
+        ControllerAlmacen ca = new ControllerAlmacen();        
+        String out = null;
+        JSONSerializer jss = new JSONSerializer();         
+        try {
+            ca.delete(idAlmacen);
+        } catch (Exception e) {
+            e.printStackTrace();
+            out = "{\"exception:\":\"" + e.toString() + "\"}";
+        }
+         return Response.status(Response.Status.OK).entity(out).build();
+    }    
 }
