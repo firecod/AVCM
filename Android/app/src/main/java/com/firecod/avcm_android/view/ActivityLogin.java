@@ -22,6 +22,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         inicializar();
@@ -58,7 +59,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     public void ingresar(Vendedor v)
     {
-        Intent i = new Intent(this, ActivityMainVendedor.class);
+        Intent i = new Intent(this, MainActivity.class);
         i.putExtra("nomVendedor", v.getPersona().getNombre());
         startActivity(i);
     }

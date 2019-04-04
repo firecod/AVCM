@@ -13,19 +13,10 @@ public class Almacen {
     private int id;
     private String nombre;
     private String domicilio;
-    private Vendedor vendedor;
     private int estatus;
 
     public int getId() {
         return id;
-    }
-
-    public Vendedor getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
     }
 
     public void setId(int id) {

@@ -35,8 +35,9 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_user" />
 
@@ -61,7 +62,7 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_password" />
