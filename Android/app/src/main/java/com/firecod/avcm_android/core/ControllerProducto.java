@@ -28,7 +28,7 @@ import java.util.Map;
 public class ControllerProducto {
 
     private Gson gson;
-    private String urlGlobal ="http://192.168.0.108:8084/AVCM_WEB/restProducto/";
+    private String urlGlobal ="http://192.168.137.159:8084/AVCM_WEB/restProducto/";
 
     public void guardarProducto(final FormularioProducto act, final Producto producto)
     {

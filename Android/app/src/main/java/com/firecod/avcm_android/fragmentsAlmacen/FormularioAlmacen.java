@@ -24,7 +24,6 @@ public class FormularioAlmacen extends Fragment {
     EditText txtDomicilioAlmacen;
     CheckBox cbEstatusAlmacen;
     Button btnGuardarAlmacen;
-    Button btnEliminarAlmacen;
     Button btnNuevoAlmacen;
 
     public EditText getTxtIdAlmacen() {
@@ -70,7 +69,7 @@ public class FormularioAlmacen extends Fragment {
         txtNombreAlmacen = view.findViewById(R.id.txtNombreAlmacen);
         cbEstatusAlmacen = view.findViewById(R.id.cbEstatusAlmacen);
         btnGuardarAlmacen = view.findViewById(R.id.btnGuardarAlmacen);
-        btnEliminarAlmacen = view.findViewById(R.id.btnEliminarAlmacen);
+
         btnNuevoAlmacen = view.findViewById(R.id.btnNuevoAlmacen);
         btnGuardarAlmacen.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -79,21 +79,20 @@ public class ControllerAlmacen {
         //Con este objeto ejecutaremos la sentencia SQL que realiza la
         //inserción en la tabla. Debemos especificarle que queremos que nos
         //devuelva el ID que se genera al realizar la inserción del registro:
-        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pstmt = conn.prepareStatement(sql);
         
         //En este objeto guardamos el resultado de la consulta, la cual
         //nos devolverá los ID's que se generaron. En este caso, solo se
         //generará un ID:
-        ResultSet rs = null;
-        
+      
         pstmt.setString(1, a.getNombre());
-        pstmt.setString(2, a.getDomicilio());               
+        pstmt.setString(2, a.getDomicilio());   
+        pstmt.setInt(3, a.getId());
                           
         //Ejecutamos la consutla:
         pstmt.executeUpdate();
         
-        //Cerramos todos los objetos de conexión con la B.D.:
-        rs.close();
+        //Cerramos todos los objetos de conexión con la B.D.:      
         pstmt.close();
         connMySQL.cerrar();                
     }
@@ -115,7 +114,7 @@ public class ControllerAlmacen {
         //En este objeto guardamos el resultado de la consulta, la cual
         //nos devolverá los ID's que se generaron. En este caso, solo se
         //generará un ID:
-        ResultSet rs = null;
+        
         
         pstmt.setInt(1, idAlmacen);         
                           
@@ -123,7 +122,7 @@ public class ControllerAlmacen {
         pstmt.executeUpdate();
         
         //Cerramos todos los objetos de conexión con la B.D.:
-        rs.close();
+       
         pstmt.close();
         connMySQL.cerrar();                
     }

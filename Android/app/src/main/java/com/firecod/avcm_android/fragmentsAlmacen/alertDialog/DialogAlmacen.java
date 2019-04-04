@@ -34,7 +34,7 @@ public class DialogAlmacen extends DialogFragment {
     EditText txtDomicilioAlmacen;
     CheckBox cbEstatusAlmacen;
     private Gson gson;
-    private String urlGlobal ="http://192.168.0.108:8084/AVCM_WEB/restProducto/";
+    private String urlGlobal ="http://192.168.137.159:8084/AVCM_WEB/restProducto/";
     private  Almacen a;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class DialogAlmacen extends DialogFragment {
 
                     }
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton("Eliminar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         eliminarAlmacen(content);
                         dialog.dismiss();
@@ -103,7 +103,7 @@ public class DialogAlmacen extends DialogFragment {
         t.makeText(this.getContext(), "Actualizando...", Toast.LENGTH_LONG).show();
         StringRequest sr = new StringRequest(
                 Request.Method.POST, //GET or POST
-                urlGlobal + "updateProducto", //URL
+                urlGlobal + "updateAlmacen", //URL
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
