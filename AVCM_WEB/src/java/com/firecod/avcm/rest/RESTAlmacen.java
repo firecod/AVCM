@@ -93,6 +93,7 @@ public class RESTAlmacen extends Application{
             a.setEstatus(1);            
             a.setNombre(nombre);                        
             a.setDomicilio(domicilio);
+            a.setId(idAlmacen);
             ca.update(a);
             if(a.getId() > 0)
                out = jss.serialize(a);                            
