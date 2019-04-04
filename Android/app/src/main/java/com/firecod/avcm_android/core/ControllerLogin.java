@@ -42,6 +42,7 @@ public class ControllerLogin {
                                 Vendedor v = gson.fromJson(response, Vendedor.class);
                                 Toast t = new Toast(act);
                                 t.makeText(act, "Ingresando...", Toast.LENGTH_LONG).show();
+                                act.ingresar(v);
                             }else{
                                 Cliente c = gson.fromJson(response, Cliente.class);
                                 Toast t = new Toast(act);
