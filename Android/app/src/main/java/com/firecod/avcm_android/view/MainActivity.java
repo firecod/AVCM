@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity
                     ContenedorProducto.OnFragmentInteractionListener,
                     CatalogoProducto.OnFragmentInteractionListener,
                     FormularioProducto.OnFragmentInteractionListener,
-                    descripcion_producto.OnFragmentInteractionListener
+                    descripcion_producto.OnFragmentInteractionListener,
+                    DialogProducto.NoticeDialogListener
                     {
 
     @Override
@@ -155,6 +157,17 @@ public class MainActivity extends AppCompatActivity
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+                        @Override
+                        public void onDialogPositiveClick(DialogFragment dialog) {
+                            System.out.println("Se preciono positivo");
+
+                        }
+
+                        @Override
+                        public void onDialogNegativeClick(DialogFragment dialog) {
+                            System.out.println("Se preciono negativo");
+                        }
 
 
 }

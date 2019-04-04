@@ -1,6 +1,7 @@
 package com.firecod.avcm_android.fragmentsProducto;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -40,27 +41,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CatalogoProducto extends Fragment  implements DialogProducto.NoticeDialogListener {
+public class CatalogoProducto extends Fragment{
 
     private TableView pTableView;
     private TableAdapterProducto pTableAdapter;
     private ProgressBar mProgressBar;
     private ControllerProducto cp;
     private Gson gson;
-    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restProducto/";
-    private FragmentActivity myContext;
+    private String urlGlobal ="http://192.168.0.108:8084/AVCM_WEB/restProducto/";
+
+
     private static final String LOG_TAG = CatalogoProducto.class.getSimpleName();
-    private ITableView mTableView;
-    private List productos = new ArrayList();
+
 
     public CatalogoProducto()  {
 
     }
-    @Override
-    public void onAttach(Activity activity) {
-        myContext=(FragmentActivity) activity;
-        super.onAttach(activity);
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,42 +76,9 @@ public class CatalogoProducto extends Fragment  implements DialogProducto.Notice
         pTableView = view.findViewById(R.id.my_TableView);
 
         initializeTableView(pTableView);
-        // initialize ViewModel
-        JsonArrayRequest sr = new JsonArrayRequest(
-                Request.Method.GET, //GET or POST
-                urlGlobal + "getAllProducto?estatus=1", //URL
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            gson = new Gson();
-                            ArrayList<Producto> productos = new ArrayList<>();
-                            Producto p;
 
-                            for(int i = 0; i<response.length(); i++){
-                                p = gson.fromJson(response.get(i).toString(), Producto.class);
-                                productos.add(p);
-
-                            }
-                            if(productos != null && productos.size()>0){
-                                // set the list on TableViewModel
-                                pTableAdapter.setUserList(productos);
-                                hideProgressBar();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Error: " + error.getMessage());
-            }
-        }
-        ) ;
-        RequestQueue queue = Volley.newRequestQueue(this.getContext());
-        queue.add(sr);
+        cp = new ControllerProducto();
+        cp.getAllProducto(pTableAdapter, this , mProgressBar, pTableView);
 
         return view;
     }
@@ -127,15 +91,7 @@ public class CatalogoProducto extends Fragment  implements DialogProducto.Notice
         tableView.setTableViewListener(new TableAdapterListenerProducto(tableView, this));
     }
 
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
 
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-
-    }
 
 
     public interface OnFragmentInteractionListener {
@@ -152,12 +108,15 @@ public class CatalogoProducto extends Fragment  implements DialogProducto.Notice
         pTableView.setVisibility(View.VISIBLE);
     }
 
-    
+
     public  void datos(List productos){
-      llamarDialog();
+        String[] valores = new String[productos.size()];
+        for(int i = 0; i<productos.size(); i++) {
+            valores[i] = productos.get(i).toString();
+
+        }
+        DialogFragment newFragment = DialogProducto.newInstance(valores);
+        newFragment.show(getFragmentManager(), "dialog");
     }
-    public void llamarDialog(){
-        DialogProducto dp = new DialogProducto();
-        dp.show(getFragmentManager(), "missiles");
-    }
+
 }

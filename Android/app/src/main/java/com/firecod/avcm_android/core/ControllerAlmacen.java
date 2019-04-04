@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ControllerAlmacen {
     Gson gson;
-    String urlGlobal = "http://192.168.137.159:8084/AVCM_WEB/restAlmacen/";
+    String urlGlobal = "http://192.168.0.108:8084/AVCM_WEB/restAlmacen/";
     public void getAllSpinnerProducto(final FormularioProducto act) {
 
         JsonArrayRequest sr = new JsonArrayRequest(
@@ -41,8 +41,8 @@ public class ControllerAlmacen {
                             ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
                                     android.R.layout.simple_spinner_item, almacenes);
                             act.getSpAlmacenProducto().setAdapter(adapter);
-                            Almacen acd;
-                            acd = ((Almacen) act.getSpAlmacenProducto().getSelectedItem());
+                           // Almacen acd;
+                            //acd = ((Almacen) act.getSpAlmacenProducto().getSelectedItem());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

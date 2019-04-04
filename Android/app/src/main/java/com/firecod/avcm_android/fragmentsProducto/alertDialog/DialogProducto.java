@@ -8,30 +8,30 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.core.ControllerProducto;
+import com.firecod.avcm_android.model.Almacen;
+import com.firecod.avcm_android.model.Producto;
 
 public class DialogProducto extends DialogFragment {
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Prueba")
-                .setPositiveButton("xD", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
-                });
-        // Create the AlertDialog object and return it
-        return builder.create();
-    }
+    EditText txtIdProducto;
+    EditText txtNombreProducto;
+    EditText txtMarcaProducto;
+    EditText txtPrecioProducto;
+    Spinner spCategoriaProducto;
+    Spinner spAlmacenProducto;
+    CheckBox cbEstatus;
+    Button btnGuardar;
+    Button btnEliminar;
+    Producto p;
+    Almacen a;
+    ControllerProducto cp;
 
     public interface NoticeDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog);
@@ -55,5 +55,57 @@ public class DialogProducto extends DialogFragment {
                     + " must implement NoticeDialogListener");
         }
     }
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        // Use the Builder class for convenient dialog construction
+        String[] datos = getArguments().getStringArray("valores");
 
+        View content = LayoutInflater.from(getContext()).inflate(R.layout.alertdialog_formulario_producto, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(content);
+        builder.setMessage("Modificar Producto")
+                .setPositiveButton("xD", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Send the positive button event back to the host activity
+                        mListener.onDialogPositiveClick(DialogProducto.this);
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mListener.onDialogNegativeClick(DialogProducto.this);
+                    }
+                });
+        // Create the AlertDialog object and return it
+        inicializar(content, datos);
+        return builder.create();
+    }
+
+    public static DialogProducto newInstance(String[] valores) {
+        DialogProducto f = new DialogProducto();
+
+        Bundle args = new Bundle();
+        args.putStringArray("valores", valores);
+        f.setArguments(args);
+        return f;
+    }
+
+    public void inicializar(View content, String[] datos){
+        spAlmacenProducto = content.findViewById(R.id.spAlmacenProducto);
+        cbEstatus = content.findViewById(R.id.cbEstatus);
+        spCategoriaProducto = content.findViewById(R.id.spCategoriaProducto);
+        txtIdProducto = content.findViewById(R.id.txtIdProducto);
+        txtIdProducto.setEnabled(false);
+        txtNombreProducto = content.findViewById(R.id.txtNombreProducto);
+        txtMarcaProducto = content.findViewById(R.id.txtMarcaProducto);
+        txtPrecioProducto = content.findViewById(R.id.txtPrecioProducto);
+        btnGuardar = content.findViewById(R.id.btnGuardar);
+        btnEliminar = content.findViewById(R.id.btnEliminar);
+        txtIdProducto.setText(datos[0]);
+        txtNombreProducto.setText(datos[1]);
+        txtMarcaProducto.setText(datos[2]);
+        txtPrecioProducto.setText(datos[3]);
+        //spCategoriaProducto
+        //spAlmacenProducto
+        //cbEstatus
+    }
 }

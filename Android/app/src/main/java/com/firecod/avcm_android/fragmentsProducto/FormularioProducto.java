@@ -160,8 +160,9 @@ public class FormularioProducto extends Fragment {
                 llamarDialog();
             }
         });
-        asignarCategorias();
         asignarAlmacen();
+        asignarCategorias();
+
 
 
     }
@@ -190,7 +191,7 @@ public class FormularioProducto extends Fragment {
         p.setMarca(txtMarcaProducto.getText().toString());
         p.setNombre(txtNombreProducto.getText().toString());
         p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
-        a.setId(1);
+        a = ((Almacen)spAlmacenProducto.getSelectedItem());
         p.setAlmacen(a);
         cp.guardarProducto(this,p);
     }
