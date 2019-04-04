@@ -49,16 +49,15 @@ public class RESTCliente extends Application {
                            @FormParam("nombre")@DefaultValue("") String nombre,
                            @FormParam("apellidoPaterno")@DefaultValue("") String apellidoPaterno,
                            @FormParam("apellidoMaterno")@DefaultValue("") String apellidoMaterno,
-                           @FormParam("genero")@DefaultValue("") String genero,
-                           @FormParam("domicilio")@DefaultValue("") String domicilio,                           
                            @FormParam("rfc")@DefaultValue("") String rfc,
+                           @FormParam("domicilio")@DefaultValue("") String domicilio,                           
+                           @FormParam("telefono")@DefaultValue("") String telefono,
                            //Cliente                           
-                           @FormParam("correoElectronico")@DefaultValue("") String correoElectronico,
-                           @FormParam("idPersona")@DefaultValue("0") int idPersona,
-                           @FormParam("idUsuario")@DefaultValue("0") int idUsuario,
-                           //Usuario                           
                            @FormParam("nombreUsuario")@DefaultValue("") String nombreUsuario,
-                           @FormParam("contrasenia")@DefaultValue("") String contrasenia
+                           @FormParam("contrasenia")@DefaultValue("0") String contrasenia,
+                           @FormParam("rol")@DefaultValue("0") String rol,
+                           //Usuario                           
+                           @FormParam("correoElectronico")@DefaultValue("") String correoElectronico
                            ){
         ControllerCliente cc = new ControllerCliente();
         JSONSerializer jss= new JSONSerializer();
@@ -73,9 +72,9 @@ public class RESTCliente extends Application {
            p.setNombre(nombre);
            p.setApellidoMaterno(apellidoMaterno);
            p.setApellidoPaterno(apellidoPaterno);
-           p.setDomicilio(domicilio);
-           p.setId(idPersona);
            p.setRfc(rfc);
+           p.setDomicilio(domicilio);
+           p.setTelefono(telefono);
            //Cliente
            c = new Cliente();
            c.setCorreoElectronico(correoElectronico);

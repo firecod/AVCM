@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    android:background="@color/table_view_default_separator_color">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_Cliente"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Tus Clientes" />
-        <item
-            android:id="@+id/nav_Vendedor"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Vendedor" />
+            android:icon="@drawable/icon_clientes_32"
+            android:title="Mi perfil" />
         <item
             android:id="@+id/nav_Producto"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Tus Producto" />
-        <item
-            android:id="@+id/nav_Almacen"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tus Almacenes" />
+            android:icon="@drawable/icon_productos_32"
+            android:title="Productos" />
     </group>
 
     <item android:title="Communicate">

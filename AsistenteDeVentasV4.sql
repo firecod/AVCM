@@ -191,32 +191,32 @@ END //
 
 CREATE PROCEDURE registroVendedor (
 									/*---- Datos Entrada Persona ----*/
-									IN var_nombre VARCHAR(20), 
-                                    IN var_apellidoPaterno VARCHAR(20),
-                                    IN var_apellidoMaterno VARCHAR(20),
-                                    IN var_rfc VARCHAR(14),
-                                    IN var_domicilio VARCHAR(100),
-                                    IN var_telefono VARCHAR(15),
+									IN var_nombre VARCHAR(20), 				-- 1
+                                    IN var_apellidoPaterno VARCHAR(20),		-- 2
+                                    IN var_apellidoMaterno VARCHAR(20),		-- 3
+                                    IN var_rfc VARCHAR(14),					-- 4
+                                    IN var_domicilio VARCHAR(100),			-- 5
+                                    IN var_telefono VARCHAR(15),			-- 6
                                     
                                     /*---- Datos Entrada Usuario ----*/
-                                    IN var_nombreUsuario VARCHAR(20),
-                                    IN var_contrasenia VARCHAR(12),
-                                    IN var_rol VARCHAR(20),
+                                    IN var_nombreUsuario VARCHAR(20),		-- 7
+                                    IN var_contrasenia VARCHAR(12),			-- 8
+                                    IN var_rol VARCHAR(20),					-- 9
                                     
                                     /*---- Datos Entrada Vendedor ----*/
-                                    IN var_fotografiaVendedor LONGTEXT,
-                                    IN var_reputacion INT,
-                                    IN var_idAlmacen INT,
+                                    IN var_fotografiaVendedor LONGTEXT,		-- 10
+                                    IN var_reputacion INT,					-- 11
+                                    IN var_idAlmacen INT,					-- 12
                                     
                                     /*---- Datos Salida Persona ----*/
-                                    OUT var_idPersona INT,
+                                    OUT var_idPersona INT,					-- 13
                                     
                                     /*---- Datos Salida Usuario ----*/
-                                    OUT var_idUsuario INT,
+                                    OUT var_idUsuario INT, 					-- 14
                                     
                                     /*---- Datos Salida Vendedor ----*/
-                                    OUT var_idVendedor INT,
-                                    OUT var_numeroVendedor VARCHAR(20)
+                                    OUT var_idVendedor INT,   				-- 15
+                                    OUT var_numeroVendedor VARCHAR(20)      -- 16
 									)
 
 BEGIN
@@ -341,8 +341,6 @@ CALL registroCliente('Vanessa', 'Ortega', 'Torres', 'OETJ981207', 'Via asinaria 
 					'van1207', '1111', 'vanessato_98@hotmail.com', @idPersona, @idUsuario, @idCliente, @numeroCliente);
                     
 CALL registroVendedor('Diego', 'Castro', 'Castro', 'CACD990225', 'Imperio Asiático #615', '4113603464',
-					'dieg0225','2222', 'Vendedor', null, null, 1, @idPersona, @idUsuario, @idVendedor, @numeroVendedor);
-                    
-                    CREATE VIEW vistaproducto AS 
-select p.idProducto, p.nombre AS 'nombreProducto', p.marca, p.precio, p.categoria, p.estatus, p.idAlmacen, a.nombre AS 'nombreAlmacen' from producto p
-inner join almacen a where p.idAlmacen = a.idAlmacen;
+					  'dieg0225','2222', 'Vendedor', null, null, 1, @idPersona, @idUsuario, @idVendedor, @numeroVendedor);
+                      
+SELECT * FROM Vendedor;
