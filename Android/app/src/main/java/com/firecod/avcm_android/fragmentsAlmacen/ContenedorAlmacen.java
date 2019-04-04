@@ -1,4 +1,4 @@
-package com.firecod.avcm_android.fragmentsProducto;
+package com.firecod.avcm_android.fragmentsAlmacen;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,38 +14,23 @@ import android.view.ViewGroup;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.adapters.SectionsAdapter;
 import com.firecod.avcm_android.clases.Utilidades;
+import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
+import com.firecod.avcm_android.fragmentsProducto.ContenedorProducto;
+import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ContenedorProducto.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ContenedorProducto#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ContenedorProducto extends Fragment {
-
+public class ContenedorAlmacen extends Fragment {
     View vista;
     private AppBarLayout appBar;
     private TabLayout pestañas;
     private ViewPager viewPager;
-    private OnFragmentInteractionListener mListener;
+    private ContenedorAlmacen.OnFragmentInteractionListener mListener;
 
-    public ContenedorProducto() {
+    public ContenedorAlmacen() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ContenedorProducto.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ContenedorProducto newInstance(String param1, String param2) {
-        ContenedorProducto fragment = new ContenedorProducto();
+    public static ContenedorAlmacen newInstance(String param1, String param2) {
+        ContenedorAlmacen fragment = new ContenedorAlmacen();
         Bundle args = new Bundle();
 
         return fragment;
@@ -60,7 +45,7 @@ public class ContenedorProducto extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.fragment_contenedor_producto, container, false);
+        vista = inflater.inflate(R.layout.fragment_contenedor_almacen, container, false);
 
         if (Utilidades.rotacion==0){
             View parent= (View) container.getParent();
@@ -70,7 +55,7 @@ public class ContenedorProducto extends Fragment {
                 pestañas = new TabLayout(getActivity());
                 appBar.addView(pestañas);
 
-                viewPager = (ViewPager) vista.findViewById(R.id.idViewPagerInfoProducto);
+                viewPager = (ViewPager) vista.findViewById(R.id.idViewPagerInfoAlmacen);
                 llenarViewPager(viewPager);
 
                 viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
@@ -91,8 +76,8 @@ public class ContenedorProducto extends Fragment {
 
     private void llenarViewPager(ViewPager viewPager) {
         SectionsAdapter adapter = new SectionsAdapter(getFragmentManager());
-        adapter.addFragment(new FormularioProducto(), "Formulario Producto");
-        adapter.addFragment(new CatalogoProducto(), "Catálogo Producto");
+        adapter.addFragment(new FormularioAlmacen(), "Formulario Almacén");
+        adapter.addFragment(new CatalogoAlmacen(), "Catálogo Almacén");
 
 
         viewPager.setAdapter(adapter);

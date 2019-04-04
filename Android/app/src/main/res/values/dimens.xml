@@ -6,7 +6,7 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="table_view_cell_height">28dp</dimen>
-    <dimen name="table_view_row_header_width">28dp</dimen>
+    <dimen name="table_view_row_header_width">40dp</dimen>
     <dimen name="table_view_default_text_size">15sp</dimen>
     <dimen name="standard_55">55dp</dimen>
     <dimen name="standard_105">105dp</dimen>

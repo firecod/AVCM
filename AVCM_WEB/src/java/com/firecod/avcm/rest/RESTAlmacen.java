@@ -105,16 +105,17 @@ public class RESTAlmacen extends Application{
          return Response.status(Response.Status.OK).entity(out).build();
     }    
     
-    @POST
+    @GET
     @Path("deleteAlmacen")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response delete(@FormParam("idAlmacen")@DefaultValue("0") int idAlmacen)
+    public Response delete(@QueryParam("idAlmacen")@DefaultValue("0") int idAlmacen)
     {        
         ControllerAlmacen ca = new ControllerAlmacen();        
         String out = null;
         JSONSerializer jss = new JSONSerializer();         
         try {
             ca.delete(idAlmacen);
+            out = "{\"response:\":\"Eliminado Correctamente.\"}";
         } catch (Exception e) {
             e.printStackTrace();
             out = "{\"exception:\":\"" + e.toString() + "\"}";

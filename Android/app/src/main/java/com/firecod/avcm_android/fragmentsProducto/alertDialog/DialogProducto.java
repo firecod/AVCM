@@ -71,11 +71,12 @@ public class DialogProducto extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
                         actualizarProducto(content);
-                        System.out.println("entre");
+
                     }
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton("Eliminar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        eliminarProducto(content);
                         dialog.dismiss();
 
                     }
@@ -95,19 +96,18 @@ public class DialogProducto extends DialogFragment {
         return f;
     }
 
-    public void asignarAlmacen(){
+    public void asignarAlmacen(String[] datos ){
         ControllerAlmacen ca = new ControllerAlmacen();
-        ca.getAllSpinnerProductoEditar(this);
+        ca.getAllSpinnerProductoEditar(this, datos);
     }
 
     public void agregarDatosSpinner(String[] datos){
         String[] categorias = new String[] {"Produtos de Temporada","Alimentos", "Línea Blanca", "Muebles", "Papeleria y Merceria",
                 "Moda", "Bebes", "Entretenimiento", "Herramientas", "Limpieza"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getContext(),
                 android.R.layout.simple_spinner_item, categorias);
         spCategoriaProducto.setAdapter(adapter);
-        System.out.println("spinner" + spCategoriaProducto.getAdapter().getCount());
-        System.out.println("dato " + datos[4]);
+
         for (int i = 0; i < spCategoriaProducto.getAdapter().getCount(); i++) {
             if (spCategoriaProducto.getAdapter().getItem(i).toString().equals(datos[4])) {
                 spCategoriaProducto.setSelection(i);
@@ -117,7 +117,7 @@ public class DialogProducto extends DialogFragment {
 
     public void inicializar(View content, String[] datos){
         spAlmacenProducto = content.findViewById(R.id.spAlmacenProducto);
-        asignarAlmacen();
+        asignarAlmacen(datos);
         cbEstatus = content.findViewById(R.id.cbEstatus);
         spCategoriaProducto = content.findViewById(R.id.spCategoriaProducto);
         txtIdProducto = content.findViewById(R.id.txtIdProducto);
@@ -151,7 +151,7 @@ public class DialogProducto extends DialogFragment {
     {
       final Context context= this.getContext();
       final Toast t = new Toast(this.getContext());
-           t.makeText(this.getContext(), "Guardando...", Toast.LENGTH_LONG).show();
+           t.makeText(this.getContext(), "Actualizando...", Toast.LENGTH_LONG).show();
         StringRequest sr = new StringRequest(
                 Request.Method.POST, //GET or POST
                 urlGlobal + "updateProducto", //URL
@@ -198,6 +198,38 @@ public class DialogProducto extends DialogFragment {
 
     }
 
+    public void eliminarProducto(View content){
+        eliminarProducto(Integer.parseInt(txtIdProducto.getText().toString()));
+    }
 
+    public void eliminarProducto(int id){
+        final Context c = this.getContext();
+        final Toast t = new Toast(this.requireContext());
+        t.makeText(this.requireContext(), "Eliminando...", Toast.LENGTH_LONG).show();
+        StringRequest sr = new StringRequest(
+                Request.Method.GET, //GET or POST
+                urlGlobal + "deleteProducto?idProducto=" + id, //URL
 
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            if (response.contains("Eliminado")){
+                                t.makeText(c, "Eliminado", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+            }
+        }
+        ) ;
+        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        queue.add(sr);
+    }
+    
 }
