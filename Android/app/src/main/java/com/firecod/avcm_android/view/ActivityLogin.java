@@ -26,6 +26,7 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         inicializar();
+        getSupportActionBar().hide();
     }
 
     public void inicializar(){

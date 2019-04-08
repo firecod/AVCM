@@ -15,7 +15,9 @@
             android:name="com.google.android.actions"
             android:resource="@drawable/launch_screen" />
 
-        <activity android:name=".view.MainActivity"></activity>
+        <activity android:name=".view.MainActivity">
+
+        </activity>
         <activity android:name=".view.ActivityMainCliente" />
         <activity android:name=".view.ActivityMainVendedor" />
         <activity android:name=".view.ActivityLogin">

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
                     ContenedorAlmacen.OnFragmentInteractionListener
 
 
+
                     {
 
     @Override
@@ -59,6 +60,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
 */
+        //getActionBar().hide();
+        getSupportActionBar().hide();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

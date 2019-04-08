@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentsCliente.DescripcionCliente">
+    tools:context=".fragmentsCliente.DescripcionCliente"
+    android:theme="@style/NoActionBar" >
 
     <ScrollView
         android:id="@+id/scrollView2"

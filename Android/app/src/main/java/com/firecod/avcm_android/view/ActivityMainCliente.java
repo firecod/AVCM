@@ -14,21 +14,17 @@ import android.view.MenuItem;
 
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.clases.Utilidades;
-import com.firecod.avcm_android.fragmentsAlmacen.CatalogoAlmacen;
-import com.firecod.avcm_android.fragmentsAlmacen.ContenedorAlmacen;
-import com.firecod.avcm_android.fragmentsAlmacen.FormularioAlmacen;
-import com.firecod.avcm_android.fragmentsCliente.CatalogoCliente;
-import com.firecod.avcm_android.fragmentsCliente.ContenedorCliente;
+import com.firecod.avcm_android.fragmentsCliente.ContenedorClientePerfil;
 import com.firecod.avcm_android.fragmentsCliente.DescripcionCliente;
 import com.firecod.avcm_android.fragmentsCliente.FormularioCliente;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
-import com.firecod.avcm_android.fragmentsProducto.ContenedorProducto;
-import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
+import com.firecod.avcm_android.fragmentsProducto.ContenedorProductoCliente;
 
 public class ActivityMainCliente extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        ContenedorCliente.OnFragmentInteractionListener,
+        ContenedorClientePerfil.OnFragmentInteractionListener,
         FormularioCliente.OnFragmentInteractionListener,
         DescripcionCliente.OnFragmentInteractionListener,
+        ContenedorProductoCliente.OnFragmentInteractionListener,
         CatalogoProducto.OnFragmentInteractionListener
         {
 
@@ -56,7 +52,7 @@ public class ActivityMainCliente extends AppCompatActivity implements Navigation
                 toggle.syncState();
 
                 if (Utilidades.pantalla==true){
-                    Fragment fragment = new ContenedorCliente();
+                    Fragment fragment = new ContenedorClientePerfil();
                     getSupportFragmentManager().beginTransaction().replace(R.id.contant_main, fragment).commit();
                 }else{
                     Utilidades.pantalla=false;
@@ -108,10 +104,10 @@ public class ActivityMainCliente extends AppCompatActivity implements Navigation
                 boolean fragSeleccionado = false;
 
                 if (id == R.id.nav_Cliente) {
-                    fragmento = new ContenedorCliente();
+                    fragmento = new ContenedorClientePerfil();
                     fragSeleccionado = true;
                 }  else if (id == R.id.nav_Producto) {
-                    fragmento = new ContenedorProducto();
+                    fragmento = new ContenedorProductoCliente();
                     fragSeleccionado = true;
 
                 } else if (id == R.id.nav_share) {
@@ -131,7 +127,8 @@ public class ActivityMainCliente extends AppCompatActivity implements Navigation
             }
 
             @Override
-            public void onFragmentInteraction(Uri uri) {
+            public void onFragmentInteraction(Uri uri)
+            {
 
             }
 

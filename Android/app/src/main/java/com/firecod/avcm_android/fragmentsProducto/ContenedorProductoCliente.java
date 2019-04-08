@@ -15,15 +15,7 @@ import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.adapters.SectionsAdapter;
 import com.firecod.avcm_android.clases.Utilidades;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ContenedorProducto.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ContenedorProducto#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ContenedorProducto extends Fragment {
+public class ContenedorProductoCliente extends Fragment {
 
     View vista;
     private AppBarLayout appBar;
@@ -31,7 +23,7 @@ public class ContenedorProducto extends Fragment {
     private ViewPager viewPager;
     private OnFragmentInteractionListener mListener;
 
-    public ContenedorProducto() {
+    public ContenedorProductoCliente() {
         // Required empty public constructor
     }
 
@@ -91,7 +83,6 @@ public class ContenedorProducto extends Fragment {
 
     private void llenarViewPager(ViewPager viewPager) {
         SectionsAdapter adapter = new SectionsAdapter(getFragmentManager());
-        adapter.addFragment(new FormularioProducto(), "Formulario Producto");
         adapter.addFragment(new CatalogoProducto(), "Catálogo Producto");
 
 
@@ -111,7 +102,6 @@ public class ContenedorProducto extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
@@ -145,4 +135,5 @@ public class ContenedorProducto extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

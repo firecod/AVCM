@@ -73,7 +73,8 @@ public class TableAdapterListenerProducto implements ITableViewListener {
     public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder owHeaderView, int row) {
 
         List productos = new ArrayList();
-        for(int i = 0; i<7; i++){
+        productos.add(mTableView.getAdapter().getRowHeaderItem(row).toString());
+        for(int i = 0; i<6; i++){
             productos.add(mTableView.getAdapter().getCellItem(i, row).toString());
         }
         catalogoProducto.datos(productos);

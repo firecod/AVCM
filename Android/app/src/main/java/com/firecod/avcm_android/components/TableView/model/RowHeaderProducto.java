@@ -10,4 +10,10 @@ public class RowHeaderProducto {
     public String getData(){
         return pData;
     }
+
+    @Override
+    public String toString() {
+        return pData;
+
+    }
 }

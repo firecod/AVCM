@@ -10,20 +10,16 @@
 
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/launch_screen</item>
-        <item name = "android:windowActionBar">false</item>
-        <item name = "android:windowNoTitle">true</item>
     </style>
 
     <style name = "NoActionBar" parent = "@android:style/Theme.Holo.Light">
         <item name = "android:windowActionBar">false</item>
-        <item name = "android:windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+
+        <item name = "android:windowNoTitle">false</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

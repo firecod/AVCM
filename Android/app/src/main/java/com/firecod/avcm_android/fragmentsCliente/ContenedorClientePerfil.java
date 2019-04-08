@@ -1,4 +1,4 @@
-package com.firecod.avcm_android.fragmentsProducto;
+package com.firecod.avcm_android.fragmentsCliente;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,15 +15,7 @@ import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.adapters.SectionsAdapter;
 import com.firecod.avcm_android.clases.Utilidades;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ContenedorProducto.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ContenedorProducto#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ContenedorProducto extends Fragment {
+public class ContenedorClientePerfil extends Fragment {
 
     View vista;
     private AppBarLayout appBar;
@@ -31,8 +23,8 @@ public class ContenedorProducto extends Fragment {
     private ViewPager viewPager;
     private OnFragmentInteractionListener mListener;
 
-    public ContenedorProducto() {
-        // Required empty public constructor
+    public ContenedorClientePerfil(){
+
     }
 
     /**
@@ -41,11 +33,11 @@ public class ContenedorProducto extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ContenedorProducto.
+     * @return A new instance of fragment ContenedorCliente.
      */
     // TODO: Rename and change types and number of parameters
-    public static ContenedorProducto newInstance(String param1, String param2) {
-        ContenedorProducto fragment = new ContenedorProducto();
+    public static ContenedorClientePerfil newInstance(String param1, String param2) {
+        ContenedorClientePerfil fragment = new ContenedorClientePerfil();
         Bundle args = new Bundle();
 
         return fragment;
@@ -60,7 +52,7 @@ public class ContenedorProducto extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.fragment_contenedor_producto, container, false);
+        vista = inflater.inflate(R.layout.fragment_contenedor_cliente, container, false);
 
         if (Utilidades.rotacion==0){
             View parent= (View) container.getParent();
@@ -70,7 +62,7 @@ public class ContenedorProducto extends Fragment {
                 pestañas = new TabLayout(getActivity());
                 appBar.addView(pestañas);
 
-                viewPager = (ViewPager) vista.findViewById(R.id.idViewPagerInfoProducto);
+                viewPager = (ViewPager) vista.findViewById(R.id.idViewPagerInfo);
                 llenarViewPager(viewPager);
 
                 viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
@@ -91,9 +83,8 @@ public class ContenedorProducto extends Fragment {
 
     private void llenarViewPager(ViewPager viewPager) {
         SectionsAdapter adapter = new SectionsAdapter(getFragmentManager());
-        adapter.addFragment(new FormularioProducto(), "Formulario Producto");
-        adapter.addFragment(new CatalogoProducto(), "Catálogo Producto");
-
+        adapter.addFragment(new FormularioCliente(), "Datos Cliente");
+        adapter.addFragment(new DescripcionCliente(), "Datos Usuario");
 
         viewPager.setAdapter(adapter);
     }
@@ -111,7 +102,6 @@ public class ContenedorProducto extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
@@ -123,6 +113,7 @@ public class ContenedorProducto extends Fragment {
         if(Utilidades.rotacion==0){
             appBar.removeView(pestañas);
         }
+
     }
 
     @Override

@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class ControllerAlmacen {
     Gson gson;
-    String urlGlobal = "http://192.168.137.159:8084/AVCM_WEB/restAlmacen/";
+    String urlGlobal = "http://192.168.43.16:8084/AVCM_WEB/restAlmacen/";
 
     public void guardarAlmacen(final FormularioAlmacen act, final Almacen almacen)
     {

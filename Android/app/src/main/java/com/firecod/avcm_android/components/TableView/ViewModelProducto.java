@@ -89,7 +89,7 @@ public class ViewModelProducto {
         List<ColumnHeaderProducto> list = new ArrayList<>();
 
         // Create Column Headers
-        list.add(new ColumnHeaderProducto("Id"));
+
         list.add(new ColumnHeaderProducto("Nombre"));
         list.add(new ColumnHeaderProducto("Marca"));
         list.add(new ColumnHeaderProducto("Precio"));
@@ -113,7 +113,7 @@ public class ViewModelProducto {
             List<CellProducto> list = new ArrayList<>();
 
             // The order should be same with column header list;
-            list.add(new CellProducto("1-" + i, producto.getId()));          // "Id"
+                      // "Id"
             list.add(new CellProducto("2-" + i, producto.getNombre()));        // "Name"
             list.add(new CellProducto("6-" + i, producto.getMarca()));
             list.add(new CellProducto("7-" + i, producto.getPrecio()));
@@ -127,11 +127,11 @@ public class ViewModelProducto {
         return lists;
     }
 
-    private List<RowHeaderProducto> createRowHeaderList(int size) {
+    private List<RowHeaderProducto> createRowHeaderList(List<Producto> productoList) {
         List<RowHeaderProducto> list = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < productoList.size(); i++) {
             // In this example, Row headers just shows the index of the TableView List.
-                list.add(new RowHeaderProducto(String.valueOf(i + 1)));
+                list.add(new RowHeaderProducto(String.valueOf(productoList.get(i).getId())));
         }
         return list;
     }
@@ -153,6 +153,6 @@ public class ViewModelProducto {
     public void generateListForTableView(List<Producto> productos) {
         mColumnHeaderModelList = createColumnHeaderModelList();
         mCellModelList = createCellModelList(productos);
-        mRowHeaderModelList = createRowHeaderList(productos.size());
+        mRowHeaderModelList = createRowHeaderList(productos);
     }
 }
