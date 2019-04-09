@@ -8,22 +8,14 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="50dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
 
 
             <TextView
@@ -31,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ID persona" />
+
             <EditText
                 android:id="@+id/txtIdPersona"
                 android:layout_width="match_parent"
@@ -43,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nombre" />
+
             <EditText
                 android:id="@+id/txtNombrePersona"
                 android:layout_width="match_parent"
@@ -55,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Apellido Paterno" />
+
             <EditText
                 android:id="@+id/txtApellidoPaterno"
                 android:layout_width="match_parent"
@@ -67,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Apellido Materno" />
+
             <EditText
                 android:id="@+id/txtApellidoMaterno"
                 android:layout_width="match_parent"
@@ -79,6 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="RFC" />
+
             <EditText
                 android:id="@+id/txtRFC"
                 android:layout_width="match_parent"
@@ -91,6 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Domicilio" />
+
             <EditText
                 android:id="@+id/txtDomicilio"
                 android:layout_width="match_parent"
@@ -103,6 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Telefono" />
+
             <EditText
                 android:id="@+id/txtTelefono"
                 android:layout_width="match_parent"
@@ -110,15 +109,12 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="74dp" />
-
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ID Cliente" />
+
             <EditText
                 android:id="@+id/txtIdCliente"
                 android:layout_width="match_parent"
@@ -131,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Numero Unico" />
+
             <EditText
                 android:id="@+id/txtNumeroCliente"
                 android:layout_width="match_parent"
@@ -143,16 +140,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Correo Electronico " />
+
             <EditText
                 android:id="@+id/txtCorreoElectronico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="74dp" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -172,6 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nombre Usuario" />
+
             <EditText
                 android:id="@+id/txtNombreUsuario"
                 android:layout_width="match_parent"
@@ -184,6 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Contraseña" />
+
             <EditText
                 android:id="@+id/txtContrasenia"
                 android:layout_width="match_parent"
@@ -201,13 +197,12 @@
                 android:id="@+id/cbEstatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Activo"
-                android:checked="true"/>
-
+                android:checked="true"
+                android:text="Activo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="89dp"
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="536dp">
@@ -227,6 +222,8 @@
                     android:layout_weight="1"
                     android:text="Limpiar" />
             </LinearLayout>
+
+
         </LinearLayout>
 
     </ScrollView>

@@ -57,45 +57,16 @@ public class FormularioProducto extends Fragment {
     public EditText getTxtIdProducto() {
         return txtIdProducto;
     }
-
-    public EditText getTxtNombreProducto() {
-        return txtNombreProducto;
-    }
-
-    public EditText getTxtMarcaProducto() {
-        return txtMarcaProducto;
-    }
-
-    public EditText getTxtPrecioProducto() {
-        return txtPrecioProducto;
-    }
-
-    public Spinner getSpCategoriaProducto() {
-        return spCategoriaProducto;
-    }
-
     public Spinner getSpAlmacenProducto() {
         return spAlmacenProducto;
     }
 
-    public CheckBox getCbEstatus() {
-        return cbEstatus;
-    }
-
-    public Button getBtnGuardar() {
-        return btnGuardar;
-    }
-
-    public Button getBtnConsultar() {
-        return btnEliminar;
-    }
 
     private OnFragmentInteractionListener mListener;
 
 
     public FormularioProducto() {
         // Required empty public constructor
-
     }
 
 
@@ -185,17 +156,21 @@ public class FormularioProducto extends Fragment {
 
 
     public void guardarProducto(){
-        p = new Producto();
-        a = new Almacen();
-        cp = new ControllerProducto();
-        p.setCategoria(spCategoriaProducto.getSelectedItem().toString());
-        p.setEstatus(1);
-        p.setMarca(txtMarcaProducto.getText().toString());
-        p.setNombre(txtNombreProducto.getText().toString());
-        p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
-        a = ((Almacen)spAlmacenProducto.getSelectedItem());
-        p.setAlmacen(a);
-        cp.guardarProducto(this,p);
+        if(txtPrecioProducto.getText().toString().length() > 0) {
+            p = new Producto();
+            a = new Almacen();
+            cp = new ControllerProducto();
+            p.setCategoria(spCategoriaProducto.getSelectedItem().toString());
+            p.setMarca("" + txtMarcaProducto.getText().toString());
+            p.setNombre("" + txtNombreProducto.getText().toString());
+            p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
+            a = ((Almacen) spAlmacenProducto.getSelectedItem());
+            p.setAlmacen(a);
+            cp.guardarProducto(this, p);
+        }else{
+            Toast t = new Toast(this.getContext());
+            t.makeText(this.getContext(), "Ingrese el precio del producto" , Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void limpiarCampos(){

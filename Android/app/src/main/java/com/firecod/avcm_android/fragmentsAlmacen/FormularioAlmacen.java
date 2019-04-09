@@ -69,7 +69,6 @@ public class FormularioAlmacen extends Fragment {
         txtNombreAlmacen = view.findViewById(R.id.txtNombreAlmacen);
         cbEstatusAlmacen = view.findViewById(R.id.cbEstatusAlmacen);
         btnGuardarAlmacen = view.findViewById(R.id.btnGuardarAlmacen);
-
         btnNuevoAlmacen = view.findViewById(R.id.btnNuevoAlmacen);
         btnGuardarAlmacen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +88,6 @@ public class FormularioAlmacen extends Fragment {
         a = new Almacen();
         a.setDomicilio("" + txtDomicilioAlmacen.getText().toString());
         a.setNombre("" + txtNombreAlmacen.getText().toString());
-        a.setEstatus(1);
         ca = new ControllerAlmacen();
         ca.guardarAlmacen(this, a);
     }

@@ -93,7 +93,7 @@ public class ContenedorCliente extends Fragment {
         SectionsAdapter adapter = new SectionsAdapter(getFragmentManager());
         adapter.addFragment(new FormularioCliente(), "Datos Cliente");
         adapter.addFragment(new CatalogoCliente(), "Datos Persona");
-        adapter.addFragment(new DescripcionCliente(), "Datos Usuario");
+
 
         viewPager.setAdapter(adapter);
     }
