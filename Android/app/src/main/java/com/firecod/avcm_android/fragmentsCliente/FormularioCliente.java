@@ -110,9 +110,9 @@ public class FormularioCliente extends Fragment {
             p.setApellidoPaterno("" + txtApellidoPaterno.getText().toString());
             p.setDomicilio("" + txtDomicilio.getText().toString());
             p.setRfc("" + txtRFC.getText().toString());
+            p.setTelefono("" + txtTelefono.getText().toString());
             c.setPersona(p);
             c.setCorreoElectronico("" + txtCorreoElectronico.getText().toString());
-            u.setContrasenia(txtContrasenia.getText().toString());
             u.setNombreUsuario(txtNombreUsuario.getText().toString());
             u.setContrasenia(txtContrasenia.getText().toString());
             u.setRol("Cliente");

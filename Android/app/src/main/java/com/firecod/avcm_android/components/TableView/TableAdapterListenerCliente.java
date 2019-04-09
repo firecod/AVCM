@@ -53,7 +53,7 @@ public class TableAdapterListenerCliente implements ITableViewListener {
 
         List clientes = new ArrayList();
         clientes.add(cTableView.getAdapter().getRowHeaderItem(row).toString());
-        for(int i = 0; i<6; i++){
+        for(int i = 0; i<12; i++){
             clientes.add(cTableView.getAdapter().getCellItem(i, row).toString());
         }
         catalogoCliente.datos(clientes);

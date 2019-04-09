@@ -145,7 +145,7 @@
             <CheckBox
                 android:id="@+id/cbEstatus"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="94dp"
                 android:checked="true"
                 android:text="Activo" />
         </LinearLayout>

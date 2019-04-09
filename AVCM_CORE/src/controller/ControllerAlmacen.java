@@ -83,15 +83,12 @@ public class ControllerAlmacen {
         
         //En este objeto guardamos el resultado de la consulta, la cual
         //nos devolverá los ID's que se generaron. En este caso, solo se
-        //generará un ID:
-      
+        //generará un ID:      
         pstmt.setString(1, a.getNombre());
         pstmt.setString(2, a.getDomicilio());   
-        pstmt.setInt(3, a.getId());
-                          
+        pstmt.setInt(3, a.getId());                          
         //Ejecutamos la consutla:
         pstmt.executeUpdate();
-        
         //Cerramos todos los objetos de conexión con la B.D.:      
         pstmt.close();
         connMySQL.cerrar();                

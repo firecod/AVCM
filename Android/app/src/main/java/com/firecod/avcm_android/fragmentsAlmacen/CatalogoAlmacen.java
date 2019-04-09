@@ -58,8 +58,8 @@ public class CatalogoAlmacen extends Fragment {
 
         initializeTableView(aTableView);
 
-        //ca = new ControllerAlmacen();
-        //ca.getAllAlmacen(aTableAdapter, this , mProgressBar, aTableView);
+        ca = new ControllerAlmacen();
+        ca.getAllAlmacen(aTableAdapter, this , mProgressBar, aTableView);
 
         return view;
     }

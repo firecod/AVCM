@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2286c3</color>
+    <color name="colorPrimary">#4fc3f7</color>
     <color name="colorPrimaryDark">#64b5f6</color>
     <color name="colorAccent">#9be7ff</color>
 
 
     <color name="selected_background_color">#64b5f6</color>
     <color name="unselected_background_color">#2286c3</color>
+    <color name="backgroud_table">#b3e5fc</color>
     <color name="shadow_background_color">#2286c3</color>
     <color name="unselected_header_background_color">#01579b</color>
 

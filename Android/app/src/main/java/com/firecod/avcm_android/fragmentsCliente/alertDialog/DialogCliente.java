@@ -23,34 +23,38 @@ import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.fragmentsAlmacen.alertDialog.DialogAlmacen;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Cliente;
+import com.firecod.avcm_android.model.Persona;
+import com.firecod.avcm_android.model.Usuario;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class DialogCliente extends DialogFragment {
-    EditText txtIdCliente;
-    EditText txtNombrePersona;
-    EditText txtApellidoPaterno;
-    EditText txtApellidoMaterno;
-    EditText txtRFC;
-    EditText txtDomicilio;
-    EditText txtTelefono;
-    EditText txtCorreoElectronico;
-    EditText txtNombreUsuario;
-    CheckBox cbEstatus;
+    private EditText txtIdCliente;
+    private EditText txtNombrePersona;
+    private EditText txtApellidoPaterno;
+    private EditText txtApellidoMaterno;
+    private EditText txtRFC;
+    private EditText txtDomicilio;
+    private EditText txtTelefono;
+    private EditText txtCorreoElectronico;
+    private EditText txtNombreUsuario;
+    private CheckBox cbEstatus;
     int idPersona;
     int idUsuario;
     private Gson gson;
-    private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restCliente/";
-    private Almacen a;
+    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restCliente/";
+    private Cliente c;
+    private Persona p;
+    private Usuario u;
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         String[] datos = getArguments().getStringArray("valores");
-        final View content = LayoutInflater.from(getContext()).inflate(R.layout.alertdialog_formulario_almacen, null);
+        final View content = LayoutInflater.from(getContext()).inflate(R.layout.alertdialog_formulario_cliente, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(content);
         builder.setMessage("Modificar Cliente")
@@ -58,6 +62,7 @@ public class DialogCliente extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // Send the positive button event back to the host activity
                         actualizarCliente(content);
+                        dialog.dismiss();
 
                     }
                 })
@@ -75,8 +80,8 @@ public class DialogCliente extends DialogFragment {
         return builder.create();
     }
 
-    public static DialogAlmacen newInstance(String[] valores) {
-        DialogAlmacen f = new DialogAlmacen();
+    public static DialogCliente newInstance(String[] valores) {
+        DialogCliente f = new DialogCliente();
         Bundle args = new Bundle();
         args.putStringArray("valores", valores);
         f.setArguments(args);
@@ -96,20 +101,37 @@ public class DialogCliente extends DialogFragment {
         txtIdCliente.setEnabled(false);
         txtNombreUsuario = view.findViewById(R.id.txtNombreUsuario);
         cbEstatus = view.findViewById(R.id.cbEstatus);
-        txtNombrePersona.setText(datos[0]);
-        txtApellidoPaterno.setText(datos[1]);
-        txtApellidoMaterno.setText(datos[2]);
-        txtRFC.setText(datos[3]);
-        txtDomicilio.setText(datos[4]);
-        txtTelefono.setText(datos[5]);
-        txtNombreUsuario.setText(datos[6]);
-        txtCorreoElectronico.setText(datos[8]);
-        idPersona = Integer.parseInt(datos[9]);
-        idUsuario = Integer.parseInt(datos[10]);
+        txtIdCliente.setText(datos[0]);
+        txtNombrePersona.setText(datos[1]);
+        txtApellidoPaterno.setText(datos[2]);
+        txtApellidoMaterno.setText(datos[3]);
+        txtRFC.setText(datos[4]);
+        txtDomicilio.setText(datos[5]);
+        txtTelefono.setText(datos[6]);
+        txtNombreUsuario.setText(datos[7]);
+        txtCorreoElectronico.setText(datos[9]);
+        idPersona = Integer.parseInt(datos[10]);
+        idUsuario = Integer.parseInt(datos[11]);
     }
 
     public void actualizarCliente(View content){
 
+        c = new Cliente();
+        p = new Persona();
+        u = new Usuario();
+        p.setNombre("" + txtNombrePersona.getText().toString());
+        p.setApellidoMaterno("" + txtApellidoMaterno.getText().toString());
+        p.setApellidoPaterno("" + txtApellidoPaterno.getText().toString());
+        p.setDomicilio("" + txtDomicilio.getText().toString());
+        p.setRfc("" + txtRFC.getText().toString());
+        p.setTelefono("" + txtTelefono.getText().toString());
+        p.setId(idPersona);
+        c.setPersona(p);
+        u.setId(idUsuario);
+        c.setUsuario(u);
+        c.setId(Integer.parseInt(txtIdCliente.getText().toString()));
+        c.setCorreoElectronico("" + txtCorreoElectronico.getText().toString());
+        actualizarCliente(c);
     }
 
     public void actualizarCliente(final Cliente c)
@@ -149,9 +171,6 @@ public class DialogCliente extends DialogFragment {
                 params.put("rfc", String.valueOf(c.getPersona().getRfc()));
                 params.put("domicilio", c.getPersona().getDomicilio());
                 params.put("telefono", c.getPersona().getTelefono());
-                params.put("nombreUsuario", c.getUsuario().getNombreUsuario());
-                params.put("contrasenia", c.getUsuario().getContrasenia());
-                params.put("rol", c.getUsuario().getRol());
                 params.put("correoElectronico", c.getCorreoElectronico());
                 params.put("idPersona", String.valueOf(c.getPersona().getId()));
                 params.put("idCliente", String.valueOf(c.getId()));
@@ -180,7 +199,7 @@ public class DialogCliente extends DialogFragment {
         t.makeText(this.requireContext(), "Eliminando...", Toast.LENGTH_LONG).show();
         StringRequest sr = new StringRequest(
                 Request.Method.GET, //GET or POST
-                urlGlobal + "deleteCliente?idAlmacen=" + id, //URL
+                urlGlobal + "deleteCliente?idCliente=" + id, //URL
 
                 new Response.Listener<String>() {
                     @Override

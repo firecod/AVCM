@@ -81,11 +81,13 @@ public class CatalogoCliente extends Fragment {
     }
 
 
-    public void datos(List productos){
-        String[] valores = new String[productos.size()];
-        for(int i = 0; i<productos.size(); i++) {
-            valores[i] = productos.get(i).toString();
+    public void datos(List clientes){
+        String[] valores = new String[clientes.size()];
+        System.out.println("lenght lista clientes " + clientes.size());
+        for(int i = 0; i<clientes.size(); i++) {
+            valores[i] = clientes.get(i).toString();
         }
+        System.out.println("lenght valores" + valores.length);
         DialogFragment newFragment = DialogCliente.newInstance(valores);
         newFragment.show(getFragmentManager(), "dialogCliente");
     }
