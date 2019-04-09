@@ -84,7 +84,7 @@ public class ContenedorClientePerfil extends Fragment {
     private void llenarViewPager(ViewPager viewPager) {
         SectionsAdapter adapter = new SectionsAdapter(getFragmentManager());
         adapter.addFragment(new FormularioCliente(), "Datos Cliente");
-        adapter.addFragment(new DescripcionCliente(), "Datos Usuario");
+        //adapter.addFragment(new DescripcionCliente(), "Datos Usuario");
 
         viewPager.setAdapter(adapter);
     }

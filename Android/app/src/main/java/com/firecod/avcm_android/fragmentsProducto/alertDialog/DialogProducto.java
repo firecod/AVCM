@@ -125,8 +125,6 @@ public class DialogProducto extends DialogFragment {
         txtNombreProducto = content.findViewById(R.id.txtNombreProducto);
         txtMarcaProducto = content.findViewById(R.id.txtMarcaProducto);
         txtPrecioProducto = content.findViewById(R.id.txtPrecioProducto);
-        btnGuardar = content.findViewById(R.id.btnGuardar);
-        btnEliminar = content.findViewById(R.id.btnEliminar);
         txtIdProducto.setText(datos[0]);
         txtNombreProducto.setText(datos[1]);
         txtMarcaProducto.setText(datos[2]);

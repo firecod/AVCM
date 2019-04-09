@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         if (Utilidades.pantalla==true){
-            Fragment fragment = new ContenedorCliente();
+            Fragment fragment = new ContenedorProducto();
             getSupportFragmentManager().beginTransaction().replace(R.id.contant_main, fragment).commit();
         }else{
             Utilidades.pantalla=false;

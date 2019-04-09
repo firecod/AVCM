@@ -1,5 +1,8 @@
 package com.firecod.avcm_android.core;
 
+import android.support.v4.app.DialogFragment;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -7,14 +10,25 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.evrencoskun.tableview.TableView;
+import com.firecod.avcm_android.components.TableView.TableAdapterCliente;
+import com.firecod.avcm_android.components.TableView.TableAdapterProducto;
+import com.firecod.avcm_android.fragmentsCliente.CatalogoCliente;
 import com.firecod.avcm_android.fragmentsCliente.FormularioCliente;
+import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
+import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.model.Cliente;
 import com.firecod.avcm_android.model.Producto;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ControllerCliente {
@@ -76,7 +90,56 @@ public class ControllerCliente {
         };
         RequestQueue queue = Volley.newRequestQueue(act.getContext());
         queue.add(sr);
-
-
     }
+
+    public void getAllCliente(final TableAdapterCliente cTableAdapter, final CatalogoCliente act, final ProgressBar mProgressBar, final TableView cTableView){
+
+        final Toast t = new Toast(act.getContext());
+
+        JsonArrayRequest sr = new JsonArrayRequest(
+                Request.Method.GET, //GET or POST
+                urlGlobal + "getAllCliente?estatus=1", //URL
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            gson = new Gson();
+                            ArrayList<Cliente> clientes = new ArrayList<>();
+                            Cliente c;
+
+                            for(int i = 0; i<response.length(); i++){
+                                c = gson.fromJson(response.get(i).toString(), Cliente.class);
+                                clientes.add(c);
+                            }
+                            if(clientes != null && clientes.size()>0){
+                                // set the list on TableViewModel
+                                cTableAdapter.setUserList(clientes);
+                                hideProgressBar(mProgressBar, cTableView);
+                            }else{
+                                t.makeText(act.requireContext(), "Error al Consultar", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(act.requireContext(), "Error al conectar con el servidor, revise su conexión a internet", Toast.LENGTH_SHORT).show();
+            }
+        }
+        ) ;
+        RequestQueue queue = Volley.newRequestQueue(act.getContext());
+        queue.add(sr);
+    }
+
+    public void hideProgressBar(ProgressBar mProgressBar, TableView pTableView) {
+        mProgressBar.setVisibility(View.INVISIBLE);
+        pTableView.setVisibility(View.VISIBLE);
+    }
+
+
+
 }

@@ -104,6 +104,8 @@ public class ViewModelCliente {
         list.add(new ColumnHeaderCliente("Nombre de Usuario"));
         list.add(new ColumnHeaderCliente("Número único de cliente"));
         list.add(new ColumnHeaderCliente("Correo Electronico"));
+        list.add(new ColumnHeaderCliente("Clave Persona"));
+        list.add(new ColumnHeaderCliente("Clave Usuario"));
         list.add(new ColumnHeaderCliente("Estatus"));
         return list;
     }
@@ -130,8 +132,9 @@ public class ViewModelCliente {
             list.add(new CellCliente("7-" + i, cliente.getUsuario().getNombreUsuario()));
             list.add(new CellCliente("8-" + i, cliente.getNumeroCliente()));
             list.add(new CellCliente("9-" + i, cliente.getCorreoElectronico()));
-            list.add(new CellCliente("10-" + i, cliente.getEstatus()));
-
+            list.add(new CellCliente("10-" + i, cliente.getPersona().getId()));
+            list.add(new CellCliente("11-" + i, cliente.getUsuario().getId()));
+            list.add(new CellCliente("12-" + i, cliente.getEstatus()));
             lists.add(list);
 
         }

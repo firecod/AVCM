@@ -72,29 +72,16 @@ public class CatalogoProducto extends Fragment{
         tableView.setTableViewListener(new TableAdapterListenerProducto(tableView, this));
     }
 
-
-
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public void showProgressBar() {
-        mProgressBar.setVisibility(View.VISIBLE);
-        pTableView.setVisibility(View.INVISIBLE);
-    }
-
-    public void hideProgressBar() {
-        mProgressBar.setVisibility(View.INVISIBLE);
-        pTableView.setVisibility(View.VISIBLE);
-    }
 
 
-    public  void datos(List productos){
+    public void datos(List productos){
         String[] valores = new String[productos.size()];
         for(int i = 0; i<productos.size(); i++) {
             valores[i] = productos.get(i).toString();
-
         }
         DialogFragment newFragment = DialogProducto.newInstance(valores);
         newFragment.show(getFragmentManager(), "dialog");

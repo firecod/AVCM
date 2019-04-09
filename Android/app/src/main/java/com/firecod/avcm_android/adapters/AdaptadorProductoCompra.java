@@ -36,10 +36,10 @@ public class AdaptadorProductoCompra extends
             ImageView fotoProducto;
             public ViewHolderProductos(View itemView) {
                 super(itemView);
-                nombreProducto=(TextView) itemView.findViewById(R.id.tv);
+             //   nombreProducto=(TextView) itemView.findViewById(R.id.tv);
                 marcaProducto=(TextView) itemView.findViewById(R.id.nombreProducto);
                 precioProducto=(TextView) itemView.findViewById(R.id.marcaProducto);
-                fotoProducto
+               // fotoProducto
 
 
             }
@@ -52,7 +52,7 @@ public class AdaptadorProductoCompra extends
 
         @Override
         public void onBindViewHolder(AdaptadorProductoCompra.ViewHolderProductos holderProductos, int position) {
-            holderProductos.idProducto.setText(listaProductos.get(position).getId());
+          //  holderProductos.idProducto.setText(listaProductos.get(position).getId());
             holderProductos.nombreProducto.setText(listaProductos.get(position).getNombre());
             holderProductos.marcaProducto.setText(listaProductos.get(position).getMarca());
 
