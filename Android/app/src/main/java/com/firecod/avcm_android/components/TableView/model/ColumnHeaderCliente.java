@@ -1,9 +1,9 @@
 package com.firecod.avcm_android.components.TableView.model;
 
-public class ColumsnHeaderCliente {
+public class ColumnHeaderCliente {
     private String pData;
 
-    public ColumsnHeaderCliente(String pData){
+    public ColumnHeaderCliente(String pData){
         this.pData = pData;
     }
 

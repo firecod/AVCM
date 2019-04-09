@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractSorterViewHolder;
 import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractViewHolder;
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.components.TableView.model.CellCliente;
 import com.firecod.avcm_android.components.TableView.model.CellProducto;
 
-public class ClienteCellViewHolder {
+public class ClienteCellViewHolder extends AbstractSorterViewHolder {
     public final TextView cell_textview;
     public final LinearLayout cell_container;
 
@@ -20,10 +22,10 @@ public class ClienteCellViewHolder {
         cell_container = itemView.findViewById(R.id.cell_container);
     }
 
-    public void setCellModel(Cell p_jModel, int pColumnPosition) {
+    public void setCellModel(CellCliente p_jModel, int pColumnPosition) {
 
         // Change textView align by column
-        cell_textview.setGravity(ProductoColumnHeaderViewHolder.COLUMN_TEXT_ALIGNS[pColumnPosition] |
+        cell_textview.setGravity(ClienteColumnHeaderViewHolder.COLUMN_TEXT_ALIGNS[pColumnPosition] |
                 Gravity.CENTER_VERTICAL);
 
         // Set text
