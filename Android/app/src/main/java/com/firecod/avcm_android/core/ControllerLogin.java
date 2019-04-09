@@ -20,7 +20,7 @@ import java.util.Map;
 public class ControllerLogin {
 
     private Gson gson;
-    private String url ="http://192.168.0.102:8084/AVCM_WEB/restLogin/login/";
+    private String url ="http://192.168.43.16:8084/AVCM_WEB/restLogin/login/";
 
     public void login(final ActivityLogin act)
     {

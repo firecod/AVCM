@@ -19,107 +19,75 @@ import com.firecod.avcm_android.components.TableView.TableAdapterProducto;
 import com.firecod.avcm_android.core.ControllerCliente;
 import com.firecod.avcm_android.core.ControllerProducto;
 import com.firecod.avcm_android.fragmentsCliente.alertDialog.DialogCliente;
+import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
+import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.google.gson.Gson;
 
 import java.util.List;
 
 public class CatalogoCliente extends Fragment {
 
-    private TableView cTableView;
-    private TableAdapterCliente cTableAdapter;
+    private TableView pTableView;
+    private TableAdapterCliente pTableAdapter;
     private ProgressBar mProgressBar;
-    private ControllerCliente cc;
+    private ControllerCliente cp;
     private Gson gson;
-    private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restCliente/";
+    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restCliente/";
 
 
-    private OnFragmentInteractionListener mListener;
+    private static final String LOG_TAG = CatalogoCliente.class.getSimpleName();
 
-    public CatalogoCliente() {
-        // Required empty public constructor
+
+    public CatalogoCliente()  {
+
     }
 
-    public static CatalogoCliente newInstance(String param1, String param2) {
-        CatalogoCliente fragment = new CatalogoCliente();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-
-        View view = inflater.inflate(R.layout.fragment_catalogo_cliente, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_catalogo_producto, container, false);
 
         mProgressBar = view.findViewById(R.id.progressBar);
 
-        cTableView = view.findViewById(R.id.my_TableView);
-        cc = new ControllerCliente();
-        //cc.getAllCliente(cTableAdapter, this , mProgressBar, cTableView);
-        initializeTableView(cTableView);
+        pTableView = view.findViewById(R.id.my_TableView);
+
+        initializeTableView(pTableView);
+
+        cp = new ControllerCliente();
+        cp.getAllCliente(pTableAdapter, this , mProgressBar, pTableView);
+
         return view;
     }
 
-
     private void initializeTableView(TableView tableView){
         // Create TableView Adapter
-        cTableAdapter = new TableAdapterCliente(getContext());
-        tableView.setAdapter(cTableAdapter);
+        pTableAdapter = new TableAdapterCliente(getContext());
+        tableView.setAdapter(pTableAdapter);
         // Create listener
         tableView.setTableViewListener(new TableAdapterListenerCliente(tableView, this));
     }
 
-    public void datos(List clientes){
-        String[] valores = new String[clientes.size()];
-        for(int i = 0; i<clientes.size(); i++) {
-            valores[i] = clientes.get(i).toString();
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+
+    public void datos(List productos){
+        String[] valores = new String[productos.size()];
+        for(int i = 0; i<productos.size(); i++) {
+            valores[i] = productos.get(i).toString();
         }
         DialogFragment newFragment = DialogCliente.newInstance(valores);
         newFragment.show(getFragmentManager(), "dialogCliente");
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

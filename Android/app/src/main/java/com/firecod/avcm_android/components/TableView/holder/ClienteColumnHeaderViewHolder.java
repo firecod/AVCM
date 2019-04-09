@@ -20,9 +20,9 @@ public class ClienteColumnHeaderViewHolder extends AbstractSorterViewHolder {
     final ImageButton column_header_sort_button;
     final ITableView tableView;
 
-    public ClienteColumnHeaderViewHolder(View itemView, ITableView pTableView) {
+    public ClienteColumnHeaderViewHolder(View itemView, ITableView cTableView) {
         super(itemView);
-        tableView = pTableView;
+        tableView = cTableView;
         column_header_textview = itemView.findViewById(R.id.column_header_textView);
         column_header_container = itemView.findViewById(R.id.column_header_container);
         column_header_sort_button = itemView.findViewById(R.id.column_header_sort_imageButton);

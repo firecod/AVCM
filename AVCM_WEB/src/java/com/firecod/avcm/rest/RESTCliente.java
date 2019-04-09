@@ -24,7 +24,7 @@ import model.Usuario;
 @Path("/")
 public class RESTCliente extends Application {
     @GET
-    @Path("")
+    @Path("getAllCliente")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@QueryParam("estatus") @DefaultValue("1") int estatus) {
         ControllerCliente cc = new ControllerCliente();

@@ -30,7 +30,7 @@ public class CatalogoAlmacen extends Fragment {
     private ProgressBar mProgressBar;
     private ControllerAlmacen ca;
     private Gson gson;
-    private String urlGlobal ="http://192.168.0.108:8084/AVCM_WEB/restAlmacen/";
+    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restAlmacen/";
 
 
     private static final String LOG_TAG = CatalogoProducto.class.getSimpleName();
@@ -58,8 +58,8 @@ public class CatalogoAlmacen extends Fragment {
 
         initializeTableView(aTableView);
 
-        ca = new ControllerAlmacen();
-        ca.getAllAlmacen(aTableAdapter, this , mProgressBar, aTableView);
+        //ca = new ControllerAlmacen();
+        //ca.getAllAlmacen(aTableAdapter, this , mProgressBar, aTableView);
 
         return view;
     }
