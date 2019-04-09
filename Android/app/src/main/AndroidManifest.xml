@@ -11,15 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher">
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@drawable/launch_screen" />
 
-        <activity android:name=".view.MainActivity">
-
-        </activity>
+        <activity android:name=".view.MainActivity"></activity>
         <activity android:name=".view.ActivityMainCliente" />
-
         <activity android:name=".view.ActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
