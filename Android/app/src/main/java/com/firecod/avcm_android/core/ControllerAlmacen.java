@@ -36,7 +36,7 @@ public class ControllerAlmacen {
     public void guardarAlmacen(final FormularioAlmacen act, final Almacen almacen)
     {
 
-        Toast t = new Toast(act.requireContext());
+        final Toast t = new Toast(act.requireContext());
         t.makeText(act.requireContext(), "Guardando...", Toast.LENGTH_LONG).show();
         StringRequest sr = new StringRequest(
                 Request.Method.POST, //GET or POST
@@ -48,6 +48,11 @@ public class ControllerAlmacen {
                             gson = new Gson();
                             Almacen a = gson.fromJson(response, Almacen.class);
                             act.getTxtIdAlmacen().setText("" + a.getId());
+                            if(a.getId() > 0) {
+                                t.makeText(act.requireContext(), "Guardado Correctamente", Toast.LENGTH_SHORT).show();
+                            }else{
+                                t.makeText(act.requireContext(), "Error al Guardar", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -56,6 +61,8 @@ public class ControllerAlmacen {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(act.requireContext(), "Error al conectar con el servidor, revise su conexión a internet", Toast.LENGTH_SHORT).show();
+
             }
         }
         ) {
@@ -80,6 +87,7 @@ public class ControllerAlmacen {
 
     public void getAllSpinnerProducto(final FormularioProducto act) {
 
+        final Toast t =new Toast(act.getContext());
         JsonArrayRequest sr = new JsonArrayRequest(
                 Request.Method.GET, //GET or POST
                     urlGlobal + "getAllAlmacen?estatus=1", //URL
@@ -93,14 +101,16 @@ public class ControllerAlmacen {
                             Almacen a;
 
                             for(int i = 0; i<response.length(); i++){
-                                a = new Almacen();
                                 a = gson.fromJson(response.get(i).toString(), Almacen.class);
                                 almacenes.add(a);
                             }
-
-                            ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
-                                    android.R.layout.simple_spinner_item, almacenes);
-                            act.getSpAlmacenProducto().setAdapter(adapter);
+                            if(almacenes.get(0).getId() > 0) {
+                                ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
+                                        android.R.layout.simple_spinner_item, almacenes);
+                                act.getSpAlmacenProducto().setAdapter(adapter);
+                            }else{
+                                t.makeText(act.getContext(), "Error al consultar almacenes", Toast.LENGTH_SHORT).show();
+                            }
                            // Almacen acd;
                             //acd = ((Almacen) act.getSpAlmacenProducto().getSelectedItem());
                         } catch (Exception e) {
@@ -111,6 +121,7 @@ public class ControllerAlmacen {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(act.getContext(), "Error al conectar con el servidor, revise su conexion a internet", Toast.LENGTH_SHORT).show();
             }
         }
         ) ;
@@ -120,6 +131,7 @@ public class ControllerAlmacen {
 
     public void getAllSpinnerProductoEditar(final DialogProducto act , final String[] datos) {
 
+        final Toast t =new Toast(act.getContext());
         JsonArrayRequest sr = new JsonArrayRequest(
                 Request.Method.GET, //GET or POST
                 urlGlobal + "getAllAlmacen?estatus=1", //URL
@@ -132,22 +144,22 @@ public class ControllerAlmacen {
                             ArrayList<Almacen> almacenes = new ArrayList<>();
                             Almacen a;
                             for(int i = 0; i<response.length(); i++){
-                                a = new Almacen();
                                 a = gson.fromJson(response.get(i).toString(), Almacen.class);
                                 almacenes.add(a);
                             }
-                            ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
-                                    android.R.layout.simple_spinner_item, almacenes);
-                            act.getSpAlmacenProducto().setAdapter(adapter);
-
-
-
-                            for (int i = 0; i < act.getSpAlmacenProducto().getAdapter().getCount(); i++) {
-                                Almacen acd;
-                                acd = ((Almacen) act.getSpAlmacenProducto().getAdapter().getItem(i));
-                                if (acd.getNombre().equals(datos[5])) {
-                                    act.getSpAlmacenProducto().setSelection(i);
+                            if(almacenes.get(0).getId() > 0) {
+                                ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
+                                        android.R.layout.simple_spinner_item, almacenes);
+                                act.getSpAlmacenProducto().setAdapter(adapter);
+                                for (int i = 0; i < act.getSpAlmacenProducto().getAdapter().getCount(); i++) {
+                                    Almacen acd;
+                                    acd = ((Almacen) act.getSpAlmacenProducto().getAdapter().getItem(i));
+                                    if (acd.getNombre().equals(datos[5])) {
+                                        act.getSpAlmacenProducto().setSelection(i);
+                                    }
                                 }
+                            }else{
+                                t.makeText(act.getContext(), "Error al consultar almacenes" , Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -165,6 +177,7 @@ public class ControllerAlmacen {
     }
 
     public void getAllAlmacen(final TableAdapterAlmacen aTableAdapter, final CatalogoAlmacen act, final ProgressBar mProgressBar, final TableView aTableView){
+        final Toast t =new Toast(act.getContext());
         JsonArrayRequest sr = new JsonArrayRequest(
                 Request.Method.GET, //GET or POST
                 urlGlobal + "getAllAlmacen?estatus=1", //URL
@@ -180,12 +193,13 @@ public class ControllerAlmacen {
                             for(int i = 0; i<response.length(); i++){
                                 a = gson.fromJson(response.get(i).toString(), Almacen.class);
                                 almacenes.add(a);
-                                System.out.println("almacen de volle " + a.getNombre() );
                             }
                             if(almacenes != null && almacenes.size()>0){
                                 // set the list on TableViewModel
                                 aTableAdapter.setUserList(almacenes);
                                 hideProgressBar(mProgressBar, aTableView);
+                            }else{
+                                t.makeText(act.getContext(), "Error al consultar almacenes" , Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

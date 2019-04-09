@@ -33,7 +33,7 @@ public class ControllerProducto {
     public void guardarProducto(final FormularioProducto act, final Producto producto)
     {
 
-        Toast t = new Toast(act.requireContext());
+        final Toast t = new Toast(act.requireContext());
         t.makeText(act.requireContext(), "Guardando...", Toast.LENGTH_LONG).show();
         StringRequest sr = new StringRequest(
                 Request.Method.POST, //GET or POST
@@ -45,6 +45,11 @@ public class ControllerProducto {
                             gson = new Gson();
                             Producto p = gson.fromJson(response, Producto.class);
                             act.getTxtIdProducto().setText("" + p.getId());
+                            if(p.getId() > 0) {
+                                t.makeText(act.requireContext(), "Guardado Correctamente", Toast.LENGTH_SHORT).show();
+                            }else{
+                                t.makeText(act.requireContext(), "Error al Guardar", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -53,6 +58,7 @@ public class ControllerProducto {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(act.requireContext(), "Error al conectar con el servidor, revise su conexión a internet", Toast.LENGTH_SHORT).show();
             }
         }
         ) {
@@ -81,6 +87,9 @@ public class ControllerProducto {
 
 
     public void getAllProducto(final TableAdapterProducto pTableAdapter, final CatalogoProducto act, final ProgressBar mProgressBar, final TableView pTableView){
+
+        final Toast t = new Toast(act.getContext());
+
         JsonArrayRequest sr = new JsonArrayRequest(
                 Request.Method.GET, //GET or POST
                 urlGlobal + "getAllProducto?estatus=1", //URL
@@ -96,12 +105,13 @@ public class ControllerProducto {
                             for(int i = 0; i<response.length(); i++){
                                 p = gson.fromJson(response.get(i).toString(), Producto.class);
                                 productos.add(p);
-
                             }
                             if(productos != null && productos.size()>0){
                                 // set the list on TableViewModel
                                 pTableAdapter.setUserList(productos);
                                 hideProgressBar(mProgressBar, pTableView);
+                            }else{
+                                t.makeText(act.requireContext(), "Error al Consultar", Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -111,6 +121,7 @@ public class ControllerProducto {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(act.requireContext(), "Error al conectar con el servidor, revise su conexión a internet", Toast.LENGTH_SHORT).show();
             }
         }
         ) ;

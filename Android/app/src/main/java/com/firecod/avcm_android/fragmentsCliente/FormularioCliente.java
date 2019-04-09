@@ -10,8 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.core.ControllerCliente;
+import com.firecod.avcm_android.model.Cliente;
+import com.firecod.avcm_android.model.Persona;
+import com.firecod.avcm_android.model.Usuario;
 
 public class FormularioCliente extends Fragment {
 
@@ -28,6 +33,14 @@ public class FormularioCliente extends Fragment {
     CheckBox cbEstatus;
     Button btnGuardar;
     Button btnLimpiar;
+    Cliente c;
+    Persona p;
+    Usuario u;
+    ControllerCliente cc;
+
+    public EditText getTxtIdCliente() {
+        return txtIdCliente;
+    }
 
     private OnFragmentInteractionListener mListener;
 
@@ -66,6 +79,7 @@ public class FormularioCliente extends Fragment {
         txtDomicilio = view.findViewById(R.id.txtDomicilio);
         txtTelefono = view.findViewById(R.id.txtTelefono);
         txtIdCliente = view.findViewById(R.id.txtIdCliente);
+        txtIdCliente.setEnabled(false);
         txtNombreUsuario = view.findViewById(R.id.txtNombreUsuario);
         txtContrasenia = view.findViewById(R.id.txtContrasenia);
         cbEstatus = view.findViewById(R.id.cbEstatus);
@@ -87,11 +101,42 @@ public class FormularioCliente extends Fragment {
     }
 
     public void guardarCliente(){
-
+        if(txtContrasenia.getText().toString().length() > 0 && txtNombreUsuario.getText().toString().length() > 0) {
+            c = new Cliente();
+            p = new Persona();
+            u = new Usuario();
+            p.setNombre("" + txtNombrePersona.getText().toString());
+            p.setApellidoMaterno("" + txtApellidoMaterno.getText().toString());
+            p.setApellidoPaterno("" + txtApellidoPaterno.getText().toString());
+            p.setDomicilio("" + txtDomicilio.getText().toString());
+            p.setRfc("" + txtRFC.getText().toString());
+            c.setPersona(p);
+            c.setCorreoElectronico("" + txtCorreoElectronico.getText().toString());
+            u.setContrasenia(txtContrasenia.getText().toString());
+            u.setNombreUsuario(txtNombreUsuario.getText().toString());
+            u.setContrasenia(txtContrasenia.getText().toString());
+            u.setRol("Cliente");
+            c.setUsuario(u);
+            cc = new ControllerCliente();
+            cc.guardarCliente(this, c);
+        }else{
+            Toast t = new Toast(this.getContext());
+            t.makeText(this.getContext(), "Nombre de usuario y contraseña no deben de estar vacíos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void limpiarCampos(){
-        
+        txtIdCliente.setText("");
+        txtNombreUsuario.setText("");
+        txtContrasenia.setText("");
+        txtCorreoElectronico.setText("");
+        txtRFC.setText("");
+        txtDomicilio.setText("");
+        txtApellidoPaterno.setText("");
+        txtApellidoMaterno.setText("");
+        txtNombrePersona.setText("");
+        txtTelefono.setText("");
+        txtCorreoElectronico.setText("");
     }
 
 
