@@ -19,7 +19,7 @@
 
         </activity>
         <activity android:name=".view.ActivityMainCliente" />
-        <activity android:name=".view.ActivityMainVendedor" />
+
         <activity android:name=".view.ActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,8 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ActivityVendedor" />
-        <activity android:name=".view.ActivityAlmacen" />
         <activity android:name=".view.ActivityCliente" />
     </application>
 

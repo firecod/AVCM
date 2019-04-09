@@ -19,13 +19,13 @@
 
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ID persona" />
+                android:text="ID Cliente" />
 
             <EditText
-                android:id="@+id/txtIdPersona"
+                android:id="@+id/txtIdCliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -109,31 +109,6 @@
                 android:ems="10"
                 android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ID Cliente" />
-
-            <EditText
-                android:id="@+id/txtIdCliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Numero Unico" />
-
-            <EditText
-                android:id="@+id/txtNumeroCliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -143,19 +118,6 @@
 
             <EditText
                 android:id="@+id/txtCorreoElectronico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ID Usuario " />
-
-            <EditText
-                android:id="@+id/txtIdUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

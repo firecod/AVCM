@@ -19,7 +19,6 @@ import com.firecod.avcm_android.fragmentsAlmacen.ContenedorAlmacen;
 import com.firecod.avcm_android.fragmentsAlmacen.FormularioAlmacen;
 import com.firecod.avcm_android.fragmentsCliente.CatalogoCliente;
 import com.firecod.avcm_android.fragmentsCliente.ContenedorCliente;
-import com.firecod.avcm_android.fragmentsCliente.DescripcionCliente;
 import com.firecod.avcm_android.fragmentsCliente.FormularioCliente;
 import com.firecod.avcm_android.fragmentsProducto.ContenedorProducto;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity
                     ContenedorCliente.OnFragmentInteractionListener,
                     FormularioCliente.OnFragmentInteractionListener,
                     CatalogoCliente.OnFragmentInteractionListener,
-                    DescripcionCliente.OnFragmentInteractionListener,
                     ContenedorProducto.OnFragmentInteractionListener,
                     CatalogoProducto.OnFragmentInteractionListener,
                     FormularioProducto.OnFragmentInteractionListener,

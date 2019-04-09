@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.clases.Utilidades;
 import com.firecod.avcm_android.fragmentsCliente.ContenedorClientePerfil;
-import com.firecod.avcm_android.fragmentsCliente.DescripcionCliente;
 import com.firecod.avcm_android.fragmentsCliente.FormularioCliente;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
 import com.firecod.avcm_android.fragmentsProducto.ContenedorProductoCliente;
@@ -23,7 +22,6 @@ import com.firecod.avcm_android.fragmentsProducto.ContenedorProductoCliente;
 public class ActivityMainCliente extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         ContenedorClientePerfil.OnFragmentInteractionListener,
         FormularioCliente.OnFragmentInteractionListener,
-        DescripcionCliente.OnFragmentInteractionListener,
         ContenedorProductoCliente.OnFragmentInteractionListener,
         CatalogoProducto.OnFragmentInteractionListener
         {

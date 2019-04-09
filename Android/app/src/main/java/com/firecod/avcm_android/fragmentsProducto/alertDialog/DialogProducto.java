@@ -49,7 +49,7 @@ public class DialogProducto extends DialogFragment {
     Almacen a;
     ControllerProducto cp;
     private Gson gson;
-    private String urlGlobal ="http://192.168.137.159:8084/AVCM_WEB/restProducto/";
+    private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restProducto/";
 
     public Spinner getSpAlmacenProducto() {
         return spAlmacenProducto;

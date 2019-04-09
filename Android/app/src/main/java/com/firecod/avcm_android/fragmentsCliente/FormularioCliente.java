@@ -7,26 +7,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import com.firecod.avcm_android.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FormularioCliente.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FormularioCliente#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FormularioCliente extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    EditText txtIdCliente;
+    EditText txtNombrePersona;
+    EditText txtApellidoPaterno;
+    EditText txtApellidoMaterno;
+    EditText txtRFC;
+    EditText txtDomicilio;
+    EditText txtTelefono;
+    EditText txtCorreoElectronico;
+    EditText txtNombreUsuario;
+    EditText txtContrasenia;
+    CheckBox cbEstatus;
+    Button btnGuardar;
+    Button btnLimpiar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -34,20 +35,11 @@ public class FormularioCliente extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FormularioCliente.
-     */
     // TODO: Rename and change types and number of parameters
-    public static FormularioCliente newInstance(String param1, String param2) {
+    public static FormularioCliente newInstance() {
         FormularioCliente fragment = new FormularioCliente();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,20 +47,54 @@ public class FormularioCliente extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_formulario_cliente, container, false);
+        View view = inflater.inflate(R.layout.fragment_formulario_cliente, container, false);
+        inicializar(view);
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    public void inicializar(View view){
+        txtNombrePersona = view.findViewById(R.id.txtNombrePersona);
+        txtApellidoPaterno = view.findViewById(R.id.txtApellidoPaterno);
+        txtApellidoMaterno = view.findViewById(R.id.txtApellidoMaterno);
+        txtCorreoElectronico = view.findViewById(R.id.txtCorreoElectronico);
+        txtRFC = view.findViewById(R.id.txtRFC);
+        txtDomicilio = view.findViewById(R.id.txtDomicilio);
+        txtTelefono = view.findViewById(R.id.txtTelefono);
+        txtIdCliente = view.findViewById(R.id.txtIdCliente);
+        txtNombreUsuario = view.findViewById(R.id.txtNombreUsuario);
+        txtContrasenia = view.findViewById(R.id.txtContrasenia);
+        cbEstatus = view.findViewById(R.id.cbEstatus);
+        btnGuardar = view.findViewById(R.id.btnGuardar);
+        btnLimpiar = view.findViewById(R.id.btnLimpiar);
+        btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardarCliente();
+            }
+        });
+        btnLimpiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpiarCampos();
+            }
+        });
+
+    }
+
+    public void guardarCliente(){
+
+    }
+
+    public void limpiarCampos(){
+        
+    }
+
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -92,18 +118,9 @@ public class FormularioCliente extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         void onFragmentInteraction(Uri uri);
     }
 }
