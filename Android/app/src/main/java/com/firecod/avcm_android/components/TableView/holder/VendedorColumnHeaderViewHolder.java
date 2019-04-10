@@ -9,17 +9,19 @@ import android.widget.TextView;
 
 import com.evrencoskun.tableview.ITableView;
 import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractSorterViewHolder;
+import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractViewHolder;
 import com.evrencoskun.tableview.sort.SortState;
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.components.TableView.model.ColumnHeaderProducto;
+import com.firecod.avcm_android.components.TableView.model.ColumnHeaderVendedor;
 
-public class ProductoColumnHeaderViewHolder extends AbstractSorterViewHolder {
+public class VendedorColumnHeaderViewHolder extends AbstractSorterViewHolder {
     final LinearLayout column_header_container;
     final TextView column_header_textview;
     final ImageButton column_header_sort_button;
     final ITableView tableView;
 
-    public ProductoColumnHeaderViewHolder(View itemView, ITableView pTableView) {
+    public VendedorColumnHeaderViewHolder(View itemView, ITableView pTableView) {
         super(itemView);
         tableView = pTableView;
         column_header_textview = itemView.findViewById(R.id.column_header_textView);
@@ -30,7 +32,7 @@ public class ProductoColumnHeaderViewHolder extends AbstractSorterViewHolder {
         column_header_sort_button.setOnClickListener(mSortButtonClickListener);
     }
 
-    public void setColumnHeaderModel(ColumnHeaderProducto pColumnHeaderModel, int pColumnPosition) {
+    public void setColumnHeaderModel(ColumnHeaderVendedor pColumnHeaderModel, int pColumnPosition) {
 
         // Change alignment of textView
         column_header_textview.setGravity(COLUMN_TEXT_ALIGNS[pColumnPosition] | Gravity
@@ -45,17 +47,17 @@ public class ProductoColumnHeaderViewHolder extends AbstractSorterViewHolder {
     }
 
     @Override
-    public void setSelected(SelectionState p_nSelectionState) {
+    public void setSelected(AbstractViewHolder.SelectionState p_nSelectionState) {
         super.setSelected(p_nSelectionState);
 
         int nBackgroundColorId;
         int nForegroundColorId;
 
-        if (p_nSelectionState == SelectionState.SELECTED) {
+        if (p_nSelectionState == AbstractViewHolder.SelectionState.SELECTED) {
             nBackgroundColorId = R.color.selected_background_color;
             nForegroundColorId = R.color.selected_text_color;
 
-        } else if (p_nSelectionState == SelectionState.UNSELECTED) {
+        } else if (p_nSelectionState == AbstractViewHolder.SelectionState.UNSELECTED) {
             nBackgroundColorId = R.color.unselected_header_background_color;
             nForegroundColorId = R.color.unselected_text_color;
 
@@ -144,5 +146,5 @@ public class ProductoColumnHeaderViewHolder extends AbstractSorterViewHolder {
             Gravity.RIGHT,
             // Fax
             Gravity.RIGHT};
-}
 
+}

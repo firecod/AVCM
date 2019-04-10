@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#98CBF4</color>
     <color name="colorAccent">#9be7ff</color>
 
-
+    <color name="background_table">#9be7ff</color>
     <color name="selected_background_color">#64b5f6</color>
     <color name="unselected_background_color">#2286c3</color>
     <color name="shadow_background_color">#2286c3</color>

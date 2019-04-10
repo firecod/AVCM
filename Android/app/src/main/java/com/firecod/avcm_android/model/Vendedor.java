@@ -33,6 +33,18 @@ public class Vendedor {
     @Expose
     private Usuario usuario;
 
+    @SerializedName("almacen")
+    @Expose
+    private Almacen almacen;
+
+    public Almacen getAlmacen() {
+        return almacen;
+    }
+
+    public void setAlmacen(Almacen almacen) {
+        this.almacen = almacen;
+    }
+
     public int getId() {
         return id;
     }

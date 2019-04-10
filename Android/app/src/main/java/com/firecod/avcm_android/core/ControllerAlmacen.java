@@ -1,5 +1,6 @@
 package com.firecod.avcm_android.core;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
@@ -21,6 +22,7 @@ import com.firecod.avcm_android.fragmentsAlmacen.FormularioAlmacen;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
+import com.firecod.avcm_android.fragmentsVendedor.FormularioVendedor;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
 import com.google.gson.Gson;
@@ -31,7 +33,7 @@ import java.util.Map;
 
 public class ControllerAlmacen {
     Gson gson;
-    String urlGlobal = "http://192.168.43.16:8084/AVCM_WEB/restAlmacen/";
+    String urlGlobal = "http://192.168.0.102:8084/AVCM_WEB/restAlmacen/";
 
     public void guardarAlmacen(final FormularioAlmacen act, final Almacen almacen)
     {
@@ -113,6 +115,50 @@ public class ControllerAlmacen {
                             }
                            // Almacen acd;
                             //acd = ((Almacen) act.getSpAlmacenProducto().getSelectedItem());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(act.getContext(), "Error al conectar con el servidor, revise su conexion a internet", Toast.LENGTH_SHORT).show();
+            }
+        }
+        ) ;
+        RequestQueue queue = Volley.newRequestQueue(act.getContext());
+        queue.add(sr);
+    }
+
+    public void getAllSpinnerVendedor(final FormularioVendedor act) {
+
+        final Toast t =new Toast(act.getContext());
+        JsonArrayRequest sr = new JsonArrayRequest(
+                Request.Method.GET, //GET or POST
+                urlGlobal + "getAllAlmacen?estatus=1", //URL
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            gson = new Gson();
+                            ArrayList<Almacen> almacenes = new ArrayList<>();
+                            Almacen a;
+
+                            for(int i = 0; i<response.length(); i++){
+                                a = gson.fromJson(response.get(i).toString(), Almacen.class);
+                                almacenes.add(a);
+                            }
+                            if(almacenes.get(0).getId() > 0) {
+                                ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
+                                        android.R.layout.simple_spinner_item, almacenes);
+                                act.getEtAlmacen().setAdapter(adapter);
+                            }else{
+                                t.makeText(act.getContext(), "Error al consultar almacenes", Toast.LENGTH_SHORT).show();
+                            }
+                            // Almacen acd;
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
