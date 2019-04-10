@@ -55,6 +55,7 @@ public class FormularioProducto extends Fragment {
     Button btnGuardar;
     Button btnEliminar;
     Button btnNuevo;
+    Button btnFoto;
     Producto p;
     Almacen a;
     ControllerProducto cp;

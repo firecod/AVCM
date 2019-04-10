@@ -11,10 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher">
-
         <meta-data
             android:name="com.google.android.actions"
-            android:resource="@drawable/launch_screen" />
+            android:resource="@xml/button_background_aceptar" />
 
         <activity android:name=".view.MainActivity">
             <intent-filter>
@@ -24,9 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.ActivityMainCliente" />
-        <activity android:name=".view.ActivityLogin">
-
-        </activity>
+        <activity android:name=".view.ActivityLogin"></activity>
         <activity android:name=".view.ActivityCliente" />
     </application>
 
