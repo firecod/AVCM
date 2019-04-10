@@ -124,8 +124,8 @@ public class RESTVendedor extends Application{
             a.setId(idAlmacen);
             v.setAlmacen(a);
             cv.update(v);
-            if(p.getId() > 0)
-               out = jss.serialize(p);                            
+            if(v.getId() > 0)
+               out = jss.serialize(v);                            
             else
                 out = "{\"error\":\"Movimiento no realizado.\"}";
         } catch (Exception e) {

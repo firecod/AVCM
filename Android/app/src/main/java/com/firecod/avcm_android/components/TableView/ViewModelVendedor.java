@@ -121,9 +121,6 @@ public class ViewModelVendedor {
             Vendedor vendedor = vendedorList.get(i);
 
             List<CellVendedor> list = new ArrayList<>();
-
-            // The order should be same with column header list;
-            // "Id"
             list.add(new CellVendedor("1-" + i, vendedor.getPersona().getNombre()));        // "Name"
             list.add(new CellVendedor("2-" + i, vendedor.getPersona().getApellidoPaterno()));
             list.add(new CellVendedor("3-" + i, vendedor.getPersona().getApellidoMaterno()));
@@ -137,7 +134,7 @@ public class ViewModelVendedor {
             list.add(new CellVendedor("11-" + i, vendedor.getReputacion()));
             list.add(new CellVendedor("12-" + i, vendedor.getPersona().getId()));
             list.add(new CellVendedor("13-" + i, vendedor.getUsuario().getId()));
-
+            list.add(new CellVendedor("14-" + i, vendedor.getEstatus()));
             lists.add(list);
 
         }

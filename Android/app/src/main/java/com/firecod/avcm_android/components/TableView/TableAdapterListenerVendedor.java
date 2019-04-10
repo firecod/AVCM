@@ -52,8 +52,8 @@ public class TableAdapterListenerVendedor  implements ITableViewListener {
     public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
         List vendedores = new ArrayList();
         vendedores.add(mTableView.getAdapter().getRowHeaderItem(row).toString());
-        for (int i = 0; i < 14; i++) {
-            vendedores.add(mTableView.getAdapter().getCellItem(i, row).toString());
+        for (int i = 0; i < 12; i++) {
+            vendedores.add(mTableView.getAdapter().getCellItem(i,row).toString());
         }
         catalogoVendedor.datos(vendedores);
     }

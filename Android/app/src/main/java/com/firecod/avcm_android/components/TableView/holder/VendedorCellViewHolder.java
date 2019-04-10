@@ -24,7 +24,7 @@ public class VendedorCellViewHolder extends AbstractSorterViewHolder {
     public void setCellModel(CellVendedor p_jModel, int pColumnPosition) {
 
         // Change textView align by column
-        cell_textview.setGravity(ProductoColumnHeaderViewHolder.COLUMN_TEXT_ALIGNS[pColumnPosition] |
+        cell_textview.setGravity(VendedorColumnHeaderViewHolder.COLUMN_TEXT_ALIGNS[pColumnPosition] |
                 Gravity.CENTER_VERTICAL);
 
         // Set text

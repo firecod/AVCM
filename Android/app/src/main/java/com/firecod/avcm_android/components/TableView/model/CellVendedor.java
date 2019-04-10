@@ -32,6 +32,5 @@ public class CellVendedor implements ISortableModel {
     @Override
     public String toString() {
         return mData.toString();
-
     }
 }

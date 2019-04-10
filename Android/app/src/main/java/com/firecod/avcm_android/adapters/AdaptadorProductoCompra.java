@@ -48,17 +48,14 @@ public class AdaptadorProductoCompra extends
         // Referencias UI.
         ImageView avatar = (ImageView) convertView.findViewById(R.id.iv_avatar);
         TextView name = (TextView) convertView.findViewById(R.id.tv_name);
-        TextView title = (TextView) convertView.findViewById(R.id.tv_title);
-        TextView company = (TextView) convertView.findViewById(R.id.tv_company);
+       // TextView title = (TextView) convertView.findViewById(R.id.tv_title);
+    //    TextView company = (TextView) convertView.findViewById(R.id.tv_company);
 
         // Lead actual.
         Producto p = getItem(position);
 
         // Setup.
-        Glide.with(getContext()).load(lead.getImage()).into(avatar);
-        name.setText(lead.getName());
-        title.setText(lead.getTitle());
-        company.setText(lead.getCompany());
+
 
         return convertView;
     }

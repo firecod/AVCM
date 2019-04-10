@@ -44,7 +44,7 @@ public class DialogCliente extends DialogFragment {
     int idPersona;
     int idUsuario;
     private Gson gson;
-    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restCliente/";
+    private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restCliente/";
     private Cliente c;
     private Persona p;
     private Usuario u;
