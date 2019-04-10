@@ -19,7 +19,7 @@ import java.util.Map;
 public class ControllerVendedor {
 
     private Gson gson;
-    private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restVendedor/";
+    private String urlGlobal ="http://192.168.0.5:8084/AVCM_WEB/restVendedor/";
 
     public void guardarVendedor(final FormularioVendedor act, final Vendedor vendedor)
     {

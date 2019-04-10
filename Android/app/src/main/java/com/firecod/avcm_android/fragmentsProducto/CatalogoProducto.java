@@ -29,7 +29,7 @@ public class CatalogoProducto extends Fragment{
     private ProgressBar mProgressBar;
     private ControllerProducto cp;
     private Gson gson;
-    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restProducto/";
+    private String urlGlobal ="http://192.168.0.5:8084/AVCM_WEB/restProducto/";
 
 
     private static final String LOG_TAG = CatalogoProducto.class.getSimpleName();

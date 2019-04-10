@@ -1,5 +1,6 @@
 package com.firecod.avcm_android.core;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.evrencoskun.tableview.TableView;
 import com.firecod.avcm_android.components.TableView.TableAdapterProducto;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
+import com.firecod.avcm_android.fragmentsProducto.CatalogoProductoCompra;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.model.Producto;
@@ -28,7 +30,7 @@ import java.util.Map;
 public class ControllerProducto {
 
     private Gson gson;
-    private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restProducto/";
+    private String urlGlobal ="http://192.168.0.5:8084/AVCM_WEB/restProducto/";
     private CodificadorImagenes ci;
 
     public void guardarProducto(final FormularioProducto act, final Producto producto)
@@ -118,6 +120,42 @@ public class ControllerProducto {
         ) ;
         RequestQueue queue = Volley.newRequestQueue(act.getContext());
         queue.add(sr);
+    }
+
+    public ArrayAdapter<Producto> getAllProducto(final CatalogoProductoCompra act){
+        final ArrayList<Producto> productos = new ArrayList<>();
+        JsonArrayRequest sr = new JsonArrayRequest(
+                Request.Method.GET, //GET or POST
+                urlGlobal + "getAllProducto?estatus=1", //URL
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            gson = new Gson();
+                            Producto p;
+                            for(int i = 0; i<response.length(); i++){
+                                p = gson.fromJson(response.get(i).toString(), Producto.class);
+                                productos.add(p);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+            }
+        }
+        ) ;
+        final ArrayAdapter<Producto> productosA = new ArrayAdapter<Producto>(
+                act.getActivity(),
+                android.R.layout.simple_list_item_1,
+                productos);
+        RequestQueue queue = Volley.newRequestQueue(act.getContext());
+        queue.add(sr);
+        return productosA;
     }
 
     public void hideProgressBar(ProgressBar mProgressBar, TableView pTableView) {

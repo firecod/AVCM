@@ -32,7 +32,8 @@ public class RESTProducto extends Application{
                            @FormParam("marca")@DefaultValue("") String marca,
                            @FormParam("precio")@DefaultValue("0") float precio,
                            @FormParam("categoria")@DefaultValue("") String categoria,
-                           @FormParam("idAlmacen")@DefaultValue("1") int almacen)
+                           @FormParam("idAlmacen")@DefaultValue("1") int almacen,
+                           @FormParam("foto") @DefaultValue("") String foto)
     {        
         ControllerProducto cp= new ControllerProducto();        
         String out = null;
@@ -48,6 +49,7 @@ public class RESTProducto extends Application{
             p.setAlmacen(a);
             p.setCategoria(categoria);
             p.setPrecio(precio);
+            p.setFoto(foto);
             cp.insert(p);
             if(p.getId() > 0)
                out = jss.serialize(p);                            

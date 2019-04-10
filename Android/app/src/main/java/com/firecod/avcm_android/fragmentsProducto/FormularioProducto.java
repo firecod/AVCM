@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -117,7 +118,7 @@ public class FormularioProducto extends Fragment {
     }
 
     public void inicializar(View view){
-
+        img = view.findViewById(R.id.imgFoto);
         spAlmacenProducto = view.findViewById(R.id.spAlmacenProducto);
         cbEstatus = view.findViewById(R.id.cbEstatus);
         spCategoriaProducto = view.findViewById(R.id.spCategoriaProducto);
@@ -138,6 +139,13 @@ public class FormularioProducto extends Fragment {
             @Override
             public void onClick(View v) {
                 guardarProducto();
+            }
+        });
+        btnFoto = view.findViewById(R.id.btnFoto);
+        btnFoto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                abrirGaleria();
             }
         });
         asignarAlmacen();
@@ -163,6 +171,7 @@ public class FormularioProducto extends Fragment {
 
 
     public void guardarProducto(){
+        ci = new CodificadorImagenes();
         if(txtPrecioProducto.getText().toString().length() > 0) {
             p = new Producto();
             a = new Almacen();
@@ -171,6 +180,7 @@ public class FormularioProducto extends Fragment {
             p.setMarca("" + txtMarcaProducto.getText().toString());
             p.setNombre("" + txtNombreProducto.getText().toString());
             p.setPrecio(Float.parseFloat(txtPrecioProducto.getText().toString()));
+            p.setFoto(ci.codificar(((BitmapDrawable) img.getDrawable()).getBitmap()));
             a = ((Almacen) spAlmacenProducto.getSelectedItem());
             p.setAlmacen(a);
             cp.guardarProducto(this, p);
