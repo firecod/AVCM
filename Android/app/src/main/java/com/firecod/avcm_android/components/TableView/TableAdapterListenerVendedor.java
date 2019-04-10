@@ -6,21 +6,20 @@ import android.support.v7.widget.RecyclerView;
 import com.evrencoskun.tableview.ITableView;
 import com.evrencoskun.tableview.listener.ITableViewListener;
 import com.firecod.avcm_android.fragmentsAlmacen.CatalogoAlmacen;
-import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
+import com.firecod.avcm_android.fragmentsVendedor.CatalogoVendedor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableAdapterListenerAlmacen implements ITableViewListener {
+public class TableAdapterListenerVendedor  implements ITableViewListener {
 
     private static final String LOG_TAG = TableAdapterListenerProducto.class.getSimpleName();
-    private Boolean editar = false;
     private ITableView mTableView;
-    private CatalogoAlmacen catalogoAlmacen;
+    private CatalogoVendedor catalogoVendedor;
 
-    public TableAdapterListenerAlmacen(ITableView aTableView, CatalogoAlmacen ca) {
+    public TableAdapterListenerVendedor(ITableView aTableView, CatalogoVendedor cv) {
         this.mTableView = aTableView;
-        this.catalogoAlmacen = ca;
+        this.catalogoVendedor = cv;
     }
 
 
@@ -51,13 +50,11 @@ public class TableAdapterListenerAlmacen implements ITableViewListener {
 
     @Override
     public void onRowHeaderLongPressed(@NonNull RecyclerView.ViewHolder rowHeaderView, int row) {
-        List almacenes = new ArrayList();
-        almacenes.add(mTableView.getAdapter().getRowHeaderItem(row).toString());
+        List vendedores = new ArrayList();
+        vendedores.add(mTableView.getAdapter().getRowHeaderItem(row).toString());
         for (int i = 0; i < 4; i++) {
-            almacenes.add(mTableView.getAdapter().getCellItem(i, row).toString());
+            vendedores.add(mTableView.getAdapter().getCellItem(i, row).toString());
         }
-        catalogoAlmacen.datos(almacenes);
+        catalogoVendedor.datos(vendedores);
     }
-
 }
-

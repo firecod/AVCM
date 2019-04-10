@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragmentsProducto.CatalogoProducto"
-    android:background="@color/backgroud_table">
+    android:background="@color/background_table">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleId"
