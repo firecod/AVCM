@@ -3,107 +3,93 @@ package com.firecod.avcm_android.fragmentsCliente;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.evrencoskun.tableview.TableView;
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.components.TableView.TableAdapterCliente;
+import com.firecod.avcm_android.components.TableView.TableAdapterListenerCliente;
+import com.firecod.avcm_android.components.TableView.TableAdapterListenerProducto;
+import com.firecod.avcm_android.components.TableView.TableAdapterProducto;
+import com.firecod.avcm_android.core.ControllerCliente;
+import com.firecod.avcm_android.core.ControllerProducto;
+import com.firecod.avcm_android.fragmentsCliente.alertDialog.DialogCliente;
+import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
+import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
+import com.google.gson.Gson;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CatalogoCliente.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CatalogoCliente#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.List;
+
 public class CatalogoCliente extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private TableView pTableView;
+    private TableAdapterCliente pTableAdapter;
+    private ProgressBar mProgressBar;
+    private ControllerCliente cp;
+    private Gson gson;
+    private String urlGlobal ="http://192.168.43.16:8084/AVCM_WEB/restCliente/";
 
-    private OnFragmentInteractionListener mListener;
 
-    public CatalogoCliente() {
-        // Required empty public constructor
+    private static final String LOG_TAG = CatalogoCliente.class.getSimpleName();
+
+
+    public CatalogoCliente()  {
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CatalogoCliente.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CatalogoCliente newInstance(String param1, String param2) {
-        CatalogoCliente fragment = new CatalogoCliente();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_catalogo_cliente, container, false);
+        View view = inflater.inflate(R.layout.fragment_catalogo_producto, container, false);
+
+        mProgressBar = view.findViewById(R.id.progressBar);
+
+        pTableView = view.findViewById(R.id.my_TableView);
+
+        initializeTableView(pTableView);
+
+        cp = new ControllerCliente();
+        cp.getAllCliente(pTableAdapter, this , mProgressBar, pTableView);
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void initializeTableView(TableView tableView){
+        // Create TableView Adapter
+        pTableAdapter = new TableAdapterCliente(getContext());
+        tableView.setAdapter(pTableAdapter);
+        // Create listener
+        tableView.setTableViewListener(new TableAdapterListenerCliente(tableView, this));
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    public void datos(List clientes){
+        String[] valores = new String[clientes.size()];
+        System.out.println("lenght lista clientes " + clientes.size());
+        for(int i = 0; i<clientes.size(); i++) {
+            valores[i] = clientes.get(i).toString();
+        }
+        System.out.println("lenght valores" + valores.length);
+        DialogFragment newFragment = DialogCliente.newInstance(valores);
+        newFragment.show(getFragmentManager(), "dialogCliente");
+    }
+
 }

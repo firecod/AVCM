@@ -130,9 +130,5 @@ public class TableAdapterProducto extends AbstractTableAdapter<ColumnHeaderProdu
                 .getRowHeaderModelList(), viewModelProducto.getCellModelList());
     }
 
-
-
-
-
 }
 

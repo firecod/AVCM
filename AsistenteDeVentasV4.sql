@@ -185,6 +185,7 @@ BEGIN
     
     INSERT INTO cliente (numeroCliente, correoElectronico, estatus, idUsuario, idPersona) VALUES
     (var_numeroCliente, var_correoElectronico, 1, var_idUsuario, var_idPersona);
+    SET var_idCliente = last_insert_id();
     
 END //
 
@@ -250,13 +251,13 @@ CREATE PROCEDURE actualizarCliente (
                                     
                                     /*---- Datos Entrada Usuario ----*/
                                     IN var_idUsuario INT,					-- 8
-                                    IN var_nombreUsuario VARCHAR(20),		-- 9
-                                    IN var_contrasenia VARCHAR(12),			-- 10
+                                  	-- 9
+                                   
                                     
                                     /*---- Datos Entrada Cliente ----*/
                                     IN var_idCliente INT,					-- 11
-                                    IN var_correoElectronico VARCHAR(30),	-- 12
-                                    IN var_estatus INT
+                                    IN var_correoElectronico VARCHAR(30)	-- 12
+                                    
 									)
 
 BEGIN
@@ -268,8 +269,8 @@ BEGIN
     UPDATE usuario SET rol = var_rol, nombreUsuario = var_nombreUsuario, contrasenia = var_contrasenia
     WHERE idUsuario = var_idUsuario;
     
-    UPDATE cliente SET numeroCliente = var_numeroCliente, correoElectronico = var_correo, estatus = var_estatus,
-    idUsuario = var_idUsuario, idPersona = var_idPersona WHERE idCliente = var_idCliente;
+    UPDATE cliente SET correoElectronico = var_correoElectronico
+	WHERE idCliente = var_idCliente;
     
 END//
 
@@ -342,4 +343,13 @@ CALL registroCliente('Vanessa', 'Ortega', 'Torres', 'OETJ981207', 'Via asinaria 
 CALL registroVendedor('Diego', 'Castro', 'Castro', 'CACD990225', 'Imperio Asiático #615', '4113603464',
 					  'dieg0225','2222', 'Vendedor', null, null, 1, @idPersona, @idUsuario, @idVendedor, @numeroVendedor);
                       
-SELECT * FROM Vendedor;
+CREATE VIEW vistaProducto AS
+SELECT P.idProducto,
+		P.nombre AS 'nombreProducto',
+        P.marca,
+		P.precio,
+        P.categoria,
+        P.estatus,
+        P.idAlmacen ,
+        A.nombre AS 'nombreAlmacen'
+        FROM Producto P INNER JOIN almacen A ON P.idAlmacen = A.idAlmacen;

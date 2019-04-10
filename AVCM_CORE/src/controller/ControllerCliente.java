@@ -20,10 +20,12 @@ import model.Usuario;
 public class ControllerCliente {
     
     public int insert(Cliente c) throws Exception{
-        String sql = "{CALL registroCliente (?, ?, ?, ?, ?, ?" //Datos de Persona
-                                          + "?, ?, ?"             //Datos de Usuario
-                                          + "?"                //Datos de Cliente
-                                          + "?, ?, ?, ?)}";    //Datos de Salida
+        String sql = "{call registroCliente (?, ?, ?, ?, ?, ?," //Datos de Persona
+                                          + "?, ?,"             //Datos de Usuario
+                                          + "?,"                //Datos de Cliente
+                                          + "?, ? ,?, ?)}";    //Datos de Salida
+        
+     
         
         //Aquí guardaremos el ID que se generará
         int idPersonaGenerado = -1;
@@ -56,23 +58,23 @@ public class ControllerCliente {
         
         cstmt.setString(7, c.getUsuario().getNombreUsuario());
         cstmt.setString(8, c.getUsuario().getContrasenia());
-        cstmt.setString(9, c.getUsuario().getRol());
         
-        cstmt.setString(10, c.getCorreoElectronico());
         
+        cstmt.setString(9, c.getCorreoElectronico());
+        
+        cstmt.registerOutParameter(10, Types.INTEGER);
         cstmt.registerOutParameter(11, Types.INTEGER);
         cstmt.registerOutParameter(12, Types.INTEGER);
-        cstmt.registerOutParameter(13, Types.INTEGER);
-        cstmt.registerOutParameter(14, Types.VARCHAR);
+        cstmt.registerOutParameter(13, Types.VARCHAR);
         
         //Ejecutamos la consutla:
         cstmt.executeUpdate();
         
         //Recuperamos los ID's generados:
-        idPersonaGenerado = cstmt.getInt(12);
-        idUsuarioGenerado = cstmt.getInt(13);
-        idClienteGenerado = cstmt.getInt(14);
-        numeroUnicoGenerado = cstmt.getString(15);          
+        idPersonaGenerado = cstmt.getInt(10);
+        idUsuarioGenerado = cstmt.getInt(11);
+        idClienteGenerado = cstmt.getInt(12);
+        numeroUnicoGenerado = cstmt.getString(13);          
         
         //Los guardamos en el objeto Cliente que nos pasaron como parámetro:
         c.getPersona().setId(idPersonaGenerado);
@@ -100,9 +102,8 @@ public class ControllerCliente {
     public void update(Cliente c) throws Exception
     {
         String sql =    "{CALL actualizarCliente( ?, ?, ?, ?, ?, ?, ?, " + //Datos Persona
-                                                  "?, ?, ?,  " +   //Datos Usuario
-                                                  "?, ?, " + //Datos Cliente
-                                                  "?, ?, ?)}"; //Valores de Relaciones
+                                                  "?, ?,  " +   //Datos Usuario
+                                                  "?, ?)}"; //Valores de Relaciones
         
         //Con este objeto nos vamos a conectar a la Base de Datos:
         ConexionMySQL connMySQL = new ConexionMySQL();
@@ -117,7 +118,7 @@ public class ControllerCliente {
         //Establecemos los valores de los parametros de la consulta, basados
         //en los signos de interrogacion:
         //Datos Persona
-        cstmt.setInt(1, c.getPersona().getId());
+        cstmt.setInt(1, c.getPersona().getId()); //Where persona
         cstmt.setString(2, c.getPersona().getNombre());
         cstmt.setString(3, c.getPersona().getApellidoPaterno());
         cstmt.setString(4, c.getPersona().getApellidoMaterno());
@@ -125,13 +126,14 @@ public class ControllerCliente {
         cstmt.setString(6, c.getPersona().getDomicilio());
         cstmt.setString(7, c.getPersona().getTelefono());
         
-        cstmt.setInt(8, c.getUsuario().getId());
-        cstmt.setString(9, c.getUsuario().getNombreUsuario());
-        cstmt.setString(10, c.getUsuario().getContrasenia());
-        cstmt.setString(11, c.getUsuario().getRol());
+        cstmt.setInt(8, c.getUsuario().getId()); //Where usuario
+      
         
-        cstmt.setInt(12, c.getId());
-        cstmt.setString(13, c.getCorreoElectronico());
+    
+        
+        cstmt.setInt(9, c.getId());
+        cstmt.setString(10, c.getCorreoElectronico());
+       
         
         
         //Ejecutamos la consulta:
@@ -279,7 +281,7 @@ public class ControllerCliente {
     public List<Cliente> getAll(String filtro, int estatus) throws Exception
     {
         //La consulta SQL a ejecutar:
-        String sql = "SELECT * FROM v_clientes WHERE estatus = ?";
+        String sql = "SELECT * FROM v_cliente WHERE estatus = ?";
         
         //La lista dinámica donde guardaremos objetos de tipo Empleado
         //por cada registro que devuelva la BD:

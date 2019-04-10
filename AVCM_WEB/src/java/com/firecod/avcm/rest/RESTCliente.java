@@ -24,7 +24,7 @@ import model.Usuario;
 @Path("/")
 public class RESTCliente extends Application {
     @GET
-    @Path("")
+    @Path("getAllCliente")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@QueryParam("estatus") @DefaultValue("1") int estatus) {
         ControllerCliente cc = new ControllerCliente();
@@ -98,4 +98,85 @@ public class RESTCliente extends Application {
         }
         return Response.status(Response.Status.OK).entity(out).build();
     }
+    
+    @POST
+    @Path("updateCliente")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(//Persona
+                           @FormParam("nombre")@DefaultValue("") String nombre,
+                           @FormParam("apellidoPaterno")@DefaultValue("") String apellidoPaterno,
+                           @FormParam("apellidoMaterno")@DefaultValue("") String apellidoMaterno,
+                           @FormParam("rfc")@DefaultValue("") String rfc,
+                           @FormParam("domicilio")@DefaultValue("") String domicilio,                           
+                           @FormParam("telefono")@DefaultValue("") String telefono,
+                           //Cliente                           
+                          
+                          
+                          
+                           //Usuario                           
+                           @FormParam("correoElectronico")@DefaultValue("") String correoElectronico,
+                           
+                           @FormParam("idCliente")@DefaultValue("0") int idCliente,
+                           @FormParam("idUsuario")@DefaultValue("0") int idUsuario,
+                           @FormParam("idPersona")@DefaultValue("0") int idPersona
+                           ){
+        ControllerCliente cc = new ControllerCliente();
+        JSONSerializer jss= new JSONSerializer();
+        String out = null;
+        Cliente c; 
+        Persona p;
+        Usuario u;
+        
+        try{
+            //Persona
+           p = new Persona();
+           p.setNombre(nombre);
+           p.setApellidoMaterno(apellidoMaterno);
+           p.setApellidoPaterno(apellidoPaterno);
+           p.setRfc(rfc);
+           p.setDomicilio(domicilio);
+           p.setTelefono(telefono);
+           p.setId(idPersona);
+           //Cliente
+           c = new Cliente();
+           c.setCorreoElectronico(correoElectronico);
+           c.setEstatus(1);
+           c.setId(idCliente);
+           //Usuario
+           u = new Usuario();
+          
+           u.setId(idUsuario);
+           //Objetos
+           c.setPersona(p);
+           c.setUsuario(u);
+           cc.insert(c);
+           if(c.getId() > 0){
+               out = jss.serialize(c);
+           }else{
+               out = "{\"error\":\"Movimiento no realizado.\"}";
+           }
+        }catch(Exception e){
+            e.printStackTrace();
+            out = "{\"exception:\":\"" + e.toString() + "\"}";
+        }
+        return Response.status(Response.Status.OK).entity(out).build();
+    }
+    
+    @GET
+    @Path("deleteCliente")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@QueryParam("idCliente")@DefaultValue("0") int idCliente)
+    {        
+        ControllerCliente cc = new ControllerCliente();        
+        String out = null;
+        JSONSerializer jss = new JSONSerializer();         
+        try {
+            cc.delete(idCliente);
+            out = "{\"response:\":\"Eliminado Correctamente.\"}";
+        } catch (Exception e) {
+            e.printStackTrace();
+            out = "{\"exception:\":\"" + e.toString() + "\"}";
+        }
+         return Response.status(Response.Status.OK).entity(out).build();
+    }    
 }

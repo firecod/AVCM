@@ -9,9 +9,9 @@ public class Usuario {
     @Expose
     private int id;
 
-    @SerializedName("puesto")
+    @SerializedName("rol")
     @Expose
-    private String puesto;
+    private String rol;
 
     @SerializedName("nombreUsuario")
     @Expose
@@ -29,12 +29,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getPuesto() {
-        return puesto;
+    public String getRol() {
+        return rol;
     }
 
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public String getNombreUsuario() {

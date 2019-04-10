@@ -16,14 +16,16 @@
             android:name="com.google.android.actions"
             android:resource="@drawable/launch_screen" />
 
-        <activity android:name=".view.MainActivity"></activity>
-        <activity android:name=".view.ActivityMainCliente" />
-        <activity android:name=".view.ActivityLogin">
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".view.ActivityMainCliente" />
+        <activity android:name=".view.ActivityLogin">
+
         </activity>
         <activity android:name=".view.ActivityCliente" />
     </application>

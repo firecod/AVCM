@@ -28,6 +28,17 @@ public class Persona {
     @SerializedName("domicilio")
     @Expose
     private String domicilio;
+    @SerializedName("telefono")
+    @Expose
+    private String telefono;
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
     public int getId() {
         return id;
