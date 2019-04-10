@@ -1,5 +1,6 @@
 package com.firecod.avcm_android.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.clases.ProductoCompra;
+import com.firecod.avcm_android.core.CodificadorImagenes;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,7 @@ public class AdaptadorProductoCompra extends
 
         ArrayList<ProductoCompra> listaProductos;
         private View.OnClickListener listener;
+        private CodificadorImagenes ci;
 
 
     public AdaptadorProductoCompra(ArrayList<ProductoCompra> listaProductos) {
@@ -36,10 +39,10 @@ public class AdaptadorProductoCompra extends
             ImageView fotoProducto;
             public ViewHolderProductos(View itemView) {
                 super(itemView);
-                nombreProducto=(TextView) itemView.findViewById(R.id.tv);
-                marcaProducto=(TextView) itemView.findViewById(R.id.nombreProducto);
-                precioProducto=(TextView) itemView.findViewById(R.id.marcaProducto);
-                fotoProducto
+                nombreProducto=(TextView) itemView.findViewById(R.id.tv_name);
+                marcaProducto=(TextView) itemView.findViewById(R.id.tv_marca);
+                precioProducto=(TextView) itemView.findViewById(R.id.tv_precio);
+                fotoProducto=(ImageView) itemView.findViewById(R.id.iv_avatar);
 
 
             }
@@ -52,9 +55,10 @@ public class AdaptadorProductoCompra extends
 
         @Override
         public void onBindViewHolder(AdaptadorProductoCompra.ViewHolderProductos holderProductos, int position) {
-            holderProductos.idProducto.setText(listaProductos.get(position).getId());
-            holderProductos.nombreProducto.setText(listaProductos.get(position).getNombre());
-            holderProductos.marcaProducto.setText(listaProductos.get(position).getMarca());
+            holderProductos.nombreProducto.setText(listaProductos.get(position).getId());
+            holderProductos.marcaProducto.setText(listaProductos.get(position).getNombre());
+            holderProductos.precioProducto.setText(listaProductos.get(position).getMarca());
+            holderProductos.fotoProducto.setImageBitmap(ci.decodificar(listaProductos.get(position).getFoto()));
 
         }
 

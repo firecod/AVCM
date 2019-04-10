@@ -1,5 +1,8 @@
 package com.firecod.avcm_android.clases;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 public class ProductoCompra {
 
     private String mId;

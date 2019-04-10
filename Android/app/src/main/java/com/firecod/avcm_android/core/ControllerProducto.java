@@ -29,6 +29,7 @@ public class ControllerProducto {
 
     private Gson gson;
     private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restProducto/";
+    private CodificadorImagenes ci;
 
     public void guardarProducto(final FormularioProducto act, final Producto producto)
     {
@@ -65,6 +66,7 @@ public class ControllerProducto {
                 params.put("precio", String.valueOf(producto.getPrecio()));
                 params.put("categoria", producto.getCategoria());
                 params.put("idAlmacen", String.valueOf(producto.getAlmacen().getId()));
+                params.put("foto", producto.getFoto());
                 return params;
             }
 

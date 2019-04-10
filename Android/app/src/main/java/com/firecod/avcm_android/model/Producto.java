@@ -1,5 +1,8 @@
 package com.firecod.avcm_android.model;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -25,6 +28,9 @@ public class Producto {
     @SerializedName("almacen")
     @Expose
     private Almacen almacen;
+    @SerializedName("foto")
+    @Expose
+    private String foto;
 
     public int getId() {
         return id;
@@ -82,6 +88,14 @@ public class Producto {
         this.almacen = almacen;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -92,6 +106,7 @@ public class Producto {
                 ", categoria='" + categoria + '\'' +
                 ", estatus=" + estatus +
                 ", almacen=" + almacen +
+                ", foto=" + foto +
                 '}';
     }
 }

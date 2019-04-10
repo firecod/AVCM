@@ -1,12 +1,13 @@
 package com.firecod.avcm_android.fragmentsProducto;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +15,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.core.CodificadorImagenes;
 import com.firecod.avcm_android.core.ControllerAlmacen;
 import com.firecod.avcm_android.core.ControllerProducto;
-import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
-import com.firecod.avcm_android.view.MainActivity;
 
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 /**
@@ -40,6 +42,9 @@ public class FormularioProducto extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
+    private static final int PICK_IMAGE=100;
+    CodificadorImagenes ci;
+    ImageView img;
     EditText txtIdProducto;
     EditText txtNombreProducto;
     EditText txtMarcaProducto;
@@ -53,6 +58,7 @@ public class FormularioProducto extends Fragment {
     Producto p;
     Almacen a;
     ControllerProducto cp;
+    public static String rutaURL;
 
     public EditText getTxtIdProducto() {
         return txtIdProducto;
@@ -180,9 +186,62 @@ public class FormularioProducto extends Fragment {
         txtNombreProducto.setText("");
     }
 
+    public void abrirGaleria(){
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(i, "Seleccione una imagen"), PICK_IMAGE);
+    }
+
+    public void onActivityResult (int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Uri uriImage = null;
+        Uri image;
+
+        String filepath= null;
+        switch (requestCode) {
+            case PICK_IMAGE:
+                if (resultCode == Activity.RESULT_OK) {
+                    image = data.getData();
+                    String selectedPath=image.getPath();
+                    if (requestCode == PICK_IMAGE) {
+
+                        if (selectedPath != null) {
+                            InputStream imageStream = null;
+                            try {
+                                imageStream = getActivity().getApplicationContext().getContentResolver().openInputStream(image);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+
+                            // Transformamos la URI de la imagen a inputStream y este a un Bitmap
+                            Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+
+                            // Ponemos nuestro bitmap en un ImageView que tengamos en la vista
+
+                            img.setImageBitmap(bmp);
+
+                        }
 
 
+                        try {
+                            ci = new CodificadorImagenes();
+                            final InputStream imageStream;
+                            imageStream = getActivity().getApplicationContext().getContentResolver().openInputStream(image);
+                            final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                            filepath= ci.codificar(selectedImage);
+                            rutaURL = filepath;
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
 
+                    }
+                }
+                break;
+        }
+    }
 
     @Override
     public void onAttach(Context context) {

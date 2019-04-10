@@ -9,10 +9,7 @@ import android.util.Log;
 
 import com.evrencoskun.tableview.ITableView;
 import com.evrencoskun.tableview.listener.ITableViewListener;
-import com.firecod.avcm_android.components.TableView.holder.ProductoColumnHeaderViewHolder;
-import com.firecod.avcm_android.components.TableView.popup.ColumnHeaderLongPressPopupProducto;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
-import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 
 
 import java.util.ArrayList;

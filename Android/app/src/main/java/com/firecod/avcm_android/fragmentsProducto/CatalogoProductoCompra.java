@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.firecod.avcm_android.R;
+import com.firecod.avcm_android.adapters.AdaptadorProductoCompra;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +22,7 @@ import com.firecod.avcm_android.R;
 public class CatalogoProductoCompra extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
 
-    private
+    private AdaptadorProductoCompra adatproduct;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

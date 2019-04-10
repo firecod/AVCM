@@ -80,8 +80,7 @@ cantidadProductos INT NOT NULL,
 importe FLOAT NOT NULL,
 facturaExpendida VARCHAR(50),
 numeroTicket INT NOT NULL,
-estatus INT NOT NULL,
-fechaPago date NOT NULL
+estatus INT NOT NULL
 );
 
 CREATE TABLE DetallesCompra(
