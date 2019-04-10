@@ -33,7 +33,7 @@ public class CatalogoAlmacen extends Fragment {
     private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restAlmacen/";
 
 
-    private static final String LOG_TAG = CatalogoProducto.class.getSimpleName();
+    private static final String LOG_TAG = CatalogoAlmacen.class.getSimpleName();
 
 
     public CatalogoAlmacen()  {
@@ -42,7 +42,7 @@ public class CatalogoAlmacen extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
+        System.out.println("siempreemtrowe");
         super.onCreate(savedInstanceState);
     }
 
@@ -57,7 +57,7 @@ public class CatalogoAlmacen extends Fragment {
         aTableView = view.findViewById(R.id.my_TableView);
 
         initializeTableView(aTableView);
-
+        System.out.println("solo una vez we");
         ca = new ControllerAlmacen();
         ca.getAllAlmacen(aTableAdapter, this , mProgressBar, aTableView);
 
@@ -74,7 +74,7 @@ public class CatalogoAlmacen extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         void onFragmentInteraction(Uri uri);
     }
     public void showProgressBar() {

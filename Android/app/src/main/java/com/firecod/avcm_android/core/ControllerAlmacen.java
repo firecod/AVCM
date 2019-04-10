@@ -23,6 +23,7 @@ import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.fragmentsVendedor.FormularioVendedor;
+import com.firecod.avcm_android.fragmentsVendedor.alertDialog.DialogVendedor;
 import com.firecod.avcm_android.model.Almacen;
 import com.firecod.avcm_android.model.Producto;
 import com.google.gson.Gson;
@@ -222,6 +223,54 @@ public class ControllerAlmacen {
         queue.add(sr);
     }
 
+    public void getAllSpinnerVendedorEditar(final DialogVendedor act , final String[] datos) {
+
+        final Toast t =new Toast(act.getContext());
+        JsonArrayRequest sr = new JsonArrayRequest(
+                Request.Method.GET, //GET or POST
+                urlGlobal + "getAllAlmacen?estatus=1", //URL
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            gson = new Gson();
+                            ArrayList<Almacen> almacenes = new ArrayList<>();
+                            Almacen a;
+                            for(int i = 0; i<response.length(); i++){
+                                a = gson.fromJson(response.get(i).toString(), Almacen.class);
+                                almacenes.add(a);
+                            }
+                            if(almacenes.get(0).getId() > 0) {
+                                ArrayAdapter<Almacen> adapter = new ArrayAdapter<Almacen>(act.getContext(),
+                                        android.R.layout.simple_spinner_item, almacenes);
+                                act.getEtAlmacen().setAdapter(adapter);
+                                for (int i = 0; i < act.getEtAlmacen().getAdapter().getCount(); i++) {
+                                    Almacen acd;
+                                    acd = ((Almacen) act.getEtAlmacen().getAdapter().getItem(i));
+                                    if (acd.getNombre().equals(datos[5])) {
+                                        act.getEtAlmacen().setSelection(i);
+                                    }
+                                }
+                            }else{
+                                t.makeText(act.getContext(), "Error al consultar almacenes" , Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(act.requireContext(), "Error al conectar con el servidor, revise su conexión a internet", Toast.LENGTH_SHORT).show();
+            }
+        }
+        ) ;
+        RequestQueue queue = Volley.newRequestQueue(act.getContext());
+        queue.add(sr);
+    }
+
     public void getAllAlmacen(final TableAdapterAlmacen aTableAdapter, final CatalogoAlmacen act, final ProgressBar mProgressBar, final TableView aTableView){
         final Toast t =new Toast(act.getContext());
         JsonArrayRequest sr = new JsonArrayRequest(
@@ -255,6 +304,7 @@ public class ControllerAlmacen {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(act.requireContext(), "Error al conectar con el servidor, revise su conexión a internet", Toast.LENGTH_SHORT).show();
             }
         }
         ) ;

@@ -40,7 +40,7 @@ public class ViewModelVendedor {
         switch (column) {
             // Id
             case 0:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
             // Name
             case 1:
                 return Gravity.LEFT;

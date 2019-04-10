@@ -50,7 +50,7 @@ public class ControllerCliente {
                             Cliente c = gson.fromJson(response, Cliente.class);
                             act.getTxtIdCliente().setText("" + c.getId());
                             if(c.getId() > 0) {
-                                t.makeText(act.requireContext(), "Guardado Correctamente", Toast.LENGTH_SHORT).show();
+                                t.makeText(act.requireContext(), "Guardado!!", Toast.LENGTH_SHORT).show();
                             }else{
                                 t.makeText(act.requireContext(), "Error al Guardar", Toast.LENGTH_SHORT).show();
                             }

@@ -90,7 +90,7 @@ public class ViewModelAlmacen {
         List<ColumnHeaderAlmacen> list = new ArrayList<>();
 
         // Create Column Headers
-        list.add(new ColumnHeaderAlmacen("Id"));
+
         list.add(new ColumnHeaderAlmacen("Nombre"));
         list.add(new ColumnHeaderAlmacen("Domicilio"));
         list.add(new ColumnHeaderAlmacen("Estatus"));
@@ -112,10 +112,10 @@ public class ViewModelAlmacen {
             List<CellAlmacen> list = new ArrayList<>();
 
             // The order should be same with column header list;
-            list.add(new CellAlmacen("1-" + i, almacen.getId()));          // "Id"
-            list.add(new CellAlmacen("2-" + i, almacen.getNombre()));        // "Name"
-            list.add(new CellAlmacen("6-" + i, almacen.getDomicilio()));
-            list.add(new CellAlmacen("7-" + i, almacen.getEstatus()));
+                    // "Id"
+            list.add(new CellAlmacen("1-" + i, almacen.getNombre()));        // "Name"
+            list.add(new CellAlmacen("2-" + i, almacen.getDomicilio()));
+            list.add(new CellAlmacen("3-" + i, almacen.getEstatus()));
 
             lists.add(list);
 

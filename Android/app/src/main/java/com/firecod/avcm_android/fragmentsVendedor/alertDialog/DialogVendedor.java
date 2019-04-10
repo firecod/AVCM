@@ -13,6 +13,11 @@ import android.widget.Spinner;
 
 import com.firecod.avcm_android.R;
 import com.firecod.avcm_android.core.ControllerAlmacen;
+import com.firecod.avcm_android.core.ControllerVendedor;
+import com.firecod.avcm_android.model.Almacen;
+import com.firecod.avcm_android.model.Persona;
+import com.firecod.avcm_android.model.Usuario;
+import com.firecod.avcm_android.model.Vendedor;
 
 
 public class DialogVendedor extends DialogFragment {
@@ -28,6 +33,17 @@ public class DialogVendedor extends DialogFragment {
     EditText etReputacion;
     Spinner etAlmacen;
     CheckBox chbActivo;
+    ControllerVendedor cv;
+    Vendedor v;
+    Persona p;
+    Usuario u;
+    Almacen a;
+    int idPersona;
+    int idUsuario;
+
+    public Spinner getEtAlmacen() {
+        return etAlmacen;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -59,7 +75,7 @@ public class DialogVendedor extends DialogFragment {
 
     public void asignarAlmacen(String[] datos ){
         ControllerAlmacen ca = new ControllerAlmacen();
-        //ca.getAllSpinnerProductoEditar(this, datos);
+        ca.getAllSpinnerVendedorEditar(this, datos);
     }
 
     public void inicializar(View view, String[] d){
@@ -84,14 +100,40 @@ public class DialogVendedor extends DialogFragment {
         etTelefono.setText(d[6]);
         etUsuario.setText(d[7]);
         etReputacion.setText(d[8]);
+        idPersona = Integer.parseInt(d[9]);
+        idUsuario = Integer.parseInt(d[10]);
     }
 
-    public void actualizarVendedor(View v){
-
+    public void actualizarVendedor(View view){
+        v = new Vendedor();
+        p = new Persona();
+        u = new Usuario();
+        a = new Almacen();
+        p.setId(idPersona);
+        p.setNombre(etNombre.getText().toString());
+        p.setApellidoPaterno(etPApellido.getText().toString());
+        p.setApellidoMaterno(etSApellido.getText().toString());
+        p.setRfc(etRFC.getText().toString());
+        p.setDomicilio(etDomicilio.getText().toString());
+        p.setTelefono(etTelefono.getText().toString());
+        u.setNombreUsuario(etUsuario.getText().toString());
+        u.setId(idUsuario);
+        v.setPersona(p);
+        v.setUsuario(u);
+        v.setReputacion(Integer.valueOf(etReputacion.getText().toString()));
+        a = ((Almacen)etAlmacen.getSelectedItem());
+        v.setAlmacen(a);
+        actualizarVendedor(v);
     }
 
+    public void actualizarVendedor(Vendedor v){
+        cv = new ControllerVendedor();
+        cv.cambiarVendedor(this, v);
+    }
     public void eliminarVendedor(View v){
-
+        cv = new ControllerVendedor();
+        String id = etIdVendedor.getText().toString();
+        cv.eliminarVendedor(this, id);
     }
 
     public static DialogVendedor newInstance(String[] valores) {

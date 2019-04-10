@@ -12,13 +12,10 @@ import android.widget.ProgressBar;
 
 import com.evrencoskun.tableview.TableView;
 import com.firecod.avcm_android.R;
-import com.firecod.avcm_android.components.TableView.TableAdapterListenerProducto;
 import com.firecod.avcm_android.components.TableView.TableAdapterListenerVendedor;
 import com.firecod.avcm_android.components.TableView.TableAdapterProducto;
-import com.firecod.avcm_android.core.ControllerProducto;
+import com.firecod.avcm_android.components.TableView.TableAdapterVendedor;
 import com.firecod.avcm_android.core.ControllerVendedor;
-import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
-import com.firecod.avcm_android.fragmentsProducto.alertDialog.DialogProducto;
 import com.firecod.avcm_android.fragmentsVendedor.alertDialog.DialogVendedor;
 import com.google.gson.Gson;
 
@@ -28,16 +25,14 @@ import java.util.List;
 public class CatalogoVendedor extends Fragment {
 
     private TableView vTableView;
-    private TableAdapterProducto vTableAdapter;
+    private TableAdapterVendedor vTableAdapter;
     private ProgressBar mProgressBar;
     private ControllerVendedor cv;
-    private Gson gson;
 
     private static final String LOG_TAG = CatalogoVendedor.class.getSimpleName();
 
 
     public CatalogoVendedor()  {
-
     }
 
 
@@ -51,7 +46,7 @@ public class CatalogoVendedor extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_catalogo_vendedor, container, false);
+        View view = inflater.inflate(R.layout.fragment_catalogo_producto, container, false);
 
         mProgressBar = view.findViewById(R.id.progressBar);
 
@@ -60,14 +55,14 @@ public class CatalogoVendedor extends Fragment {
         initializeTableView(vTableView);
 
         cv = new ControllerVendedor();
-        //cv.getAllProducto(vTableAdapter, this , mProgressBar, vTableView);
+        cv.getAllVendedor(vTableAdapter, this , mProgressBar, vTableView);
 
         return view;
     }
 
     private void initializeTableView(TableView tableView){
         // Create TableView Adapter
-        vTableAdapter = new TableAdapterProducto(getContext());
+        vTableAdapter = new TableAdapterVendedor(getContext());
         tableView.setAdapter(vTableAdapter);
         // Create listener
         tableView.setTableViewListener(new TableAdapterListenerVendedor(tableView, this));

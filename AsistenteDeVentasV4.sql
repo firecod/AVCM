@@ -275,6 +275,7 @@ BEGIN
     
 END//
 
+drop procedure  actualizarVendedor;
 CREATE PROCEDURE actualizarVendedor (
 									/*---- Datos Entrada Persona ----*/
                                     IN var_idPersona INT,
@@ -286,17 +287,18 @@ CREATE PROCEDURE actualizarVendedor (
                                     IN var_telefono VARCHAR(15),
                                     
                                     /*---- Datos Entrada Usuario ----*/
-                                    IN var_idUsuario INT,
-                                    IN var_puesto VARCHAR(20),
-                                    IN var_nombreUsuario VARCHAR(20),
-                                    IN var_contrasenia VARCHAR(12),	
-                                    IN var_rol VARCHAR(20),
+                                    IN var_idUsuario INT,  -- 8
+                                     
+                                    IN var_nombreUsuario VARCHAR(20), -- 9
+                                --    IN var_numeroVendedor VARCHAR(12),	-- 10
+                                    
+                                 
                                     
                                     /*---- Datos Entrada Vendedor ----*/
-                                    IN var_idVendedor INT,
-                                    IN var_fotografiaVendedor LONGTEXT,
-                                    IN var_reputacion INT,
-                                    IN var_idAlmacen INT
+                                    IN var_idVendedor INT,   -- 11
+                                    IN var_fotografiaVendedor LONGTEXT, -- 12
+                                    IN var_reputacion INT, -- 13
+                                    IN var_idAlmacen INT -- 14
 									)
 
 BEGIN
@@ -305,11 +307,11 @@ BEGIN
 	apellidoMaterno = var_apellidoMaterno, rfc = var_rfc, domicilio = var_domicilio,
     telefono = var_telefono WHERE idPersona = var_idPersona;
     
-    UPDATE usuario SET rol = var_rol, nombreUsuario = var_nombreUsuario, contrasenia = var_contrasenia
+    UPDATE usuario SET rol = 'Vendedor' , nombreUsuario = var_nombreUsuario
     WHERE idUsuario = var_idUsuario;
     
-    UPDATE vendedor SET numeroVendedor = var_numeroVendedor, fotografiaVendedor = var_fotografiaVendedor,
-    reputacion= var_reputacion, estatus = var_estatus WHERE idVendedor = var_idVendedor;
+    UPDATE vendedor SET fotografiaVendedor = var_fotografiaVendedor,
+    reputacion= var_reputacion, estatus = 1 WHERE idVendedor = var_idVendedor;
     
 END //
 

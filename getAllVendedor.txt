@@ -1,0 +1,37 @@
+public void getAllVendedor(final TableAdapterVendedor pTableAdapter, final CatalogoVendedor act, final ProgressBar mProgressBar, final TableView pTableView){
+        JsonArrayRequest sr = new JsonArrayRequest(
+                Request.Method.GET, //GET or POST
+                urlGlobal + "getAllVendedor", //URL
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            gson = new Gson();
+                            ArrayList<Vendedor> vendedores = new ArrayList<>();
+                            Vendedor v;
+
+                            for(int i = 0; i<response.length(); i++){
+                                v = gson.fromJson(response.get(i).toString(), Vendedor.class);
+                                vendedores.add(v);
+
+                            }
+                            if(vendedores != null && vendedores.size()>0){
+                                // set the list on TableViewModel
+                                pTableAdapter.setUserList(vendedores);
+                                hideProgressBar(mProgressBar, pTableView);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("Error: " + error.getMessage());
+            }
+        }
+        ) ;
+        RequestQueue queue = Volley.newRequestQueue(act.getContext());
+        queue.add(sr);
+    }

@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
-import model.Almacen;
 import model.Cliente;
 import model.Persona;
 import model.Usuario;
@@ -27,7 +26,7 @@ public class ControllerVendedor {
     
     public int insert(Vendedor v) throws Exception{
         String sql = "{CALL registroVendedor (?, ?, ?, ?, ?, ?," //Datos de Persona
-                                          + "?, ?, ?,"             //Datos de Usuario
+                                          + "?, ?,"             //Datos de Usuario
                                           + "?, ?, ?,"                //Datos de Cliente
                                           + "?, ?, ?, ?)}";    //Datos de Salida
         
@@ -62,25 +61,24 @@ public class ControllerVendedor {
         
         cstmt.setString(7, v.getUsuario().getNombreUsuario());
         cstmt.setString(8, v.getUsuario().getContrasenia());
-        cstmt.setString(9, v.getUsuario().getRol());
         
-        cstmt.setString(10, "");
-        cstmt.setInt(11, v.getReputacion());
-        cstmt.setInt(12, v.getAlmacen().getId());
+        cstmt.setString(9, "");
+        cstmt.setInt(10, v.getReputacion());
+        cstmt.setInt(11, v.getAlmacen());
         
+        cstmt.registerOutParameter(12, Types.INTEGER);
         cstmt.registerOutParameter(13, Types.INTEGER);
         cstmt.registerOutParameter(14, Types.INTEGER);
-        cstmt.registerOutParameter(15, Types.INTEGER);
-        cstmt.registerOutParameter(16, Types.VARCHAR);
+        cstmt.registerOutParameter(15, Types.VARCHAR);
         
         //Ejecutamos la consutla:
         cstmt.executeUpdate();
         
         //Recuperamos los ID's generados:
-        idPersonaGenerado = cstmt.getInt(13);
-        idUsuarioGenerado = cstmt.getInt(14);
-        idClienteGenerado = cstmt.getInt(15);
-        numeroUnicoGenerado = cstmt.getString(16);          
+        idPersonaGenerado = cstmt.getInt(12);
+        idUsuarioGenerado = cstmt.getInt(13);
+        idClienteGenerado = cstmt.getInt(14);
+        numeroUnicoGenerado = cstmt.getString(15);          
         
         //Los guardamos en el objeto Cliente que nos pasaron como parámetro:
         v.getPersona().setId(idPersonaGenerado);
@@ -97,7 +95,7 @@ public class ControllerVendedor {
     }
     
     public void update(Vendedor v) throws Exception{
-        String sql = "{CALL actualizarVendedor (?, ?, ?, ?, ?, ?, ?," //Datos de Persona
+        String sql = "{CALL actualizarVendedor (?, ?, ?, ?, ?, ?, " //Datos de Persona
                                           + "?, ?, "             //Datos de Usuario
                                           + "?, ?, ?, ?)}";    //Datos de Salida
         
@@ -117,21 +115,20 @@ public class ControllerVendedor {
         //generará un ID:
         ResultSet rs = null;
         
-        cstmt.setInt(1, v.getPersona().getId());
-        cstmt.setString(2, v.getPersona().getNombre());
-        cstmt.setString(3, v.getPersona().getApellidoPaterno());
-        cstmt.setString(4, v.getPersona().getApellidoMaterno());
-        cstmt.setString(5, v.getPersona().getRfc());
-        cstmt.setString(6, v.getPersona().getDomicilio());
-        cstmt.setString(7, v.getPersona().getTelefono());
+        cstmt.setString(1, v.getPersona().getNombre());
+        cstmt.setString(2, v.getPersona().getApellidoPaterno());
+        cstmt.setString(3, v.getPersona().getApellidoMaterno());
+        cstmt.setString(4, v.getPersona().getRfc());
+        cstmt.setString(5, v.getPersona().getDomicilio());
+        cstmt.setString(6, v.getPersona().getTelefono());
         
-        cstmt.setInt(8, v.getUsuario().getId());
-        cstmt.setString(9, v.getUsuario().getNombreUsuario());
-                
-        cstmt.setInt(10, v.getId());
-        cstmt.setString(11, "");
-        cstmt.setInt(12, v.getReputacion());
-        cstmt.setInt(13, v.getAlmacen().getId());
+        cstmt.setString(7, v.getUsuario().getNombreUsuario());
+        cstmt.setString(8, v.getUsuario().getContrasenia());
+        
+        cstmt.setInt(9, v.getId());
+        cstmt.setString(10, "");
+        cstmt.setInt(11, v.getReputacion());
+        cstmt.setInt(12, v.getAlmacen());
         
         //Ejecutamos la consutla:
         cstmt.executeUpdate();
@@ -147,7 +144,7 @@ public class ControllerVendedor {
     public List<Vendedor> getAll(String filtro, int estatus) throws Exception
     {
         //La consulta SQL a ejecutar:
-        String sql = "SELECT * FROM v_vendedor WHERE estatus = ?";
+        String sql = "SELECT * FROM v_vendedores";
         
         //La lista dinámica donde guardaremos objetos de tipo Empleado
         //por cada registro que devuelva la BD:
@@ -189,7 +186,6 @@ public class ControllerVendedor {
             p.setApellidoMaterno(rs.getString("apellidoMaterno"));
             p.setApellidoPaterno(rs.getString("apellidoPaterno"));
             p.setDomicilio(rs.getString("domicilio"));
-            p.setId(rs.getInt("idPersona"));
             p.setNombre(rs.getString("nombre"));
             p.setRfc(rs.getString("rfc"));
             p.setTelefono(rs.getString("telefono"));
@@ -197,9 +193,7 @@ public class ControllerVendedor {
             //Creamos un nuevo objeto de tipo Usuario:
             u = new Usuario();
             u.setContrasenia(rs.getString("contrasenia"));
-            u.setId(rs.getInt("idUsuario"));
             u.setNombreUsuario(rs.getString("nombreUsuario"));
-            u.setRol(rs.getString("rol"));
             
             //Creamos un nuevo objeto de tipo Empleado:
             v = new Vendedor();
@@ -207,14 +201,10 @@ public class ControllerVendedor {
             //Establecemos sus datos personales:
             
             v.setId(rs.getInt("idVendedor"));
-            v.setFotografíaVendedor(rs.getString("fotografiaVendedor"));
             v.setPersona(p);
             v.setUsuario(u);
             v.setReputacion(rs.getInt("reputacion"));
-            Almacen a = new Almacen();
-            a.setNombre(rs.getString("nombreAlmacen"));
-            a.setId(rs.getInt("idAlmacen"));
-            v.setAlmacen(a);
+            v.setAlmacen(rs.getInt("almacen"));
             
          
             
@@ -237,7 +227,7 @@ public class ControllerVendedor {
         return vendedores;
     }
     
-    public void delete(int id) throws Exception
+        public void delete(int id) throws Exception
     {
         String sql = "UPDATE vendedor SET estatus = 0 WHERE idVendedor = ?";
         //delete cliente where idcliente = ?;

@@ -23,6 +23,9 @@ import com.firecod.avcm_android.fragmentsCliente.FormularioCliente;
 import com.firecod.avcm_android.fragmentsProducto.ContenedorProducto;
 import com.firecod.avcm_android.fragmentsProducto.FormularioProducto;
 import com.firecod.avcm_android.fragmentsProducto.CatalogoProducto;
+import com.firecod.avcm_android.fragmentsVendedor.CatalogoVendedor;
+import com.firecod.avcm_android.fragmentsVendedor.ContenedorVendedor;
+import com.firecod.avcm_android.fragmentsVendedor.FormularioVendedor;
 
 
 public class MainActivity extends AppCompatActivity
@@ -35,10 +38,10 @@ public class MainActivity extends AppCompatActivity
                     FormularioProducto.OnFragmentInteractionListener,
                     FormularioAlmacen.OnFragmentInteractionListener,
                     CatalogoAlmacen.OnFragmentInteractionListener,
-                    ContenedorAlmacen.OnFragmentInteractionListener
-
-
-
+                    ContenedorAlmacen.OnFragmentInteractionListener,
+                    ContenedorVendedor.OnFragmentInteractionListener,
+                    FormularioVendedor.OnFragmentInteractionListener,
+                    CatalogoVendedor.OnFragmentInteractionListener
                     {
 
     @Override
@@ -123,7 +126,8 @@ public class MainActivity extends AppCompatActivity
             fragmento = new ContenedorCliente();
             fragSeleccionado = true;
         } else if (id == R.id.nav_Vendedor) {
-
+            fragmento = new ContenedorVendedor();
+            fragSeleccionado = true;
         } else if (id == R.id.nav_Producto) {
             fragmento = new ContenedorProducto();
             fragSeleccionado = true;

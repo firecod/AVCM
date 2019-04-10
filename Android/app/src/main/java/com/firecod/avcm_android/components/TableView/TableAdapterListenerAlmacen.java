@@ -55,6 +55,7 @@ public class TableAdapterListenerAlmacen implements ITableViewListener {
         almacenes.add(mTableView.getAdapter().getRowHeaderItem(row).toString());
         for (int i = 0; i < 4; i++) {
             almacenes.add(mTableView.getAdapter().getCellItem(i, row).toString());
+
         }
         catalogoAlmacen.datos(almacenes);
     }

@@ -36,7 +36,7 @@ public class ViewModelProducto {
         switch (column) {
             // Id
             case 0:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
             // Name
             case 1:
                 return Gravity.LEFT;
@@ -48,39 +48,39 @@ public class ViewModelProducto {
                 return Gravity.LEFT;
             // BirthDay
             case 4:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
             // Gender (Sex)
             case 5:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
             // Age
             case 6:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
             // Job
             case 7:
                 return Gravity.LEFT;
             // Salary
             case 8:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
             // CreatedAt
             case 9:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
             // UpdatedAt
             case 10:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
             // Address
             case 11:
                 return Gravity.LEFT;
             // Zip Code
             case 12:
-                return Gravity.RIGHT;
+                return Gravity.LEFT;
             // Phone
             case 13:
-                return Gravity.RIGHT;
+                return Gravity.LEFT;
             // Fax
             case 14:
-                return Gravity.RIGHT;
+                return Gravity.LEFT;
             default:
-                return Gravity.CENTER;
+                return Gravity.LEFT;
         }
 
     }

@@ -121,6 +121,7 @@ public class DialogAlmacen extends DialogFragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("Error: " + error.getMessage());
+                t.makeText(context, "Error al conectar con el servidor, revise su conexión a internet", Toast.LENGTH_SHORT).show();
             }
         }
         ) {
@@ -172,7 +173,7 @@ public class DialogAlmacen extends DialogFragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("Error: " + error.getMessage());
-                t.makeText(c, "Ocurrió un error de conexión", Toast.LENGTH_LONG).show();
+                t.makeText(c, "Error al conectar con el servidor, revise su conexión a internet", Toast.LENGTH_SHORT).show();
             }
         }
         ) ;
