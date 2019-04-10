@@ -34,7 +34,7 @@ import java.util.Map;
 public class ControllerCliente {
 
     private Gson gson;
-    private String urlGlobal ="http://192.168.0.102:8084/AVCM_WEB/restCliente/";
+    private String urlGlobal ="http://192.168.0.5:8084/AVCM_WEB/restCliente/";
 
     public void guardarCliente (final FormularioCliente act, final Cliente c){
         final Toast t = new Toast(act.requireContext());

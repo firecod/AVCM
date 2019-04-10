@@ -36,8 +36,8 @@ public class ContenedorProductoCliente extends Fragment {
      * @return A new instance of fragment ContenedorProducto.
      */
     // TODO: Rename and change types and number of parameters
-    public static ContenedorProducto newInstance(String param1, String param2) {
-        ContenedorProducto fragment = new ContenedorProducto();
+    public static ContenedorProductoCliente newInstance(String param1, String param2) {
+        ContenedorProductoCliente fragment = new ContenedorProductoCliente();
         Bundle args = new Bundle();
 
         return fragment;
@@ -83,7 +83,7 @@ public class ContenedorProductoCliente extends Fragment {
 
     private void llenarViewPager(ViewPager viewPager) {
         SectionsAdapter adapter = new SectionsAdapter(getFragmentManager());
-        adapter.addFragment(new CatalogoProducto(), "Catálogo Producto");
+        adapter.addFragment(new CatalogoProductoCompra(), "Catálogo Producto");
 
 
         viewPager.setAdapter(adapter);

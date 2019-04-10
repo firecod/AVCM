@@ -18,6 +18,7 @@ public class Producto {
     private Float precio;
     private String categoria;
     private int estatus;
+    private String foto;
     private Almacen almacen;
 
     public int getId() {
@@ -27,6 +28,16 @@ public class Producto {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
+    
 
     public String getNombre() {
         return nombre;

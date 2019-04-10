@@ -26,8 +26,8 @@ public class ControllerProducto {
     
     public int insert(Producto p) throws Exception{
         
-        String sql = "INSERT INTO producto (nombre, marca, precio, categoria, estatus, idAlmacen) "
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO producto (nombre, marca, precio, categoria, estatus, idAlmacen, foto) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         //Aquí guardaremos el ID que se generará
         int idGenerado = -1;
@@ -54,6 +54,7 @@ public class ControllerProducto {
         pstmt.setString(4, p.getCategoria());
         pstmt.setInt(5, 1);        
         pstmt.setInt(6, p.getAlmacen().getId());
+        pstmt.setString(7, p.getFoto());
         
         //Ejecutamos la consutla:
         pstmt.executeUpdate();
